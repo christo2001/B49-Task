@@ -1,4 +1,34 @@
-Definition of document objects ?
+1.Definition of document objects ?
   The document object represent a web page that is loaded in the browser. By accessing the document object, 
   we can access the element in the HTML page. With the help of document objects, we can add dynamic content to our web page. 
   The document object can be accessed with a window.document or just document.
+  
+
+2.Definition of windows objects ?
+    The window object is the topmost object of the DOM hierarchy. It represents a browser window or frame that displays the contents of the webpage.
+    Whenever a window appears on the screen to display the contents of the document, the window object is created. 
+
+
+
+3.Difference between document and window ?
+
+Window object : It is the top most object and outermost element of the object hierarchy.
+
+Document object : Each HTML document that gets loaded into a window becomes a document object. 
+The document contains the contents of the page. Using document object, JavaScript can modify, add and delete the HTML elements, attributes CSS styles in the page
+
+---------------------------------------------------------------------------------------
+
+Window object : The window object represents a window/tab containing a DOM document where as document object is property of window object
+that points to the DOM document loaded in that window.
+
+Document object : You can access a document object either using window.document property or using document object directly
+as window is global object. In the below example, title is the property of document object.
+
+---------------------------------------------------------------------------------------
+
+Window object : Screen is the window property that holds information of browser screen. It refers to screen object associated with
+that window object.Used to display screen width, height, colorDepth, pixelDepth etc
+
+Document object : Similar to document screen can be accessed either by window.screen or screen object directly. Screen object doesn't have
+any methodsas in window and document objects.
