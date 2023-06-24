@@ -1,0 +1,4 @@
+Definition of document objects ?
+  The document object represent a web page that is loaded in the browser. By accessing the document object, 
+  we can access the element in the HTML page. With the help of document objects, we can add dynamic content to our web page. 
+  The document object can be accessed with a window.document or just document.
