@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>XMLHttpRequest Example</title>
+    <title>FLAG API</title>
   </head>
   <body>
     <script>
@@ -20,7 +20,7 @@
           console.log(xhr.responseText);
           var countriesDetails = JSON.parse(xhr.responseText);
           for (var i = 0; i < countriesDetails.length; i++) {
-            console.log("country name :",countriesDetails[i].flag);
+            console.log("country FLAG :",countriesDetails[i].flag);
             console.log('--------------')
           }
         } else {
