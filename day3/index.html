@@ -20,7 +20,11 @@
           console.log(xhr.responseText);
           var countriesDetails = JSON.parse(xhr.responseText);
           for (var i = 0; i < countriesDetails.length; i++) {
-            console.log(countriesDetails[i].flag);
+            console.log("country name :",countriesDetails[i].name.common);
+            console.log("region :",countriesDetails[i].region);
+            console.log("subregion :",countriesDetails[i].subregion);
+            console.log("population :",countriesDetails[i].population);
+            console.log('--------------')
           }
         } else {
           //Request failed
