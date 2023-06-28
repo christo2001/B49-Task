@@ -1,0 +1,19 @@
+const json1 = {name:"person 1", age:32};
+const json2 = {age:32,name:"person 1"};
+
+function compareJSON(json1, json2) {
+  
+  if(Object.keys(json1).length != Object.keys(json2).length) {
+    return false;
+  }
+  
+  for(let key in json1) {
+    if(!json2.hasOwnProperty(key) || json1[key] !== json1[key]) {
+      return false;
+    }
+  }
+  return true;
+}
+
+const res = compareJSON(json1, json2);
+console.log(res);
