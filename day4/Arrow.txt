@@ -1,0 +1,87 @@
+1.sum using arrow function
+
+let i = (a,sum) => {
+   for(let i=0;i<a.length;i++){
+    sum+=(a[i])
+  }console.log(sum)
+}
+i([1,2,3,4,5],0)
+
+-----------------------------------------
+
+2. title caps
+
+let i = (a) => {
+  var c =[]
+  
+  var x = a.join('').split(' ')
+  for(let i=0;i<x.length;i++){
+    var b = x[i].charAt(0).toUpperCase()+x[i].slice(1)
+    c.push(b);
+    var d = c.join(' ')
+  }
+  return d;
+}
+let h = i(['welcome home folks'])
+console.log(h)
+
+-------------------------------------------------
+
+3.odd numbers in the array
+
+let i = (a) => {
+  let b =[];
+  
+  for(let i=0;i<a.length;i++){
+    if(a[i]%2!=0){
+      b.push(a[i]);
+    }
+  }
+  console.log('odd numbers in the array')
+  return b;
+}
+let h = i([1,2,3,4,5])
+console.log(h)
+
+---------------------------------------------------
+
+4. prime numbers 
+
+let i = (a,k) => {
+
+let h =[];
+  
+for (let i = a; i <= k; i++) {
+    let flag = 0
+    for (let j = 2; j < i; j++) {
+        if (i % j == 0) {
+          flag = 1;
+            break;
+        }
+    }
+
+    if (i > 1 && flag==0) {
+      h.push(i)
+    }
+} return h;
+}
+let h = i(2,10)
+console.log(h)
+
+-------------------------------------------------
+
+5.palindrome 
+
+let i = (a) => {
+  
+  let b =[];
+  
+  for(let i=0;i<a.length;i++){
+    let c = a[i].split('').reverse().join('');
+    if(c==a[i]){
+      b.push(c);
+    }
+  }return b;
+}
+let h = i(['hello','radar','level','malayalam'])
+console.log(h)
