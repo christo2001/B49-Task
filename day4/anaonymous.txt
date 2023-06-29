@@ -1,0 +1,158 @@
+1. sum of an array 
+
+let sum = function(a,sum){
+  for(let i=0;i<a.length;i++){
+    sum+=a[i]
+  }console.log(sum)
+}
+let z = [1,2,3,4,5]
+let x = sum(z,0)
+
+---------------------------------------------------------------------
+
+2.caps 
+
+let sum = function(a){
+  
+  let c =[]
+  
+  let x = a.join('').split(' ')
+  for(let i=0;i<x.length;i++){
+    let b = x[i].charAt(0).toUpperCase()+x[i].slice(1)
+    c.push(b);
+    var d = c.join(' ')
+  }
+  return d;
+}
+let z = ['welcome home folks']
+let x = sum(z)
+console.log(x)
+
+------------------------------------------------------------------------
+
+3.odd numbers
+
+let sum = function(a){
+  let b =[];
+  for(let i=0;i<a.length;i++){
+    if(a[i]%2!=0){
+      b.push(a[i]);
+    }
+  }
+  console.log('odd numbers in the array')
+  return b;
+}
+let z = [1,2,3,4,5]
+let x = sum(z)
+console.log(x)
+
+-----------------------------------------------------------------------
+
+4.palindrome
+
+let sum = function(a){
+  let b =[];
+  for(let i=0;i<a.length;i++){
+    let c = a[i].split('').reverse().join('');
+    if(c==a[i]){
+      b.push(c);
+    }
+  }return b;
+}
+let z = ['hello','radar','level']
+let x = sum(z)
+console.log(x)
+
+--------------------------------------------------------------------
+
+5.Median
+
+let sum = function(a,b){
+  let a1 = a.sort();
+  let b1 = b.sort();
+  let c = a1.concat(b1);
+  let d =[];
+  
+  if(c.length%2==0){
+    let res = c.length/2
+    let res1 = ((c[res]+c[res-1])/2)
+    d.push(res1)
+  }
+  else{
+    let res = Math.floor(c.length/2);
+    d.push(c[res]);
+  }
+  return d;
+}
+
+let z = [3,2,1]
+let y = [5,4,6]
+let x = sum(z,y)
+console.log(x);
+
+------------------------------------------------------------------
+
+6.remove duplicates
+
+let sum = function(a){
+  let b =[];
+  
+  for(let i=0;i<a.length;i++){
+    if(!b.includes(a[i])){
+      b.push(a[i])
+    }
+  }return b;
+ 
+}
+
+let z = ['christo','witney','christo',1,2,3,1,3]
+let x = sum(z)
+console.log(x);
+
+-------------------------------------------------------------------- 
+
+7.rotate an array by k times 
+
+let sum = function(a,k){
+  
+  for(let i=0;i<k;i++){
+    z.unshift(z.pop());
+  }
+  return z;
+ 
+}
+
+let z = [1,2,3,4,5]
+let y = 3
+let x = sum(z,y)
+console.log(x);
+
+--------------------------------------------------------------------
+
+8. prime numbers in an array
+
+let sum = function(a,k){
+
+let h =[];
+  
+for (let i = a; i <= k; i++) {
+    let flag = 0
+    for (let j = 2; j < i; j++) {
+        if (i % j == 0) {
+          flag = 1;
+            break;
+        }
+    }
+
+    if (i > 1 && flag==0) {
+      h.push(i)
+    }
+} return h;
+ 
+}
+
+let z = 2
+let y = 10
+let x = sum(z,y)
+console.log(x);
+
