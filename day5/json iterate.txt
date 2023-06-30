@@ -1,0 +1,57 @@
+var json = [{
+    "name" : "christo lawrence", 
+    "age"   : 22,
+    "gender" : "male",
+    "mail": "christolawrencee@gmail.com"
+},
+{
+    "name" : "witney", 
+    "age"   : 25,
+    "gender" : "male",
+    "mail": "witni@gmail.com"
+}];
+
+--------------------------------------------------------
+
+1.FOR EACH
+
+let s = JSON.parse(json)
+s.forEach(function(obj){
+  console.log(obj.name)
+  console.log(obj.age);
+  console.log(obj.gender);
+  console.log(obj.mail)
+  console.log("-----------")
+  
+  });
+
+------------------------------------------------------
+
+2.FOR LOOP
+
+let s = JSON.parse(json)
+for(var i = 0; i < s.length; i++){
+  console.log(s[i].name)
+  console.log(s[i].age);
+  console.log(s[i].gender);
+  console.log(s[i].mail)
+  console.log("-----------")
+};
+
+----------------------------------------------------------
+
+3.FOR IN 
+
+let s = JSON.parse(json)
+for (var key in s) {
+  console.log(s[key]);
+}
+
+------------------------------------------------------------
+
+4.FOR OF
+
+let s = JSON.parse(json)
+for (let value of Object.values(s)) {
+  console.log(value);
+}
