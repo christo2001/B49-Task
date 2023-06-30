@@ -1,0 +1,46 @@
+JSON RESUME 
+
+ var resume=`{
+      
+          "profile":{
+            "name":"christo",
+            "age":3,
+            "email": "christolawrencee@gamil.com",
+            "phone": 8056536704,
+            "degree": "B.A",
+            "location": {
+            "address": "36, Gokul Nagar Phase 2",
+            "postalCode": 636008,
+            "city": "salem",
+            "state": "Tamilnadu",
+            "country": "India"
+            }
+            },
+            
+            "education":{
+              "institution": "voorhees college",
+              "department": "Defense and strategic studies",
+              "studyType": "fulltime",
+              "batch start year": 2019,
+              "batch end year": 2022,
+              "gpa": 7.5
+            },
+            
+            "skills":{
+              "name": "python,javascript",
+              "level": "beginner",
+              "project": [
+              "Royal Enfield modal website using front end technologies"
+               ]
+            },
+            
+             "languages": [
+                {
+                  "language": "Tamil,English"
+                }
+              ]
+
+          }`;
+          
+         let a = JSON.parse(resume)
+         console.log(a)
