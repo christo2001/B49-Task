@@ -1,0 +1,178 @@
+1. UBER PRICE 
+
+class UberPriceCalculator {
+  constructor(baseFare, costPerMinute, costPerMile) {
+    this.baseFare = baseFare;
+    this.costPerMinute = costPerMinute;
+    this.costPerMile = costPerMile;
+  }
+
+  uberAutoPrice(distance, duration) {
+    const distanceCost = distance * this.costPerMile;
+    const durationCost = duration * this.costPerMinute;
+    const totalFare = this.baseFare + distanceCost + durationCost;
+    return totalFare;
+  }
+}
+
+class UberCar extends UberPriceCalculator{
+  constructor(baseFare, costPerMinute, costPerMile,carbaseFare, carcostPerMinute, carcostPerMile){
+    super(baseFare, costPerMinute, costPerMile)
+    this.car = carbaseFare;
+    this.carcost = carcostPerMinute;
+    this.carmile = carcostPerMile;
+  }
+  
+    uberCarPrice(distance, duration) {
+    const distanceCost = distance * this.carmile;
+    const durationCost = duration * this.carcost;
+    const totalFare = this.baseFare + distanceCost + durationCost;
+    return totalFare;
+  }
+} 
+
+class Uber extends UberCar{
+}
+
+let uber = new Uber(("autobasefare",2.5),("autocostperminute",1),("autocostpermile",2),("carbasefare",5),("carcostperminute",3),("carcostpermile",4))
+console.log("UBER AUTO TOTAL FARE :",uber.uberAutoPrice(5,15))
+console.log("UBER CAR TOTAL FARE :",uber.uberCarPrice(5,15))
+
+-------------------------------------------------------------------------
+
+2. PERSON DETAILS
+
+  class Bio{
+  constructor(name,age,gender,phone,address){
+    
+    this.name = name;
+    this.age = age;
+    this.gender = gender;
+    this.phone = phone;
+    this.address = address;
+  }
+  getbio(){
+    console.log('BASIC DETAILS')
+    console.log('')
+    console.log("FULL-NAME :",this.name)
+    console.log("AGE :",this.age)
+    console.log("GENDER :",this.gender)
+    console.log("PHONE-NUMBER :",this.phone)
+    console.log("ADDRESS :",this.address)
+  }
+}
+
+class School extends Bio{
+  constructor(name,age,gender,phone,address,schoolname,school_10th_percent,school_12th_percent){
+    super(name,age,gender,phone,address)
+    this.schoolname = schoolname;
+    this.school_10th_percent = school_10th_percent;
+    this.school_12th_percent = school_12th_percent
+  }
+  getschool(){
+    console.log('')
+    console.log('SCHOOL DETAILS')
+    console.log('')
+    console.log("SCHOOL-NAME :",this.schoolname);
+    console.log("10TH PERCENTAGE :",this.school_10th_percent)
+    console.log("12TH PERCENTAGE :",this.school_12th_percent)
+  }
+}
+
+class College extends School{
+  constructor(name,age,gender,phone,address,schoolname,school_10th_percent,school_12th_percent,collegename,CGPA){
+    super(name,age,gender,phone,address,schoolname,school_10th_percent,school_12th_percent)
+    this.collegename = collegename;
+    this.CGPA = CGPA;
+  }
+  getcollege(){
+    console.log('')
+    console.log('COLLEGE DETAILS')
+    console.log('')
+    console.log("COLLEGE-NAME :",this.collegename);
+    console.log("CGPA :",this.CGPA)
+  }
+}
+
+class Person extends College{
+}
+
+let x = new Person("Christo Lawrence K",21,"Male",8056536704,"Salem","Holy Cross International School",87+"%",60+"%","Voorhees College",8.6)
+x.getbio(),x.getschool(),x.getcollege()
+
+-------------------------------------------------------------------------
+
+3. MOVIES
+
+class Movie {
+  constructor(title, studio, rating) {
+    this.title = title;
+    this.studio = studio;
+    
+    if(rating==""){
+      return this.rating = "PG"
+    }
+    else{
+      return this.rating = rating
+    }
+  }
+  
+  getpg(movies){
+    return movies.filter(movie => movie.rating === "PG");
+  }
+}
+
+let m = new Movie("Oppenheimer","Universal Pictures","")
+console.log(m)
+console.log("")
+console.log(m.getpg(([{title: 'Night at the Museum', studio: '20th Century Fox', rating: 'PG'},
+                      {title: 'Finding Nemo', studio: 'Walt Disney', rating: 'PG'},
+                      {title: 'Deadpool', studio: 'Marvel Studios', rating: 'A'}
+                   ])))
+
+-------------------------------------------------------------------------
+
+4. CIRCLE
+
+class circle{
+  constructor(radius,color){
+    this._radius = radius
+    this._color = color
+  }
+  
+  get radius(){
+    return this._radius
+  }
+  
+  set radius(newrad){
+    this._radius = newrad
+  }
+  
+  get color(){
+    return this._color
+  }
+  
+  set color(newcolor){
+    this._color = newcolor
+  }
+  
+  get area(){
+    return Math.PI * Math.pow(this._radius,2)
+  }
+  get circumference(){
+    return 2*Math.PI*this._radius
+  }
+}
+
+let mycircle = new circle(5,'RED')
+console.log("BEFORE SETTER :",mycircle.area)
+console.log("BEFORE SETTER :",mycircle.circumference)
+console.log("BEFORE SETTER :",mycircle.color)
+
+console.log('')
+
+mycircle.radius = 7
+mycircle.color = "GREEN"
+console.log("AFTER SETTER :",mycircle.area)
+console.log("AFTER SETTER :",mycircle.circumference)
+console.log("AFTER SETTER :",mycircle.color)
