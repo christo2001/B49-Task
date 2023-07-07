@@ -1,0 +1,44 @@
+<html>
+  <head>
+    <title>POPULATION</title>
+  </head>
+  <body>
+    <script>
+      //Create a new XMLHttpRequest object
+      var xhr = new XMLHttpRequest();
+
+      //Define HTTP method and URL
+      var method = "GET";
+      var url = "https://restcountries.com/v3.1/all";
+
+      //Open the request
+      xhr.open(method, url);
+
+      xhr.onload = function () {
+        if (xhr.status === 200) {
+          //Request was successful
+          console.log(xhr.responseText);
+          var countriesDetails = JSON.parse(xhr.responseText);
+           for(let i=0;i<countriesDetails.length;i++){
+            if(countriesDetails[i].currencies != undefined){
+              Object.keys(countriesDetails[i].currencies).forEach((key)=>{
+                if(key === "USD"){
+                  console.log(countriesDetails[i].currencies)
+                }
+              })
+            }
+           }
+                    
+
+    
+        } else {
+          //Request failed
+          console.log("Request failed", xhr.status);
+        }
+      };
+
+      //send the request
+      xhr.send();
+    </script>
+  </body>
+</html>
