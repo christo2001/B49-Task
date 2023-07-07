@@ -1,0 +1,40 @@
+<html>
+  <head>
+    <title>POPULATION</title>
+  </head>
+  <body>
+    <script>
+      //Create a new XMLHttpRequest object
+      var xhr = new XMLHttpRequest();
+
+      //Define HTTP method and URL
+      var method = "GET";
+      var url = "https://restcountries.com/v3.1/all";
+
+      //Open the request
+      xhr.open(method, url);
+
+      xhr.onload = function () {
+        if (xhr.status === 200) {
+          //Request was successful
+          console.log(xhr.responseText);
+          var countriesDetails = JSON.parse(xhr.responseText);
+
+        let newArr = countriesDetails.reduce(function (acc, cur) {
+            return acc+cur.population;
+        },0);
+        console.log(newArr);
+                    
+
+    
+        } else {
+          //Request failed
+          console.log("Request failed", xhr.status);
+        }
+      };
+
+      //send the request
+      xhr.send();
+    </script>
+  </body>
+</html>
