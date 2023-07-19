@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>search events.html</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lugrasimo&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+      body{
+        background: linear-gradient(360deg, rgb(36, 37, 38) 0.00%, rgb(65, 80, 95) 49.92%);
+        background-repeat: no-repeat;
+        height: 1000px;
+      }
+      .card{
+        background: linear-gradient(307deg, rgb(251, 251, 255) 0.00%, rgb(215, 223, 252) 62.37%);
+      }
+      .container{
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 30px;
+        
+      }
+      .card img{
+        height: 130px;
+        width: 250px;
+      }
+      .card-body{
+        margin-top: -10px;
+      }
+
+      .text-center{
+        color: aliceblue;
+        text-transform: capitalize;
+        margin-bottom: 80px;
+      }
+      @media(max-width:1400px){
+      .container{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr ;
+      }
+      .buttons{
+          display: flex;
+          margin-left: -20px;
+          padding-top: 0px;
+          gap: 10px;
+        }
+      .card img{
+        height: 130px;
+        width: 290px;
+      }
+     }
+
+      @media(max-width:1200px){
+      .container{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr ;
+      }
+      .buttons{
+          display: flex;
+          margin-left: -60px;
+          padding-top: 20px;
+          gap: 10px;
+        }
+      .card img{
+        height: 100px;
+        width: 290px;
+      }
+     }
+
+
+
+      @media(max-width:768px){
+      .container{
+        display: grid;
+        grid-template-columns: 1fr 1fr ;
+      }
+      .buttons{
+          display: flex;
+          gap: 10px;
+          margin-left: 10px;
+          padding-top: 0px;
+        }
+        .card img{
+        height: 140px;
+        width: 200px;
+        margin-left: 20px;
+      }
+     }
+
+
+
+      @media(max-width:576px){
+        .container{
+          display: grid;
+          grid-template-columns: 1fr;
+        }
+        .card img{
+          width: 180px;
+          height: 190px;
+        }
+        .buttons{
+          display: flex;
+          gap: 10px;
+          margin-left: -10px;
+        }
+        .card-body{
+          position: absolute;top: 30px;left: 220px;
+    
+        }
+     }
+
+
+
+
+     @media(max-width:1400px){
+      .container{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr ;
+      }
+      .cards2 .buttons{
+          display: flex;
+          margin-left: -20px;
+          padding-top: 0px;
+          gap: 10px;
+        }
+        .cards2 .card img{
+        height: 130px;
+        width: 290px;
+      }
+     }
+
+      @media(max-width:1200px){
+      .container{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr ;
+      }
+      .cards2 .buttons{
+          display: flex;
+          margin-left: -60px;
+          padding-top: 20px;
+          gap: 10px;
+        }
+        .cards2 .card img{
+        height: 100px;
+        width: 290px;
+      }
+     }
+
+
+
+      @media(max-width:768px){
+      .container{
+        display: grid;
+        grid-template-columns: 1fr 1fr ;
+      }
+      .cards2 .buttons{
+          display: flex;
+          gap: 10px;
+          margin-left: 10px;
+          padding-top: 0px;
+        }
+        .cards2 .card img{
+        height: 140px;
+        width: 200px;
+        margin-left: 20px;
+      }
+     }
+
+
+
+      @media(max-width:576px){
+        .container{
+          display: grid;
+          grid-template-columns: 1fr;
+        }
+        .cards2 .card img{
+          width: 180px;
+          height: 190px;
+        }
+        .cards2 .buttons{
+          display: flex;
+          gap: 10px;
+          margin-left: -10px;
+        }
+        .cards2 .card-body{
+          position: absolute;top: 30px;left: 220px;
+    
+        }
+     }
+
+  
+
+     
+
+   
+
+    
+
+    </style>
+</head>
+<body>
+  <div class="text-center">
+    <h1>search events</h1>
+  </div>
+
+   <div class="container">
+
+   
+
+    <div class="card mb-1" style="max-width: 540px;">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img src="https://o.remove.bg/downloads/908065b8-db82-43ab-a778-8f1250fa2036/boxing-simple-element_24908-54284-removebg-preview.png" class="img-fluid rounded-start" alt="...">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <p class="card-text">23 may 2020</p>
+            <p> seats 23</p>
+            <div class="buttons">
+            <button type="button" class="btn btn-primary">Book Now</button>
+            <button disabled ="button" class="btn btn-danger">Sold</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card mb-1" style="max-width: 540px;">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img src="https://o.remove.bg/downloads/2007ca01-485a-41af-abad-5d99c4b4da41/biker-logo-template-design_23-2149947427-removebg-preview.png" class="img-fluid rounded-start" alt="...">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <p class="card-text">23 may 2020</p>
+            <p> seats 23</p>
+            <div class="buttons">
+              <button type="button" class="btn btn-primary">Book Now</button>
+              <button disabled type="button" class="btn btn-danger">Sold</button>
+            </div>
+    
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card mb-1" style="max-width: 540px;">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img src="https://o.remove.bg/downloads/2815ee79-c720-4808-b172-ae1bee92e315/racing-colored-print-with-description-super-power-international-racing-championship-unlimited-speed_1284-39707-removebg-preview.png" class="img-fluid rounded-start" alt="...">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <p class="card-text">23 may 2020</p>
+            <p> seats 23</p>
+            <div class="buttons">
+              <button disabled type="button" class="btn btn-primary">Book Now</button>
+              <button type="button" class="btn btn-danger">Sold</button>
+            </div>
+     
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card mb-1" style="max-width: 540px;">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img src="https://o.remove.bg/downloads/fdbb11d6-1673-4da4-b38a-a5fad8550c34/cricket-fever-freehand-sketch-graphic-design-vector-illustration_460848-10886-removebg-preview.png" class="img-fluid rounded-start" alt="...">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <p class="card-text">23 may 2020</p>
+            <p> seats 23</p>
+            <div class="buttons">
+              <button disabled type="button" class="btn btn-primary">Book Now</button>
+              <button type="button" class="btn btn-danger">Sold</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <div class="card mb-1" style="max-width: 540px;">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img src="https://o.remove.bg/downloads/50e0ee1e-f8f0-4aad-9029-65a9ebe8002e/baseball-championship-poster-field-ball-bats_24877-60020-removebg-preview.png" class="img-fluid rounded-start" alt="...">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <p class="card-text">23 may 2020</p>
+            <p> seats 23</p>
+            <div class="buttons">
+              <button  type="button" class="btn btn-primary">Book Now</button>
+              <button disabled type="button" class="btn btn-danger">Sold</button>
+            </div>
+     
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card mb-1" style="max-width: 540px;">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img src="https://o.remove.bg/downloads/ce546e6d-2b8d-46ef-a385-82ca9a16d294/colored-vintage-basketball-logotype-template_1284-39319-removebg-preview.png" class="img-fluid rounded-start" alt="...">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <p class="card-text">23 may 2020</p>
+            <p> seats 23</p>
+            <div class="buttons">
+              <button disabled type="button" class="btn btn-primary">Book Now</button>
+              <button  type="button" class="btn btn-danger">Soldt</button>
+            </div>
+     
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card mb-1" style="max-width: 540px;">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img src="https://o.remove.bg/downloads/3415fddd-0826-48b7-afb1-6d6ec214c827/flat-design-field-hockey-design-logo_23-2149481835-removebg-preview.png" class="img-fluid rounded-start" alt="...">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <p class="card-text">23 may 2020</p>
+            <p> seats 23</p>
+            <div class="buttons">
+              <button type="button" class="btn btn-primary">Book Now</button>
+              <button disabled type="button" class="btn btn-danger">Sold</button>
+            </div>
+     
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card mb-1" style="max-width: 540px;">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img src="https://o.remove.bg/downloads/d5fb8469-982f-4f20-b8ff-41d93ee950dd/premier-soccer-football-tournament-background_1017-24106-removebg-preview.png" class="img-fluid rounded-start" alt="...">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <p class="card-text">23 may 2020</p>
+            <p> seats 23</p>
+            <div class="buttons">
+              <button  type="button" class="btn btn-primary">Book Now</button>
+              <button disabled type="button" class="btn btn-danger">Sold</button>
+            </div>
+     
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>   
+</body>
+</html>
