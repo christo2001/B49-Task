@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Addition Calculator</title>
+</head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sriracha&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="calci.css">
+<style>
+  
+</style>
+<body>
+  <h1 id="title" class="textcenter">Calculator</h1>
+
+  <p id="description">
+    The DOM calculator is a web-based calculator created using HTML, CSS, and JavaScript, which leverages the Document Object Model (DOM) to provide a user interface for performing mathematical operations. It allows users to input numbers, select operations through interactive buttons, and receive immediate results without requiring page reloads or server interactions. The calculator's functionality and user-friendly interface make it a convenient tool for performing various calculations directly within a web browser.
+  </p>
+<div class="container">
+  <div class="calculator">
+
+    <script>
+      let input = document.createElement("input")
+      input.type="text"
+       input.setAttribute("id","result")
+       input.setAttribute("class","result")
+      let c = document.querySelector(".calculator")
+      c.append(input)
+  </script>
+  
+          <button id="clear" class="operand">C</button>
+          <button id="delete" class="operand">&larr;</button>
+          <button id="modulus" value="%" class="operand">%</button>
+          <button id="mul" value="*" class="operand">*</button>
+          <button  id="7" value="7">7</button>
+          <button  id="8" value="8">8</button>
+          <button  id="9" value="9">9</button>
+          <button  id="divide" value="/" class="operand">/</button>
+          <button  id="4" value="4">4</button>
+          <button  id="5" value="5">5</button>
+          <button  id="6" value="6">6</button>
+          <button id="subtract" class="operand" value="-">-</button>
+          <button class="btn" id="1" value="1">1</button>
+          <button  id="2" value="2">2</button>
+          <button id="3" value="3">3</button>
+          <button id="add" value="+" class="operand">+</button>
+          <button id="0" value="0">0</button>
+          <button id="dot" value="." class="operand">.</button>
+          <button id="equal" value="=" class="eval">=</button>
+  </div>
+</div>
+    <script src="calci.js"></script>
+    <script src="https://app.zenclass.in/sheets/v1/js/zen/suite/bundle.js"></script>
+  </body>
+</html>

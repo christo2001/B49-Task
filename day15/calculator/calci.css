@@ -1,0 +1,60 @@
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+   }
+ 
+   .calculator{
+     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+     border-radius: 10px;
+     padding: 10px;
+     display: grid;
+     grid-template-columns: repeat(4,70px)
+ 
+   
+     
+   }
+   
+   input{
+     grid-column: span 4;
+     height: 70px;
+     background-color: rgba(182, 180, 179, 0.605);
+     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+ 
+     color: black;
+     font-size: large;
+     border: none;
+ 
+     margin-bottom: 10px;
+   }
+   #equal{
+     grid-column: span 2;
+     background-color: rgba(223, 184, 184, 0.559);
+   }
+ 
+   button{
+     height: 68px;
+     border: none;
+     margin: 2px;
+     font-weight: 540;
+     font-size: 15px;
+     background-color: rgb(235, 234, 233);
+     border-radius: 10px;
+     box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px; 
+    }
+ 
+    .operand{
+     color: brown;
+     font-weight:550;
+     background-color: rgba(223, 184, 184, 0.559);
+    }
+ 
+    h1{
+     text-align: center;
+    }
+   #description{
+     padding: 30px;
+     text-align: center;
+     font-family: 'Sriracha', cursive;
+   }
