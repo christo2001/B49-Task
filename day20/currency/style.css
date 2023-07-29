@@ -1,0 +1,90 @@
+html,
+body{
+   font-family: 'Poppins', sans-serif;
+   background-image: radial-gradient( circle 815px at 23.4% -21.8%,  rgba(9,29,85,1) 0.2%, rgba(0,0,0,1) 100.2% );
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
+  
+  body{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .container{
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgb(115, 108, 108) 0px 3px 6px;
+    padding: 10px 24px;
+    border-radius: 20px;
+    width: 490px;
+  }
+  
+  h1{
+    color:aliceblue;
+    text-align: center;
+    margin-bottom: 0.5em;
+    font-family: sans-serif;
+  }
+  .container .box{
+    width: 100%;
+    display: flex;
+    
+  }
+  .box div{
+    width: 100%;
+  }
+  
+  select{
+    width: 95%;
+    height: 40px;
+    font-size: 1.2em;
+    cursor: pointer;
+    background: black;
+    border: 1px solid white;
+    outline: none;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    color: aliceblue;
+    margin: 0.2em 0;
+    padding: 0 1em;
+    border-radius: 10px;
+  }
+  
+  select option{
+    font-size: 13px;
+    min-height: 90px;
+    min-width: 30px;
+  }
+  
+  
+  input{
+    width: 80%;
+    height: 40px;
+    font-size: 1em;
+    margin: 0.2em 0;
+    border-radius: 10px;
+    border: none;
+    background-image: radial-gradient( circle 975px at 2.6% 48.3%,  rgba(0,8,120,1) 0%, rgba(95,184,224,1) 99.7% );
+    outline: none;
+    padding: 0 1em;
+    color: aliceblue;
+  }
+  
+  .btn{
+    display:flex;
+    justify-content: center;
+  }
+  
+  button{
+    width: 40%;
+    height: 40px;
+    background-image: radial-gradient( circle 972.6px at 10% 20%,  rgba(243,0,75,1) 0%, rgba(255,93,75,1) 90% );
+    color: #f2f3f8;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2em;
+    margin: 0.5em 0;
+    padding-top: 10PX;
+  
+  }

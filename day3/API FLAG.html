@@ -1,36 +1,46 @@
+<!DOCTYPE html>
 <html>
-  <head>
-    <title>FLAG API</title>
-  </head>
-  <body>
-    <script>
-      //Create a new XMLHttpRequest object
-      var xhr = new XMLHttpRequest();
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Example of using theCatAPI.com to show a grid of cropped Kitties</title>
+</head>
+<body>
+<div class="maincontent">
+  <div id="grid" class="imgrid"></div>
+ </div>
 
-      //Define HTTP method and URL
-      var method = "GET";
-      var url = "https://restcountries.com/v3.1/all";
+ <script>
+  //change the limit to however many images to use
+const url = `https://api.thecatapi.com/v1/images/search?limit=20`;
+const api_key = "DEMO_API_KEY"
 
-      //Open the request
-      xhr.open(method, url);
-
-      xhr.onload = function () {
-        if (xhr.status === 200) {
-          //Request was successful
-          console.log(xhr.responseText);
-          var countriesDetails = JSON.parse(xhr.responseText);
-          for (var i = 0; i < countriesDetails.length; i++) {
-            console.log("country FLAG :",countriesDetails[i].flag);
-            console.log('--------------')
-          }
-        } else {
-          //Request failed
-          console.log("Request failed", xhr.status);
-        }
-      };
-
-      //send the request
-      xhr.send();
-    </script>
-  </body>
+ fetch(url,{headers: {
+      'x-api-key': api_key
+    }})
+ .then((response) => {
+   return response.json();
+ })
+.then((data) => {
+  let imagesData = data;
+  imagesData.map(function(imageData) {
+    
+    let image = document.createElement('img');
+    //use the url from the image object
+    image.src = `${imageData.url}`;
+        
+    let gridCell = document.createElement('div');
+    gridCell.classList.add('col');
+    gridCell.classList.add('col-lg');
+    gridCell.appendChild(image)
+      
+    document.getElementById('grid').appendChild(gridCell);
+    
+    });
+})
+.catch(function(error) {
+   console.log(error);
+});
+ </script>
+</body>
 </html>
