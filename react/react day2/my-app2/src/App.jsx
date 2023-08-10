@@ -39,7 +39,7 @@ export class App extends Component {
 
   //card2
   React.createElement('div',{className:'card1'}, React.createElement('p',{className:"type"},"plus"), React.createElement('h1',{className:'heading'},"$9/month"),
-  //card1 body
+  //card2 body
   React.createElement('div',{className:'card-body'},
   // availability
   React.createElement('p',{className:"available"},<FontAwesomeIcon icon={faCheck} />,"5 users"),
@@ -57,7 +57,7 @@ export class App extends Component {
 
   //card3
   React.createElement('div',{className:'card1'}, React.createElement('p',{className:"type"},"pro"), React.createElement('h1',{className:'heading'},"$49/month"),
-  //card1 body
+  //card3 body
   React.createElement('div',{className:'card-body'},
   // availability
   React.createElement('p',{className:"available"},<FontAwesomeIcon icon={faCheck} />,"unlimited users"),
