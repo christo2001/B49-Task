@@ -1,0 +1,63 @@
+
+.cards{
+  display: flex;
+  justify-content: center;
+  column-gap: 30px;
+  background-color: rgba(8, 136, 240, 0.66);
+  margin-top: 50px;
+}
+
+.card1{
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 30px;
+  margin-top: 80px;
+  position: relative;bottom: 40px;
+  background-color:white;
+  border: none;
+}
+.type{
+  text-align: center;
+  position: relative;left: 120px;
+  text-transform: capitalize;
+}
+
+.heading{
+  position: relative;left: 65px;
+  text-transform: capitalize;
+}
+.card-body{
+padding-left: 40px;
+padding-right: 40px;
+}
+.available{
+  text-transform: capitalize;
+}
+p{
+  display: flex;
+  gap: 10px;
+}
+.button-avai{
+ border: 2px solid;
+ padding: 10px;
+ text-align: center;
+ border-radius: 20px;
+ background-color: rgb(8, 136, 240);
+ color: aliceblue;
+ text-transform: capitalize;
+}
+
+.declined{
+filter: opacity(0.5);
+}
+
+.button-dec{
+  border: 2px solid;
+  padding: 10px;
+  text-align: center;
+  border-radius: 20px;
+  background-color: rgb(8, 136, 240);
+  color: aliceblue;
+  text-transform: capitalize;
+  filter: opacity(0.7);
+}
