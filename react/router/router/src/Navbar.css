@@ -1,0 +1,81 @@
+/* Navbar.css */
+#navbar {
+    background-color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0;
+  }
+  
+  #navbar ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  #navbar ul li {
+    text-align: center;
+    padding: 10px 20px;
+    transition: background-color 0.3s, transform 0.3s; /* Add transform transition */
+  }
+  
+  #navbar ul li a {
+    text-decoration: none;
+    color: white;
+    transition: color 0.3s;
+  }
+  
+  #navbar ul li:hover {
+    background-color: #555;
+    transform: translateY(-3px); /* Apply a slight upward translation on hover */
+  }
+  #navbar ul li a:active,
+  #navbar ul li a.active{
+    color: #ff9900;
+    text-decoration: underline;
+  }
+  #navbar ul li:hover a {
+    color: #ff9900;
+  }
+  #navbar ul li a:active,
+#navbar ul li a.active {
+  color: #ff9900;
+  position: relative; /* Required for absolute positioning of pseudo-element */
+}
+
+#navbar ul li a:active::after,
+#navbar ul li a.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px; /* Adjust this value to control the distance of the underline from the text */
+  left: 0;
+  width: 100%;
+  height: 2px; /* Thickness of the underline */
+  background-color: #ff9900;
+  transform: scaleX(0); /* Initially hide the underline */
+  transform-origin: bottom right;
+  transition: transform 0.3s ease-in-out;
+}
+
+#navbar ul li a:active:hover::after,
+#navbar ul li a.active:hover::after {
+  transform: scaleX(1); /* Show the underline on hover */
+  transform-origin: bottom left;
+}
+
+  /* Add responsive styles */
+  @media (max-width: 768px) {
+    #navbar ul {
+      flex-direction: column;
+    }
+  
+    #navbar ul li {
+      padding: 15px 0;
+      border-bottom: 1px solid white;
+    }
+  }
+  .bg {
+    max-width: 100%;
+    height: auto;
+  }

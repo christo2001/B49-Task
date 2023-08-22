@@ -1,0 +1,38 @@
+/* Full.css */
+.full-container {
+    background-color: aliceblue;
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  .heading {
+    text-align: center;
+    color: #333;
+    text-transform: capitalize;
+  }
+  
+  .heading h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    margin-right: 650px;
+  }
+  
+  .heading p {
+    font-size: 1.03rem;
+    font-weight: 490;
+    margin-right: 250px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .responsive-img {
+    width: 100%;
+    height: auto; /* Keep the image's aspect ratio */
+  }
+  
+  /* Reduce the maximum height for laptops */
+  @media (min-width: 992px) {
+    .responsive-img {
+      width: 80%;
+      max-height: 480px; /* Adjust this value as needed */
+    }
+  }
