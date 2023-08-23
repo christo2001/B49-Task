@@ -1,0 +1,58 @@
+.parent {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: rgb(210, 193, 175);
+    color: black;
+    text-transform: capitalize;
+  }
+  .thumbnail {
+    position: relative;
+    right: 120px;
+  }
+  .price {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    position: relative;
+  }
+  .price p {
+    position: relative;
+    bottom: 15px;
+  }
+  .quantity-input {
+    width: 30px; 
+    height: 15px;
+    padding: 5px;
+    text-align: center;
+  }
+  .details {
+    position: relative;
+    right: 20px;
+  }
+  .available{
+    background-color: brown;
+    color: aliceblue;
+  }
+  @media (max-width: 720px) {
+    .parent {
+      flex-direction: column;
+    }
+    .thumbnail {
+      position: static;
+      right: 70;
+    }
+    .price {
+      position: static;
+    }
+    .price p {
+      position: relative;
+      bottom: 10px;
+    }
+    .quantity-input {
+      width: 50px;
+    }
+    .details {
+      position: static;
+      left: 0;
+    }
+  }
