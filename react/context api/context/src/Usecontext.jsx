@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { ProductContext } from './Animalcontext';
+import { ProductContext } from './Product';
 import './product.css'
 
 function Animalsound() {
