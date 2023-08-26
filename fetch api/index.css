@@ -1,0 +1,39 @@
+body{
+   background-color: black;
+}
+
+#title{
+    color: aliceblue;
+    text-transform: capitalize;
+}
+.row{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+img{
+    width: 100%;
+    height: 300px;
+    padding: 50px;
+}
+
+.card{
+    border: none;
+    background: transparent;
+    margin-top: 20px;
+}
+
+.card-header{
+    box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+   color: aliceblue;
+}
+.card-body{
+ box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+color: aliceblue;
+border-radius: 30px;
+}
+
+.card-text{
+    font-size: large;
+}
