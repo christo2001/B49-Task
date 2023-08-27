@@ -1,0 +1,108 @@
+  .add-btn,
+  .remove-btn {
+    padding: 5px 10px;
+    border: none;
+    background-color: #7fa0c3;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    transition: background-color 0.3s;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.15) 100%), radial-gradient(at top center, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.40) 120%) #989898;
+ background-blend-mode: multiply,multiply;
+  }
+
+  .remove-btn{
+    position: relative;right: 30px;
+  }
+  .add-btn:hover,
+  .remove-btn:hover {
+    background-color: #0056b3;
+  }
+  img{
+    width: 300px;
+    height: auto;
+    border-radius: 30px;
+    box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+  }
+  .details{
+    display: flex;
+    text-transform: capitalize;
+    justify-content: center;
+    gap: 3px;
+  }
+  .name{
+    border-radius: 2px;
+  }
+  .price{
+  border-radius: 2px;
+  color: rgb(250, 246, 246);
+  }
+button{
+display: flex;
+justify-content: center;
+text-align: center;
+margin-left: 35%;
+}
+  
+  /* Media query for screens with a maximum width of 576px */
+  @media (max-width: 576px) {
+    .name {
+      border-radius: 2px;
+    }
+    .details{
+      justify-content: center;
+    }
+    button{
+     margin-left: 40%;
+    }
+    .product {
+      flex-direction: column;
+    }
+  
+    .box {
+      margin-top: 5px;
+    }
+  
+    .name {
+      font-size: 1rem; /* Adjust font size for smaller screens */
+    }
+  
+    .price {
+      font-size: 1rem; /* Adjust font size for smaller screens */
+    }
+  }
+
+  /* Media query for screens up to 768px */
+@media (max-width: 720px) {
+  .name {
+    border-radius: 2px;
+  }
+  
+  .details {
+    justify-content: center;
+  }
+  
+  button {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+  }
+
+  .product {
+    flex-direction: column;
+  }
+
+  .box {
+    margin-top: 5px;
+  }
+
+  .name {
+    font-size: 1rem; /* Adjust font size for smaller screens */
+  }
+
+  .price {
+    font-size: 1rem; /* Adjust font size for smaller screens */
+  }
+}
+

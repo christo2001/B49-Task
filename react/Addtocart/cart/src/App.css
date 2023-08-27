@@ -1,0 +1,80 @@
+/* Reset default margin and padding */
+body, h1, h2, h3, p, ul, li {
+  margin: 0;
+  padding: 0;
+  background: black;
+  color: aliceblue;
+}
+
+/* Basic styles for the app container */
+.app {
+  font-family: Arial, sans-serif;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 20px;
+  border: none;
+
+}
+
+/* Product styling */
+.product {
+ 
+  padding: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+  border: none;
+}
+
+.price {
+  font-weight: bold;
+}
+
+.add-btn {
+  background-color: #4caf50;
+  color: white;
+}
+
+.remove-btn {
+  background-color: #f44336;
+  color: white;
+}
+
+/* Cart styling */
+.cart {
+  border: 1px solid #ccc;
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .products {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .product {
+    width: 100%;
+  }
+}
+.p {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+/* Media query for screens with a maximum width of 768px */
+@media (max-width: 768px) {
+  .p {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Media query for screens with a maximum width of 576px */
+@media (max-width: 576px) {
+  .p {
+    grid-template-columns: 1fr;
+  }
+}
+.text-center{
+   background: transparent;
+}

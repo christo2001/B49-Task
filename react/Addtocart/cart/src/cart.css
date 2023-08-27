@@ -1,0 +1,86 @@
+/* cart.css */
+.cart {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 400px;
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 20px;
+    background-color: black;
+    transition: right 0.5s ease-in-out;
+    color: aliceblue;
+    border-radius: 10px;
+  }
+  
+  .cart-active {
+    right: 0;
+     /* This line adds the transition effect */
+  }
+  
+  .close {
+    float: right;
+    cursor: pointer;
+  }
+  
+  .open {
+    float: right;
+    cursor: pointer;
+  }
+  .cart-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .cart-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin: 10px 0;
+    
+  }
+  
+  .cart-item-img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    margin-right: 10px;
+  }
+  
+  .cart-item-details {
+    flex-grow: 1;
+  }
+  
+  .cart-item-name {
+    font-size: 18px;
+    margin: 0;
+  }
+  
+  .cart-item-price {
+    font-size: 16px;
+    margin: 0;
+  }
+  .count{
+    float: right;
+    position: relative;bottom: 13px;right: 20px;
+   color: black;
+    padding: 2px;
+    border-radius: 100px;
+    font-size: smaller;
+    background: aliceblue;
+  }
+  .fontawesome{
+    position: relative;top: 10px;
+  }
+  .btn{
+    float: left;
+    background-image: linear-gradient(45deg, #93a5cf 0%, #e4efe9 100%);
+    color: black;
+    border-radius: 5px;
+    margin-left: -1px;
+    padding: 1px;
+    text-transform: capitalize;
+    font-size: smaller;
+  }
