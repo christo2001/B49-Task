@@ -62,7 +62,7 @@ const Author = () => {
         <div className="input-group">
           <label className="input-label" htmlFor="name"> Name:</label>
           <input type="text" id="name" name="name" value={formik.values.name} onChange={formik.handleChange} className="input-field"
-            placeholder="Enter your name"/>
+            placeholder="Enter author name"/>
           {formik.errors.name && <p className="error">{formik.errors.name}</p>}
         </div>
 
@@ -70,7 +70,7 @@ const Author = () => {
         <div className="input-group">
           <label className="input-label" htmlFor="bio">Bio:</label>
           <textarea id="bio" name="bio" value={formik.values.bio} onChange={formik.handleChange} className="textarea-field"
-            placeholder="Enter your bio"/>
+            placeholder="Enter author bio"/>
           {formik.errors.bio && <p className="error">{formik.errors.bio}</p>}
         </div>
 
@@ -82,7 +82,7 @@ const Author = () => {
             selected={formik.values.birthdate}
             onChange={(date) => formik.setFieldValue('birthdate', date)}
             className="input-field"
-            placeholderText="Select your birthdate"
+            placeholderText="Select author birthdate"
           />
           {formik.errors.birthdate && <p className="error">{formik.errors.birthdate}</p>}
         </div>

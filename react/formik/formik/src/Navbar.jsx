@@ -7,19 +7,19 @@ const Navbar = () => {
   return (
     <div className="nav">
       <div className="menu">
-        <NavLink exact to="/" activeClassName="active-link">
+        <NavLink exact to="/">
           Home
         </NavLink>
-        <NavLink to="/author" activeClassName="active-link">
+        <NavLink to="/author">
           Author
         </NavLink>
-        <NavLink to="/authorrecord" activeClassName="active-link">
+        <NavLink to="/authorrecord">
           Author Record
         </NavLink>
-        <NavLink to="/book" activeClassName="active-link">
+        <NavLink to="/book">
           Book
         </NavLink>
-        <NavLink to="/bookrecord" activeClassName="active-link">
+        <NavLink to="/bookrecord">
           Book Record
         </NavLink>
       
