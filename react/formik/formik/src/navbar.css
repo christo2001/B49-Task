@@ -1,0 +1,67 @@
+/* navbar.css */
+
+.nav {
+    color: #fff;
+    padding: 10px 0;
+    position: relative;
+    
+  }
+  
+  .menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px; /* Reduce padding for better spacing on small screens */
+    margin: 0 auto; /* Center the menu horizontally and remove the fixed margin */
+    max-width: 900px; /* Set a maximum width for the menu */
+    border-radius: 10px;
+    background-image: radial-gradient(
+      circle 993px at 0.5% 50.5%, 
+      rgba(16, 48, 117, 0.37) 0%, 
+      rgba(245, 247, 252, 1) 100.2%
+    );
+  }
+  
+  .logo {
+    position: absolute;
+    left: 0;
+    top: -10px;
+  }
+  
+  .menu a {
+    color: #0a0909;
+    text-decoration: none;
+    margin: 0 30px;
+    transition: color 0.3s;
+    text-transform: capitalize;
+    font-size: large;
+  }
+  
+  .menu a:hover {
+    color: #ff5733;
+  }
+
+  .active-link {
+    background-color: #ff5733; 
+    color: #fff; 
+  
+  }
+
+  @media (max-width: 928px) {
+    .menu {
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      margin: 0px; /* Adjust padding for better spacing on small screens */
+    }
+  
+    .menu a {
+      margin: 10px 0;
+    }
+  }
+  @media (max-width: 768px) {
+    .menu {
+      padding: 10px;
+      font-size: 14px; /* You can adjust the font size as needed */
+    }
+  }

@@ -1,0 +1,109 @@
+/* Authorrecord.css */
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+  }
+  
+  tr:hover {
+    background-color: #f5f5f5;
+  }
+  
+  /* Adjust the column sizes */
+  th:nth-child(3), td:nth-child(3) {
+    width: 180px; /* Reduce the size of the "Birthdate" column */
+  }
+  
+  th:nth-child(2), td:nth-child(2) {
+    width: 40%; /* Give more size to the "Bio" column */
+  }
+  
+ /* Authorrecord.css */
+
+/* Modal Styles */
+.modal-container {
+    width: 80%;
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    background-color: #ffffff; /* Background color for the modal */
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    position: relative;
+  }
+  
+  /* Add a background overlay */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Background color with some transparency */
+    z-index: 999; /* Ensure the overlay covers the entire screen */
+  }
+  
+  /* Style the modal content */
+  .modal-container h2 {
+    margin-bottom: 20px;
+    color: #333; /* Text color for the modal title */
+  }
+  
+  .modal-container input,
+  .modal-container textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px; /* Increase the font size for input fields */
+  }
+  
+  /* Style the buttons */
+  .modal-container button {
+    padding: 10px 20px;
+    background-color: #007bff; /* Button background color */
+    color: #fff; /* Button text color */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-right: 10px;
+  }
+  
+  .modal-container button.cancel {
+    background-color: #ccc; /* Background color for the Cancel button */
+  }
+  
+  /* Add hover effect for buttons */
+  .modal-container button:hover {
+    background-color: #0056b3; /* Background color on hover */
+  }
+  
+  /* Add a simple animation */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  /* Apply the animation to the modal */
+  .modal-container {
+    animation: fadeIn 0.3s ease-in-out; /* Apply the animation to the modal */
+  }
+  

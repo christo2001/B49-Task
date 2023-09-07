@@ -1,0 +1,96 @@
+body {
+    background-image: linear-gradient(to top, #dfe9f3 0%, white 100%);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+  }
+.inputs {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    position: relative;
+  }
+  
+  .box {
+    padding: 20px;
+    position: relative;
+    margin: 0 auto;
+    max-width: 400px;
+
+  
+    /* Center the input fields horizontally and vertically */
+    display: flex;
+    flex-direction: column; /* Stack input fields vertically */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+  }
+  
+  /* Increase the size of the input fields */
+  .inputs input[type="text"] {
+    width: 240px; /* 100% width of the parent container */
+    height: 40px; /* Adjust the desired height */
+    padding: 1px; /* Add padding for better appearance */
+    font-size: 16px;
+    gap: 20px; /* Adjust font size */
+    border-radius: 5px;
+  }
+
+  .buttons{
+    padding: 50px;
+  }
+
+  button{
+    padding: 10px;
+    border-radius: 5px;
+  }
+
+  .images{
+    position: relative;
+  }
+
+  .images p{
+    position: absolute;
+    left: 500px;
+    top: 150px;
+    font-size: xx-large;
+    text-align: center;
+  }
+  
+  /* Media query for screens smaller than 768px (adjust the breakpoint as needed) */
+  @media (max-width: 768px) {
+    .inputs {
+      grid-template-columns: 1fr;
+      left: 0;
+      gap: 15px;
+    }
+  
+    .box {
+      padding: 10px;
+      margin-top: 25%;
+    }
+  
+    .images {
+      position: relative;
+      width: 100%;
+      height: auto;
+      text-align: center; /* Center the image horizontally */
+    }
+  
+    img {
+      display: block; /* Remove any default inline spacing */
+      margin: 0 auto; /* Center the image horizontally within the container */
+      max-width: 100%; /* Ensure the image doesn't exceed its container width */
+    }
+  
+    .images p {
+      position: absolute;
+      left: 20px;
+      top: 450px;
+      font-size: larger;
+      text-align: center;
+    }
+  }
+  
+  
