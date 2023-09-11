@@ -23,7 +23,7 @@ export const productSlice = createSlice({
     increment: (state) => {
       var newQuantity = state.quantity + 1;
       if(newQuantity>state.stock){
-       return alert('deue')
+       return alert('Please select within the limit')
       }
       return { ...state, quantity: newQuantity, price: state.price + initialState.price};
     },
