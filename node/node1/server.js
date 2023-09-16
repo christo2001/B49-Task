@@ -12,9 +12,7 @@ if(!fs.existsSync(outputfolder)){
 
 const PORT = 3000
 
-app.listen(PORT,()=>{
-    console.log("server is running on",PORT)
-})
+
 
 app.get("/createfile",(req,res) =>{
     const currentTime = new Date();
@@ -26,7 +24,7 @@ app.get("/createfile",(req,res) =>{
     const mins = currentTime.getMinutes().toString();
     const secs = currentTime.getSeconds().toString();
 
-    const datetimeforfilename = `${year}-${month}-${date}-${hours}-${mins}-${secs}`
+    const datetimeforfilename = `${year}-${month}-${date}-${hours}-${mins}-${secs}.txt`
 
     const filepath = path.join(outputfolder,datetimeforfilename);
 
@@ -39,3 +37,20 @@ app.get("/createfile",(req,res) =>{
         res.send(`file created successfully at: ${filepath}`)
     })
 })
+
+app.get('/getfile',(req,res)=>{
+    fs.readdir(outputfolder,(err,files)=>{
+        if(err){
+            res.status(500).send(`error reading file ${err}`);
+            return;
+        }
+
+        const textfiles = files.filter((file)=>path.extname(file) ==='.txt');
+        res.json(textfiles)
+    })
+})
+
+app.listen(PORT,()=>{
+    console.log("server is running on",PORT)
+})
+
