@@ -1,63 +1,38 @@
-const express = require("express");
-const bodyparser= require("body-parser")
+const express = require('express');
+const bodyParser = require('body-parser');
 
 const app = express();
-const port=3000
+const PORT = process.env.PORT || 3000;
 
-app.use(bodyparser.json());
+app.use(bodyParser.json());
 
-let items=[
-    {id:1, name:"christo"},
-    {id:2, name:"haha"}
-]
+// room
+const rooms = [];
 
-app.post("/items",(req,res)=>{
-    const newitem = req.body;
-    if(!newitem.id || !newitem.name){
-        return res.status(500).send("item must have an id and name")
-    }
+app.post('/room', (req, res) => {
+  const { seats, amenities, pricePerHour } = req.body;
 
-    items.push(newitem);
-    res.status(201).send(`item added with id:${newitem.id}`)
+  if (!seats || !pricePerHour) {
+    return res.status(400).json({ error: 'Seats and pricePerHour are required' });
+  }
+
+  const room = {
+    seats,
+    amenities,
+    pricePerHour,
+  };
+
+  rooms.push(room);
+
+  res.status(201).json(room);
 });
 
-app.get("/getitems",(req,res)=>{
-    res.json(items)
+// Define a route to get all rooms
+app.get('/room', (req, res) => {
+  res.json(rooms);
 });
 
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
 
-app.put("/items/:id",(req,res)=>{
-    const itemid = parseInt(req.params.id);
-    const updateditem = req.body
-
-    const index = items.findIndex((item)=> item.id === itemid);
-    if(index===-1){
-        return res.status(404).send("item not found")
-    }
-
-    if(!updateditem.name){
-        return res.status(500).send("item must have a name!!!")
-    }
-
-    items[index].name = updateditem.name;
-    res.status(201).send(`item updated with id:${itemid}`)
-})
-
-app.delete("/items/:id",(req,res)=>{
-    const itemid = parseInt(req.params.id);
-    
-
-    const index = items.findIndex((item)=> item.id === itemid);
-    if(index===-1){
-        return res.status(404).send("item not found")
-    }
-
- 
-
-    items.splice(index,1)
-    res.status(201).send(`item updated with id:${itemid}`)
-})
-
-app.listen(port,()=>{
-    console.log("server is running",port)
-})
