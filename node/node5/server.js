@@ -1,9 +1,8 @@
-// Define a route to get all rooms with booking data
 const express = require('express');
 const bodyParser = require('body-parser');
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 
@@ -13,9 +12,11 @@ const roomdetails = [
     {roomname:"ginsberg", bookingstatus:"failed", customername:"sasi", date:"25-09-2023",start_time:"08.00",end_time:"12.00"},
   ]
   
-  app.get('/getroomdetails',(req,res)=>{
+  app.get('/getdetails',(req,res)=>{
     res.json(roomdetails)
   })
+
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
   });
+  
