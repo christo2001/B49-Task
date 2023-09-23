@@ -28,7 +28,7 @@ app.post('/room', (req, res) => {
 });
 
 // Define a route to get all rooms
-app.get('/room', (req, res) => {
+app.get('/getroom', (req, res) => {
   res.json(rooms);
 });
 
@@ -89,7 +89,7 @@ app.post('/bookings', (req, res) => {
 });
 
 // Define a route to get all room bookings
-app.get('/bookings', (req, res) => {
+app.get('/getbookings', (req, res) => {
   res.json(roombooking);
 });
 
