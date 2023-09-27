@@ -24,14 +24,14 @@ mongoose
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.log("Could not connect to MongoDB", err));
 
+  //using this api we can register our email and password
+
   app.post('/register', async (req, res) => {
     try {
         const { email, password } = req.body;
 
-        // Create a new instance of the Register model with the data
         const registration = new Register({ email, password });
 
-        // Save the registration data to the database
         await registration.save();
 
         res.status(201).send(registration);
@@ -40,13 +40,12 @@ mongoose
     }
 });
 
-// Define a new route for getting all registered users
+//------------------------------------------------------------------------------
+// using this api we can get the registered email id
 app.get('/registeredusers', async (req, res) => {
   try {
     // Use the Register model to query all registered users from the database
     const users = await Register.find();
-
-    // Send the list of registered users as a response
     res.status(200).json(users);
   } catch (error) {
     // Handle errors and send an error response if there's a problem
@@ -54,6 +53,9 @@ app.get('/registeredusers', async (req, res) => {
   }
 });
 //--------------------------------------------------------------------------------
+
+
+ //using this api enter your registed email to get forgot password link via gmail
 
 app.post('/forgetpassword', async (req, res) => {
   try {
@@ -76,9 +78,8 @@ app.post('/forgetpassword', async (req, res) => {
       var mailOptions = {
         from: 'otismelbourn22@gmail.com',
         to: email,
-        subject: 'Sending Email using Node.js',
-        text: 'That was easy!',
-        html: '<a href="https://www.w3schools.com/nodejs/nodejs_email.asp">Reset Password link</a>'
+        subject: 'Sending Forget Password Email using Node.js',
+        html: '<a href="https://651466c53b691f1dbdc6cc18--thunderous-cheesecake-5134b6.netlify.app/">Reset Password link</a>'
       };
       
       
@@ -96,6 +97,9 @@ app.post('/forgetpassword', async (req, res) => {
 });
 
 //----------------------------------------------------------------------------------------
+
+ //using this api we can change password to our registered email
+
 app.post('/changepassword', async (req, res) => {
   try {
       const { email, newPassword } = req.body; // Extract email and newPassword

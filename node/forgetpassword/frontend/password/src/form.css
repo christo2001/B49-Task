@@ -1,0 +1,48 @@
+/* Base styles for the form */
+.form-group {
+    margin-bottom: 20px;
+  }
+  
+  input[type="email"],
+  input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  /* Responsive CSS using media queries */
+  @media (max-width: 768px) {
+    /* Adjust the form width for smaller screens */
+    input[type="email"],
+    input[type="password"] {
+      width: 80%;
+    }
+  
+    button {
+      width: 80%;
+    }
+  }
+  
+  /* Responsive CSS for very small screens (e.g., mobile phones) */
+  @media (max-width: 480px) {
+    /* Further adjust the form width for very small screens */
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+    }
+  
+    button {
+      width: 100%;
+    }
+  }
+  
