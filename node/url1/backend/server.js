@@ -24,7 +24,7 @@ mongoose
   .catch((err) => console.log("Could not connect to MongoDB", err));
 
 
-  app.post('/regis', async (req, res) => {
+  app.post('/regist', async (req, res) => {
     try {
         const {firstname,lastname, email, password } = req.body;
 
