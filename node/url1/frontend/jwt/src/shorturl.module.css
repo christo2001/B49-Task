@@ -1,0 +1,15 @@
+.head{
+    margin: 0 auto;
+    width: 50%;
+    background-image: radial-gradient( circle 674px at 18.3% 77%,  rgba(139,186,244,1) 3.4%, rgba(15,51,92,1) 56.6% );
+    border-radius: 10px;
+}
+.value{
+    font-size: x-large;
+    
+}
+.url{
+    text-decoration: none;
+    font-size: x-large;
+    color: white;
+}

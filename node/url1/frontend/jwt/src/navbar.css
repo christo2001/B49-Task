@@ -1,0 +1,41 @@
+ul{
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    flex-wrap: wrap;
+    gap: 20px;
+    place-items: center;
+    margin-right: 20px;
+    font-size: x-large;
+    text-transform: capitalize;
+}
+
+.nav {
+    background-image: linear-gradient(to top, #0ba360 0%, #3cba92 100%);
+    padding: 0; /* Remove any default padding */
+    border-radius: 10px;
+  }
+  
+  .nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0; /* Remove any margin */
+  }
+  
+  .nav li {
+    display: inline; /* Display list items inline */
+    margin: 0;
+    padding: 0;
+  }
+  
+  .nav a {
+    text-decoration: none;
+    color: #fff; /* Set the link color */
+    padding: 10px 15px; /* Add padding to create clickable area */
+    display: block; /* Make the entire list item clickable */
+  }
+  
+  .nav a:hover {
+    text-decoration: underline; /* Add a background color on hover */
+  }
+  

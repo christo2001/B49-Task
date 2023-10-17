@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './register.css';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate,Link} from 'react-router-dom';
+import Emailverify from './Emailverify';
+import registercss from './register.module.css';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -24,7 +26,7 @@ const Register = () => {
     try {
       const response = await axios.post('http://localhost:3000/regist', formData);
       setMessage(response.data.message);
-      navigate('/login');
+      navigate('/login')
     } catch (error) {
       console.error(error);
       setMessage('Email already exists.');
@@ -32,57 +34,66 @@ const Register = () => {
   };
 
   return (
-    <div className="container">
-      <h2>Register</h2>
-      <form onSubmit={handleSubmit} className="form-grid">
+    <div className={registercss.container}>
+      <h2 className={registercss.heading}>Registration</h2>
+      <div className={ registercss.line}></div>
+
+      <form onSubmit={handleSubmit} className={ registercss.form}>
         <div className="form-group">
-          <label htmlFor="firstname">First Name:</label>
+      
           <input
             type="text"
             id="firstname"
             name="firstname"
             onChange={handleChange}
             value={formData.firstname}
+            placeholder='firstname'
             required
           />
         </div>
 
         <div className="form-group">
-          <label htmlFor="lastname">Last Name:</label>
+        
           <input
             type="text"
             id="lastname"
             name="lastname"
             onChange={handleChange}
             value={formData.lastname}
+            placeholder='lastname'
             required
           />
         </div>
 
         <div className="form-group">
-          <label htmlFor="email">Email:</label>
+         
           <input
             type="email"
             id="email"
             name="email"
             onChange={handleChange}
             value={formData.email}
+            placeholder='email'
             required
           />
         </div>
 
         <div className="form-group">
-          <label htmlFor="password">Password:</label>
+          
           <input
             type="password"
             id="password"
             name="password"
             onChange={handleChange}
             value={formData.password}
+            placeholder='passwword'
             required
           />
         </div>
-        <button type="submit">Register</button>
+        <div className={registercss.buttons}>
+        <button type="submit">sign up</button>
+        
+        </div>
       </form>
       {message && <p>{message}</p>}
     </div>

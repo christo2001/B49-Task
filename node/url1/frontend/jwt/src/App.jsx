@@ -5,6 +5,11 @@ import Register from './Register';
 import Home from './Home';
 import Shorturl from './Shorturl';
 import Dashboard from './Dashboard';
+import ForgotPassword from './ForgotPassword';
+import ChangePassword from './ChangePassword';
+
+
+
 
 function App() {
 
@@ -18,6 +23,8 @@ function App() {
             <Route path="/home" element={ <Home />} />
             <Route path="/myurl" element={ <Shorturl />} />
             <Route path="/dashboard" element={ <Dashboard />} />
+            <Route path="/ForgotPassword" element={ <ForgotPassword />} />
+            <Route path="/ChangePassword" element={ <ChangePassword />} />
           </Routes>
         </main>
       </div>
