@@ -26,7 +26,7 @@ const Register = () => {
     try {
       const response = await axios.post('http://localhost:3000/regist', formData);
       setMessage(response.data.message);
-      navigate('/login')
+      navigate('/verify/:token')
     } catch (error) {
       console.error(error);
       setMessage('Email already exists.');

@@ -17,6 +17,7 @@ const User = require("./models/register");
 
 const PORT = process.env.port
 const MONGO_URL = process.env.url
+const SECRET_KEY = process.env.SECRET_KEY;
 
 //Connect to MongoDB
 mongoose
@@ -26,23 +27,50 @@ mongoose
 
 
   app.post('/regist', async (req, res) => {
-    const { firstname,lastname,email, password } = req.body;
-
+    const { firstname, lastname, email, password } = req.body;
+  
     const hashedPassword = await bcrypt.hash(password, 10);
   
-    const user = new User({ firstname,lastname,email, password: hashedPassword });
+    const user = new User({ firstname, lastname, email, password: hashedPassword });
   
     try {
       await user.save();
-      res.json({ message: "we have sent you a verification mail to your registered email id" });
+      
+      // Generate a token (you can keep this if needed for other purposes)
+      const token = jwt.sign(
+        { data: 'Token Data' },
+        'SECRET_KEY',
+        { expiresIn: '1h' }
+      );
+      
+      // You can store the token in a variable or not, depending on your requirements
+      // req.registrationToken = token;
+  
+      res.json({ message: "User registered successfully" });
     } catch (error) {
       console.error(error);
-      res
-        .status(500)
-        .json({ message: "An error occurred while registering the user!" });
+      res.status(500).json({ message: "An error occurred while registering the user!" });
     }
-});
-
+  });
+  
+  
+  app.get('/verify', (req, res) => {
+    const { token } = req.params;
+  
+    // Access the token stored in the request object
+    const registrationToken = req.registrationToken;
+  
+    jwt.verify(token, 'SECRET_KEY', function (err, decoded) {
+      if (err) {
+        console.log(err);
+        res.send('Email verification failed, possibly the link is invalid or expired');
+      } else {
+        // Implement logic to mark the email as verified
+        res.send('Email verified successfully');
+        console.log(registrationToken);
+      }
+    });
+  });
   
 
 app.post("/login", async (req, res) => {

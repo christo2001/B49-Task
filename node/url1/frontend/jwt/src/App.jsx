@@ -7,6 +7,7 @@ import Shorturl from './Shorturl';
 import Dashboard from './Dashboard';
 import ForgotPassword from './ForgotPassword';
 import ChangePassword from './ChangePassword';
+import Emailverify from './Emailverify';
 
 
 
@@ -25,6 +26,7 @@ function App() {
             <Route path="/dashboard" element={ <Dashboard />} />
             <Route path="/ForgotPassword" element={ <ForgotPassword />} />
             <Route path="/ChangePassword" element={ <ChangePassword />} />
+            <Route path="/verify/:token" element={ <Emailverify />} />
           </Routes>
         </main>
       </div>

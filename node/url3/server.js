@@ -97,7 +97,7 @@ app.post('/forgetpasswords', async (req, res) => {
         from: 'otismelbourn22@gmail.com',
         to: email,
         subject: 'Sending Forget Password Email using Node.js',
-        html: '<a href="http://example.com/changepassword">Reset Password link</a>'
+        html: '<a href="https://65314fc156c43335356e68f4--aesthetic-starlight-83ca3b.netlify.app/login">Reset Password link</a>'
       };
       
       
