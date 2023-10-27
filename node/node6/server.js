@@ -12,7 +12,7 @@ const Student = require("./models/student")
 
 const port = 3000
 
-const db_url = "mongodb+srv://christolawrenceee:Chris123@cluster0.uobw0gc.mongodb.net/?retryWrites=true&w=majority&appName=AtlasApp"
+const db_url = "mongodb+srv://christolawrence:Chris123@cluster0.oiwcntz.mongodb.net/?retryWrites=true&w=majority&appName=AtlasApp"
 
 app.use(bodyparser.json());
 
