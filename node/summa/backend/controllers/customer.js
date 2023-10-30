@@ -1,7 +1,7 @@
 import { customer } from "../models/customer";
 import jwt  from "jsonwebtoken";
 
-export function getuserbyemail(request){
+export function getuserbyemails(request){
     return customer.findOne({
         email:request.body.email
     })
