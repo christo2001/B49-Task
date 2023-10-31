@@ -28,6 +28,9 @@ const customerschema = new mongoose.Schema({
       urlToken: {
         type: String,
       },
+      otp:{
+        type:String,
+      }
 })
 
 const customermodel = mongoose.model("Customer", customerschema)
