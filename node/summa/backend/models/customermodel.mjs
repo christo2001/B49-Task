@@ -18,6 +18,16 @@ const customerschema = new mongoose.Schema({
         required:true,
         trim:true
     },
+    isActive: {
+        type: Boolean,
+        default: false,
+      },
+      activationToken: {
+        type: String,
+      },
+      urlToken: {
+        type: String,
+      },
 })
 
 const customermodel = mongoose.model("Customer", customerschema)
