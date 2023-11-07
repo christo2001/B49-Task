@@ -35,6 +35,7 @@ router.post("/registered",async(req,res)=>{
         //generate json web token
 
         const token = generatetoken(Customer._id);
+        const verify = `http://localhost:5173/api/user/verify `
 
         //sending activation token via mail
 
@@ -53,11 +54,8 @@ router.post("/registered",async(req,res)=>{
             subject: 'Sending Forget Password Email using Node.js',
               
             // This would be the text of email body 
-            text: `Hi! There, You have recently visited  
-                   our website and entered your email. 
-                   Please follow the given link to verify your email 
-                   http://localhost:3000/api/user/verify/${uniqueActivationToken}  
-                   Thanks` 
+            text: `Hi there, you have recently visited our website and entered your email. 
+            Please follow the given link to verify your email: ${verify}. Thanks` 
               
         }; 
           
@@ -71,7 +69,7 @@ router.post("/registered",async(req,res)=>{
         });
         
         
-        res.status(201).json({message:"successfully logged in",uniqueActivationToken})
+        res.status(201).json({message:"successfully logged in",token})
 
 
     } catch (error) {
@@ -91,11 +89,7 @@ router.get('/verify/:token', async (req, res) => {
         const user = await customermodel.findOne({ uniqueActivationToken: token });
 
         if (!user) {
-            return res.status(404).json({ error: 'Invalid activation token' });
-        }
-
-        if (user.isActive) {
-            return res.status(400).json({ error: 'User account is already active' });
+            return res.status(404).json({ error: 'Invalid activation token ' });
         }
 
         // Activate the user's account
@@ -138,7 +132,7 @@ router.post("/login",async(req,res)=>{
 })
 
 //-------------------------------------------------------------------------------------------------
-
+//forget password
 router.post("/forgetpassword", async (req, res) => {
     let Customer = await getuserbyemail(req);
   
@@ -147,6 +141,36 @@ router.post("/forgetpassword", async (req, res) => {
     }
   
     const otp = generateOTP();
+
+    var transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: 'otismelbourn22@gmail.com',
+        pass: 'xpur qesj lfvz fwhe'
+      }
+    });  
+    
+  const mailConfigurations = { 
+    
+      from: 'otismelbourn22@gmail.com',
+      to: req.body.email,
+      subject: 'Sending Forget Password Email using Node.js',
+        
+      // This would be the text of email body 
+      text: `Hi there, you have recently visited our website and entered your email. 
+      Please follow the given link to verify your email: ${otp}. Thanks` 
+        
+  }; 
+    
+  transporter.sendMail(mailConfigurations, function(error, info) {
+      if (error) {
+          console.error(error);
+          return res.status(500).json({ error: 'Email could not be sent' });
+      }
+      console.log('Email Sent Successfully');
+      console.log(info);
+  });
+  
   
     // Update the user's 'otp' field in the database
     Customer.otp = otp;

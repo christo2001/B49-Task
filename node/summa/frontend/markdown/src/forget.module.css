@@ -1,0 +1,76 @@
+.body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    flex-direction: column;
+    gap: 30px;
+    background: #1d2b3a;
+}
+
+.inputbox{
+    position: relative;
+    width: 250px;
+}
+
+.inputbox input{
+    border-radius: 0px;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid rgba(255,255,255,0.25);
+    background: #1d2b3a;
+    outline: none;
+    color: #fff;
+    font-size: 1em;
+}
+
+.inputbox span{
+    position: absolute;
+    left: 0;
+    padding: 10px;
+    pointer-events: none;
+    font-size: 1em;
+    color:rgba(255,255,255,0.25); 
+    text-transform: uppercase;
+    transition: 0.5s;
+}
+
+.inputbox input:valid ~ span,
+.inputbox input:focus ~ span
+{
+    color: #1d2b3a;
+    transform: translateX(10px) translateY(-1px);
+    font-size: 0.65em;
+    padding:0 10px;
+    background: #00dfc4;
+    border-left: 1px solid #00dfc4;
+    border-right: 1px solid #00dfc4;
+    letter-spacing: 0.2em;
+}
+
+.inputbox input:valid,
+.inputbox input:focus 
+{
+    border: 1px solid #00dfc4;
+}
+
+.head h2{
+    color:#00dfc4;
+    text-transform: capitalize;
+    margin-bottom: 20px;
+}
+
+.forgetbutton{
+    border-radius: 0;
+    margin-top: 20px;
+}
+
+.message{
+    color:#00dfc4;
+    text-transform: capitalize;
+}
+
+
+
+
+

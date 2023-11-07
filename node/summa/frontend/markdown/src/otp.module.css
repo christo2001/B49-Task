@@ -1,0 +1,85 @@
+.body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    flex-direction: column;
+    gap: 30px;
+    background: #1d2b3a;
+}
+
+.otpbox input{
+    width: 60px;
+    border: none; 
+    border: 1px solid #00dfc4;
+    margin: 0 11px; 
+    text-align: center; 
+    font-size: 36px; 
+    border-radius: 10px;
+    padding: 0px;
+    margin-top: 20px;
+    background: transparent;
+    color:#00dfc4;
+}
+
+.emailinputbox{
+    position: relative;
+    width: 250px;
+}
+
+.emailinputbox input{
+    border-radius: 0px;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid rgba(255,255,255,0.25);
+    background: #1d2b3a;
+    outline: none;
+    color: #fff;
+    font-size: 1.3em;
+    margin-top: 25px;
+}
+
+.emailinputbox span{
+    color: #1d2b3a;
+    font-size: 0.8em;
+    padding:0 10px;
+    background: #00dfc4;
+    border-left: 1px solid #00dfc4;
+    border-right: 1px solid #00dfc4;
+    letter-spacing: 0.2em;
+    text-transform: capitalize;
+    position: relative;
+    bottom: 70px;
+}
+
+
+.emailinputboxinput:valid,
+.emailinputbox input:focus 
+{
+    border: 1px solid #00dfc4;
+    background: transparent;
+}
+
+.head h2{
+    color:#00dfc4;
+    text-transform: capitalize;
+    margin-bottom: 20px;
+}
+
+.forgetbutton {
+    border-radius: 0;
+    margin-top: 40px;
+    font-size: medium;
+    background: transparent;
+    border: 1px solid #00dfc4;
+    color:#fff;
+    text-transform: capitalize;
+}
+
+.message{
+    color:#00dfc4;
+    text-transform: capitalize;
+    font-size: large;
+}
+
+
