@@ -6,7 +6,9 @@ import { faApple,faFacebook,faLinkedin,faTwitter,faInstagram } from '@fortawesom
 
 function Footers() {
   return (
+    
     <div className={footercss.body}>
+       <div id='contact'></div>
       <footer className={footercss.footer}>
         <div className={footercss.footcontainer}>
           <div className={footercss.footrow}>

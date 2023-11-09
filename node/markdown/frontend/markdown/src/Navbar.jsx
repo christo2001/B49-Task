@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import { BrowserRouter as Router, Routes, Route, NavLink, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, NavLink, useNavigate, Link  } from 'react-router-dom';
 import navbarcss from './navbar.module.css';
 
 
@@ -32,26 +32,22 @@ function Navbar() {
             </div>
 
             <ul className={menuopen ? navbarcss.open : ""}>
-              <li>
-                <NavLink to='/' className={navbarcss.navlink}>
-                  Home
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to='/api/user/verify' className={navbarcss.navlink}>
-                  uses
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to='/forget'className={navbarcss.navlink}>
-                 about
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to='/otp'className={navbarcss.navlink}>
-                  contact
-                </NavLink>
-              </li>
+
+            <a href="#home" className={navbarcss.navlink}>
+                home
+            </a>
+
+              <a href="#adv" className={navbarcss.navlink}>
+                uses
+              </a>
+
+              
+              <a href="#about" className={navbarcss.navlink}>
+                about
+              </a>
+              <a href="#contact" className={navbarcss.navlink}>
+                contact
+              </a>
 
               <li>
                <button onClick={logout} className={navbarcss.navbtn}>Logout</button>

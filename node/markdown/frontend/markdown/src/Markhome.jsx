@@ -10,6 +10,7 @@ import Aboutus from './Aboutus';
 import Barchart from './componenets/Barchart.jsx';
 import Navbar from './Navbar.jsx';
 import Footers from './Footers.jsx';
+import Cheatsheet from './Cheatsheet.jsx';
 
 function Markhome() {
   useEffect(() => {
@@ -22,6 +23,7 @@ function Markhome() {
   return (
     <div>
       <Navbar/>
+      <div id='home'></div>
       <div className={markhomecss.body} data-aos="fade-up">
         <section className={markhomecss.about}>
           <div className={markhomecss.main}>
@@ -43,7 +45,9 @@ function Markhome() {
               <h6> It allows you to parse and render Markdown text as HTML, making it easy to integrate and present Markdown-based documentation, articles, or other content in your React projects</h6>
 
               <div className={markhomecss.btn}>
-                <button type='button'>learn more</button>
+              <a href="#markdown">
+                learn more
+              </a>
               </div>
             </div>
           </div>
@@ -52,6 +56,7 @@ function Markhome() {
       <Advantage />
       <Aboutus />
       <Barchart />
+      <Cheatsheet/>
       <Markdowns />
       <Footers/>
     </div>

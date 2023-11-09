@@ -84,7 +84,7 @@
         flex-direction: column; /* Change to a column layout for small screens */
         gap: 20px; /* Adjust spacing between charts */
         position: relative;
-        left: -0px;
+        left: -50px;
       }
       .aboutparas{
           position: relative;

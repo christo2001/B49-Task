@@ -37,6 +37,7 @@ function Markdowns() {
 
   return (
     <div className={textareacss.body} data-aos="fade-up">
+       <div id='markdown'></div>
       <div className={textareacss.textarea}>
         <textarea value={post} onChange={handleMarkdownChange} rows={10} cols={50}  />
       </div>

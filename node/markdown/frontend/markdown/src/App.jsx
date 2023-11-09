@@ -13,6 +13,7 @@ import Advantage from './Advantage';
 import Aboutus from './Aboutus';
 import Barchart from './componenets/Barchart';
 import Nav from './Nav';
+import Cheatsheet from './Cheatsheet';
 
 function App() {
   const user = localStorage.getItem("token");
@@ -32,6 +33,8 @@ function App() {
             <Route path='/chart' element={<Barchart/>} />
             <Route path='/about' element={<Aboutus/>} />
             <Route path='/nav' element={<Nav/>} />
+            <Route path='/cheatsheet' element={<Cheatsheet/>} />
+
           </Routes>
     </BrowserRouter>
   )

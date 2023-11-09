@@ -23,8 +23,8 @@ function Advantage() {
 
   return (
    <div>
-   {/* <h1 className={advantagecss.advantagehead} id='adv'>advantages</h1> */}
-   <div className={advantagecss.body}  data-aos="fade-up" >
+   <div id='adv'></div>
+   <div className={advantagecss.body}  data-aos="fade-up"  id='adv'>
         <div className={advantagecss.container}>
            <div className={advantagecss.box}>
             <div className={advantagecss.content}>
