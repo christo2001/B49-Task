@@ -1,34 +1,39 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import React from 'react'
 import './App.css'
+import { BrowserRouter as Router, Routes, Route, NavLink, BrowserRouter } from 'react-router-dom';
+import Home from './Home';
+import Login from './Login';
+import Forget from './Forget';
+import Otp from './Otp';
+import Password from './Password';
+import Markdown from './Markdown';
+import Verification from './Verification';
+import Markhome from './Markhome';
+import Advantage from './Advantage';
+import Aboutus from './Aboutus';
+import Barchart from './componenets/Barchart';
+import Nav from './Nav';
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  const user = localStorage.getItem("token");
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <BrowserRouter>
+      <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/api/user/verify' element={<Verification token={user} />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/forget' element={<Forget />} />
+            <Route path='/otp' element={<Otp />} />
+            <Route path='/change' element={<Password />} />
+            <Route path='/mark' element={<Markdown />} />
+            <Route path='/markhome' element={<Markhome />} />
+            <Route path='/advantage' element={<Advantage />} />
+            <Route path='/aboutus' element={<Aboutus />} />
+            <Route path='/chart' element={<Barchart/>} />
+            <Route path='/about' element={<Aboutus/>} />
+            <Route path='/nav' element={<Nav/>} />
+          </Routes>
+    </BrowserRouter>
   )
 }
 

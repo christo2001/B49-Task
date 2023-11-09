@@ -11,6 +11,10 @@ import Markhome from './Markhome';
 import Advantage from './Advantage';
 import Aboutus from './Aboutus';
 import Barchart from './componenets/Barchart';
+import Nav from './Nav';
+
+
+
 
 function Navbar() {
   const user = localStorage.getItem("token");
@@ -75,6 +79,16 @@ function Navbar() {
                   chart
                 </NavLink>
               </li>
+              <li>
+                <NavLink to='/about' activeClassName='active-link'>
+                  about
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to='/nav' activeClassName='active-link'>
+                  nav
+                </NavLink>
+              </li>
             </ul>
           </nav>
 
@@ -90,6 +104,8 @@ function Navbar() {
             <Route path='/advantage' element={<Advantage />} />
             <Route path='/aboutus' element={<Aboutus />} />
             <Route path='/chart' element={<Barchart/>} />
+            <Route path='/about' element={<Aboutus/>} />
+            <Route path='/nav' element={<Nav/>} />
           </Routes>
         </div>
       </Router>

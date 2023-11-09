@@ -1,0 +1,59 @@
+.verifybox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 100px;
+    padding-top: 10px;
+}
+
+.verifyp{
+    text-transform: capitalize;
+    font-size: medium;
+    font-weight: 400;
+    padding: 0 10px;
+    font-weight: 600;
+}
+
+.verifylogin{
+    text-decoration: none;
+}
+
+.verifybody{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+.verifyimage{
+    width: 250px;
+    height: 250px;
+    margin-bottom: 50px;
+}
+
+.verifymessage{
+    color: rgb(12, 12, 12);
+    text-transform: capitalize;
+    font-size: larger;
+    font-weight: 700;
+}
+
+.verifybutton {
+    padding: 0.6em 1em;
+    border: 4px solid #fa725a;
+    transition: ease-in-out 0.3s;
+    background-color: transparent;
+    color: #fa725a;
+    font-weight: bolder;
+    font-size: 16px;
+    margin-bottom: 50px;
+   }
+   
+.verifybutton:hover {
+    transform: scale(1.2) rotate(10deg);
+    background-color: #fa725a;
+    color: white;
+   }
+

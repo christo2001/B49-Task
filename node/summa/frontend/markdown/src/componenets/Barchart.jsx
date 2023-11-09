@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import chartcss from '../componenets/chart.module.css';
 import 'chart.js/auto';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 import {
   Chart as ChartJS,
@@ -13,6 +15,7 @@ import {
 } from 'chart.js';
 
 import { Line } from 'react-chartjs-2';
+import { Doughnut } from 'react-chartjs-2'
 
 ChartJS.register(
   CategoryScale,
@@ -31,7 +34,7 @@ const options = {
     },
     title: {
       display: true,
-      text: 'Line Chart Example', // Change the title
+      text: 'Markdown Users Count', // Change the title
     },
   },
   animation: {
@@ -43,26 +46,55 @@ const options = {
   width: 400,
 };
 
-const data = {
+const linedata = {
   labels: [2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023],
   datasets: [
     {
-      label: 'present',
-      data: [10,20,30,40,40,50,60,70,70,80,70,100],
+      label: 'USERS',
+      data: [1000,1500,3000,4000,3900,5000,6000,7000,6000,8000,7000,10000],
       borderColor: 'green', // Line color
       fill: false, // Do not fill the area under the line
     },
   ],
 };
 
+//doughnut chart info
+
+const doughnutdata = {
+  labels: ['Consumers','Developers','Content Creators'],
+  datasets: [
+    {
+      label: 'TYPE OF USERS',
+      data: [1000,1500,3000],
+      backgroundColor: ['lightblue', 'navy', 'skyblue'], // Line color
+      fill: false, // Do not fill the area under the line
+    },
+  ],
+};
+
 function LineChart() {
+
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: true,
+    });
+  }, []);
+
   return (
-    <div className={chartcss.body}>
+    <div className={chartcss.body} data-aos="fade-up">
+
       <div className={chartcss.chart}>
         <div className={chartcss.line}>
-          <Line options={options} data={data}></Line>
+          <Line options={options} data={linedata}></Line>
+        </div>
+
+        <div className={chartcss.doughnut}>
+          <Doughnut options={options} data={doughnutdata}></Doughnut>
         </div>
       </div>
+
+
     </div>
   );
 }

@@ -11,6 +11,9 @@ import Aboutus from './Aboutus';
 import Barchart from './componenets/Barchart.jsx';
 
 
+
+
+
 function Markhome() {
   useEffect(() => {
     AOS.init({
@@ -23,7 +26,7 @@ function Markhome() {
   return (
     <div>
       <a href='#adv'>adv</a>
-    <div className={markhomecss.body}>
+    <div className={markhomecss.body} data-aos="fade-up">
       <section className={markhomecss.about}>
         <div className={markhomecss.main}>
           <img src={img5} className={markhomecss.image}/>
@@ -56,8 +59,8 @@ function Markhome() {
     <Aboutus/>
     <Barchart/>
     <Markdowns/>
-   
-  
+
+
     </div>
   );
 }
