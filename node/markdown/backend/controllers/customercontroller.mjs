@@ -2,19 +2,24 @@ import { customermodel } from "../models/customermodel.mjs"
 import jwt  from "jsonwebtoken";
 import { v4 as uuidv4 } from "uuid";
 import crypto from "crypto";
-import { request } from "http";
+import { usermodel } from "../models/verify.js";
+import { sendmail } from "./sendmail.js";
+import { forgetmodel } from "../models/forget.js";
 
 
 
-export function getuserbyemail(request){
-    return customermodel.findOne({
-        email:request.body.email
-    })
+export async function getuserbyemail(request) {
+  return  customermodel.findOne({
+      email: request.body.email
+  });
 }
 
-export function generatetoken(id) {
-    return jwt.sign({ id }, process.env.SECRET_KEY);
-  }
+
+export function generatetoken(email) {
+  return jwt.sign({ email }, process.env.SECRET_KEY);
+}
+
+
 
 export function generateUniqueActivationToken() {
     const randomUuid = uuidv4();
@@ -23,15 +28,62 @@ export function generateUniqueActivationToken() {
     return activationToken;
   }
 
-export function generateOTP() {
-  return Math.floor(1000 + Math.random() * 9000);
+
+
+  export async function insertverifyuser(token) {
+    try {
+        const userverify = await usermodel.findOne({ token: token });
+
+        if (userverify) {
+            const newuser = new customermodel({
+                username: userverify.username,
+                email: userverify.email,
+                password: userverify.password,
+                token:userverify.token
+            });
+
+            await newuser.save();
+            await usermodel.deleteOne({ token: token });
+
+            // Assuming you have a sendmail function defined
+            const content = `<p>Successfully registered</p><p>Regards</p>`;
+            
+            // Send email asynchronously and wait for it to complete
+            await sendmail(newuser.email, "Registration successful", content);
+
+            // Return success message after email has been sent
+            return `<p>Registration successful</p>`;
+        } 
+    } catch (error) {
+        console.error(error);
+        return `<p>Error occurred</p><h4>Registration failed</h4>`;
+    }
 }
 
 
-export async function verifyotp(request) {
-  const userEnteredOTP = request.body.otp; // Assuming the client sends OTP in the request body
+export async function changepassword(token) {
+  try {
+    const changepasswordEntry = await forgetmodel.findOne({ token: token });
 
-  // Query the database for a user with the provided OTP
-  return await customermodel.findOne({ otp: userEnteredOTP });
+    if (changepasswordEntry) {
+      // Log token details for troubleshooting
+      console.log('Found token in forgetmodel:', changepasswordEntry);
+
+      // Remove the token from forgetmodel after password change
+      await forgetmodel.deleteOne({ token: token });
+
+      return { success: true, message: 'Password changed successfully' };
+    } else {
+      // Log token details for troubleshooting
+      console.log('Invalid token:', token);
+      return { success: false, message: 'Invalid token' };
+    }
+  } catch (error) {
+    console.error(error);
+    return { success: false, message: 'Error occurred during password change' };
+  }
 }
+
+
+
 

@@ -5,6 +5,7 @@ import img3 from "../images/image3.png"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope,faLock} from "@fortawesome/free-solid-svg-icons";
 import { useNavigate,Link  } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 
 function Login() {
@@ -92,6 +93,7 @@ function Login() {
             </div>
 
             <input type='submit' className={logincss.loginbtnsolid}/>
+            <NavLink to="/forget" className={logincss.forgetbtn}>Forget Password</NavLink>
           </form>
 
           {console.log('Rendering error message block:', message)}

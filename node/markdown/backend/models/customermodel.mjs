@@ -18,20 +18,17 @@ const customerschema = new mongoose.Schema({
         required:true,
         trim:true
     },
+    token: {
+      type: String,
+  },
     isActive: {
         type: Boolean,
         default: false,
       },
-      activationToken: {
-        type: String,
-      },
-      urlToken: {
-        type: String,
-      },
       otp:{
         type:String,
-      }
+      },
 })
 
-const customermodel = mongoose.model("Customer", customerschema)
+const customermodel = mongoose.model("users", customerschema)
 export { customermodel };

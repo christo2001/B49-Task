@@ -1,107 +1,79 @@
 import express from "express";
-import { generatetoken, getuserbyemail,generateUniqueActivationToken,generateOTP, verifyotp } from "../controllers/customercontroller.mjs";
+import { generatetoken, getuserbyemail,generateUniqueActivationToken, insertverifyuser,changepassword } from "../controllers/customercontroller.mjs";
 import bcrypt from "bcrypt"
 import { customermodel } from "../models/customermodel.mjs"
 import nodemailer from "nodemailer"
+import { usermodel } from "../models/verify.js";
+import { sendmail } from "../controllers/sendmail.js";
+import { forgetmodel } from "../models/forget.js";
 
 
 const router = express.Router();
 
 
-//register
-router.post("/registered",async(req,res)=>{
-    try {
-        //check user already exist
-
-        let Customer = await getuserbyemail(req)
-        if(Customer){
-            return res.status(400).json({error:"user already exist"})
-        }
-
-        // generate hashed password
-
-        const salt = await bcrypt.genSalt(10)
-        const hashedpassword = await bcrypt.hash(req.body.password,salt)
-
-        //generate activation token (check controllers folder)
-        const uniqueActivationToken = generateUniqueActivationToken();
-
-        Customer = await new customermodel({
-            ...req.body,
-            password:hashedpassword,
-            uniqueActivationToken
-        }).save();
-
-        //generate json web token
-
-        const token = generatetoken(Customer._id);
-        const verify = `http://localhost:5173/api/user/verify/`
-
-        //sending activation token via mail
-
-        var transporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: {
-              user: 'otismelbourn22@gmail.com',
-              pass: 'xpur qesj lfvz fwhe'
-            }
-          });  
-          
-        const mailConfigurations = { 
-          
-            from: 'otismelbourn22@gmail.com',
-            to: req.body.email,
-            subject: 'Sending Forget Password Email using Node.js',
-              
-            // This would be the text of email body 
-            text: `Hi there, you have recently visited our website and entered your email. 
-            Please follow the given link to verify your email: ${verify}. Thanks` 
-              
-        }; 
-          
-        transporter.sendMail(mailConfigurations, function(error, info) {
-            if (error) {
-                console.error(error);
-                return res.status(500).json({ error: 'Email could not be sent' });
-            }
-            console.log('Email Sent Successfully');
-            console.log(info);
-        });
-        
-        
-        res.status(201).json({message:"successfully logged in",token})
-
-
-    } catch (error) {
-        console.log(error)
-        res.status(500).json({error:"internal error"})
+router.post("/registered", async (req, res) => {
+  try {
+    // Check if user already exists
+    let verifyuser = await getuserbyemail(req);
+    if (verifyuser) {
+      return res.status(400).json({ error: "User already exists" });
     }
-})
+
+    // Generate hashed password
+    const salt = await bcrypt.genSalt(10);
+    const hashedpassword = await bcrypt.hash(req.body.password, salt);
+
+    // Generate JWT token using user's email
+    const token = generatetoken(req.body.email);
+    
+    const verify = `http://localhost:5173/verify/:token`;
+    const content = `<h1>welcome to our app</h1>
+      <a href="${verify}">click here</a>`;
+    
+
+    // Create new user
+    verifyuser = await new usermodel({
+      ...req.body,
+      username: req.body.username,
+      email: req.body.email,
+      password: hashedpassword,
+      token,
+    }).save();
+
+    // Send email using the sendmail function
+    
+    await sendmail(req.body.email, 'registration mail',content);
+
+    res.status(201).json({ message: 'Successfully registered', token });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal error' });
+  }
+});
+
+
 
 //--------------------------------------------------------------------------------------------
 //verifying mail 
 
 router.get('/verify/:token', async (req, res) => {
-    const { token } = req.params;
+  try {
+    const response = await insertverifyuser(req.params.token);
+    const user = await customermodel.findOne({ verificationToken: req.params.token });
 
-    try {
-        // Find the user with the provided activation token
-        const user = await customermodel.findOne({ uniqueActivationToken: token });
-
-        if (!user) {
-            return res.status(404).json({ error: 'Invalid activation token ' });
-        }
-
-        // Activate the user's account
-        user.isActive = true;
-        await user.save();
-
-        res.status(200).json({ message: 'Account activated successfully' });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Internal error' });
+    if (user) {
+      user.isActive = true;
+      await user.save();
+      res.status(200).json({ message: response });
+    } else {
+      res.status(400).json({ error: "Invalid or already verified token" });
     }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
 });
+
 
 
 //-------------------------------------------------------------------------------------------------
@@ -135,108 +107,68 @@ router.post("/login",async(req,res)=>{
 //-------------------------------------------------------------------------------------------------
 //forget password
 router.post("/forgetpassword", async (req, res) => {
-    let Customer = await getuserbyemail(req);
-  
-    if (!Customer) {
+  try {
+    // Check if the user exists
+    let user = await getuserbyemail(req);
+
+    if (!user) {
       return res.status(400).json({ error: "User not exist" });
     }
-  
-    const otp = generateOTP();
 
-    var transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user: 'otismelbourn22@gmail.com',
-        pass: 'xpur qesj lfvz fwhe'
-      }
-    });  
-    
-  const mailConfigurations = { 
-    
-      from: 'otismelbourn22@gmail.com',
-      to: req.body.email,
-      subject: 'Sending Forget Password Email using Node.js',
-        
-      // This would be the text of email body 
-      text: `Hi there, you have recently visited our website and entered your email. 
-      Please follow the given link to verify your email: ${otp}. Thanks` 
-        
-  }; 
-    
-  transporter.sendMail(mailConfigurations, function(error, info) {
-      if (error) {
-          console.error(error);
-          return res.status(500).json({ error: 'Email could not be sent' });
-      }
-      console.log('Email Sent Successfully');
-      console.log(info);
-  });
-  
-  
-    // Update the user's 'otp' field in the database
-    Customer.otp = otp;
-    await Customer.save();
-  
-    res.status(200).json({ message: "OTP generated successfully", otp });
-  });
+    // Generate JWT token using user's email
+    const token = generatetoken(req.body.email);
+    const content = `<h1>Access to change your old password</h1>
+      <a href="http://localhost:5173/change/:token">"${token}"</a>`;
+
+    // Create new forgetuser
+    const forgetuser = await new forgetmodel({
+      ...req.body,
+      email: req.body.email,
+      token,
+    }).save();
+
+    // Send email using the sendmail function
+    await sendmail(req.body.email, 'Change Password', content);
+
+    res.status(201).json({ message: 'Successfully email sent to change password', token });
+  } catch (error) {
+    console.error("Error in forget password route:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
   
 
-///--------------------------------------------------------
-
-// verify otp
-router.post("/verifyotp", async (req, res) => {
-    // Retrieve the user by email from your database
-    let Customer = await getuserbyemail(req);
-  
-    if (!Customer) {
-      return res.status(400).json({ error: "User does not exist" });
-    }
-  
-    // Check if the stored OTP matches the one provided by the user
-    let otpUser = await verifyotp(req);
-  
-    if (!otpUser) {
-      return res.status(400).json({ error: "Invalid OTP" });
-    }
-  
-    // Check if the OTP user matches the user retrieved by email
-    if (Customer._id.toString() !== otpUser._id.toString()) {
-      return res.status(400).json({ error: "Invalid OTP" });
-    }
-  
-    // If the OTP is valid, you can update the user's status or reset their password as needed
-  
-    // Clear the OTP in your database to prevent further use
-    Customer.otp = null; // Assuming you have an 'otp' field in your user record
-    await Customer.save();
-  
-    // Respond to the client with a success message
-    res.status(200).json({ message: "OTP verified successfully" });
-  });
-
-
-//--------------------------------------------------------
+///-------------------------------------------------------
 
 //changepassword
+router.post("/change/:token", async (req, res) => {
+  try {
+    // Check if the user exists
+    let customer = await getuserbyemail(req);
 
-router.post("/changepassword", async (req, res) => {
-    let Customer = await getuserbyemail(req);
-  
-    if (!Customer) {
-      return res.status(400).json({ error: "User not exist" });
+    if (!customer) {
+      return res.status(400).json({ success: false, error: "User not exist" });
     }
 
-        // Update the user's password with the new password
-        const hashedPassword = await bcrypt.hash(req.body.newpassword, 10); // Use newPassword here
-        Customer.password = hashedPassword; // Update the user's password
-    
-        // Save the updated user data
-        await Customer.save();
-    
-        res.json({ message: 'Password changed successfully' });
-  
- });
-  
+    // Update the user's password with the new password
+    const hashedPassword = await bcrypt.hash(req.body.newpassword, 10);
+    customer.password = hashedPassword;
+
+    // Save the updated user data
+    await customer.save();
+
+    // Remove the token from forgetmodel
+    await forgetmodel.findOneAndDelete({ email: req.body.email });
+
+    res.json({ success: true, message: 'Password successfully changed' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
+  }
+});
+
+
   
 
 export const userRouter = router;

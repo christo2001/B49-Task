@@ -7,6 +7,8 @@ function Todo() {
   const [newdesc, setnewdesc] = useState('');
  const [statusFilter, setStatusFilter] = useState('all'); // State for filtering
 
+
+
   const handleaddtodo = () => {
     const newtodo = {
       title: newtitle,
@@ -20,6 +22,8 @@ function Todo() {
     setnewdesc('');
   };
 
+
+
   const edit = (event) => {
     const index = event.target.getAttribute('data-index');
     const record = alltodo[index];
@@ -30,12 +34,15 @@ function Todo() {
     setalltodo(updatedList);
   };
 
+
   const handledelete = (index)=>{
     let reduce = [...alltodo]
     reduce.splice(index)
     setalltodo(reduce)
   }
 
+
+  
   const filteredTodos = alltodo.filter((todo) => {
     if (statusFilter === 'all') {
       return true;
@@ -46,6 +53,8 @@ function Todo() {
     }
     return true;
   });
+
+
 
   return (
     <div>
