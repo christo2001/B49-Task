@@ -1,0 +1,103 @@
+.abouthead{
+    display: flex;
+    gap: 10px;
+}
+
+.abouthead h1{
+    font-size: 30px;
+    text-transform: capitalize;
+}
+
+.abouticon{
+    height: 25px;
+}
+
+.aboutcard{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    padding: 0 140px;
+    margin-top: 20px;
+}
+
+.aboutcard1{
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    padding: 0 50px;
+}
+
+.aboutpara{
+    position: relative;
+    left: 35px;
+}
+
+.abouticon{
+    color: orange;
+}
+
+/* end of first two cards */
+
+
+
+.aboutheads{
+    display: flex;
+    gap: 10px;
+}
+
+.aboutheads h1{
+    font-size: 30px;
+    text-transform: capitalize;
+}
+
+.aboutparas{
+    position: relative;
+    left: 35px;
+}
+
+.aboutcards{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    padding: 0 350px;
+    margin-top: 40px;
+   
+}
+
+.aboutcards1{
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    padding: 0 50px;
+}
+
+@media screen and (max-width: 768px) {
+    .aboutcard {
+      display: flex;
+      flex-direction: column; /* Change to a column layout for small screens */
+      gap: 20px; /* Adjust spacing between charts */
+    }
+    .aboutpara{
+        position: relative;
+        left: 4px;
+    }
+    .aboutcards{
+        display: flex;
+        flex-direction: column; /* Change to a column layout for small screens */
+        gap: 20px; /* Adjust spacing between charts */
+        position: relative;
+        left: -50px;
+      }
+      .aboutparas{
+          position: relative;
+          left: 4px;
+      }
+  }
+
+  @media screen and (max-width: 576px){
+    .aboutcards{
+        display: flex;
+        flex-direction: column; /* Change to a column layout for small screens */
+        gap: 20px; /* Adjust spacing between charts */
+        position: relative;
+        left: -100px;
+      }
+  }

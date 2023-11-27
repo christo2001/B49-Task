@@ -1,0 +1,52 @@
+.body{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin: 0 100px;
+}
+
+.responsivetable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+
+  .responsivetable:nth-child(1){
+    margin: 50px 0;
+  }
+
+
+  
+  .responsivetable th,
+  .responsivetable td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    margin-bottom: 10px;
+  }
+
+.thead{
+    background-color: dimgrey;
+    color: #fff;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.code{
+    background-color: cadetblue;
+    color: aliceblue;
+}
+  
+  /* Responsive Styles */
+  
+  @media (max-width: 800px) {
+    .responsivetable th,
+    .responsivetable td {
+      display: block;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .body{
+        margin: 0 20px;
+    }
+  }
