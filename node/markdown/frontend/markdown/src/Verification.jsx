@@ -9,7 +9,7 @@ const Verification = ({ token }) => {
   useEffect(() => {
     const verifyUser = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/api/user/verify/${token}`);
+        const response = await fetch(`https://url-short-3gtm.onrender.com/api/user/verify/${token}`);
         const data = await response.json();
 
         if (response.ok) {

@@ -22,7 +22,7 @@ function Password() {
     e.preventDefault();
 
     try {
-      const response = await axios.post(`http://localhost:3000/api/user/change/${token}`, {
+      const response = await axios.post(`https://url-short-3gtm.onrender.com/api/user/change/${token}`, {
         email: email,
         newpassword: newpassword,
       });
