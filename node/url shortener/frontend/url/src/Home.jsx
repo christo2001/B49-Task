@@ -19,7 +19,7 @@ function Signup() {
     setloading(true)
     setTimeout(()=>{
       setloading(false)
-    },5000)
+    },3000)
   },[])
  
 

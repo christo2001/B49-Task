@@ -33,22 +33,13 @@ function Navbar() {
 
             <ul className={menuopen ? navbarcss.open : ""}>
 
-            <a href="#home" className={navbarcss.navlink}>
-                home
-            </a>
+              <Link to="/urlhome" className={navbarcss.navlink}>Home</Link>
 
-              <a href="#adv" className={navbarcss.navlink}>
-                uses
-              </a>
+              <Link to="/shorturl" className={navbarcss.navlink}>My url</Link>
+              
+              <Link to="/dash" className={navbarcss.navlink}>Dashboard</Link>
 
               
-              <a href="#about" className={navbarcss.navlink}>
-                about
-              </a>
-              <a href="#contact" className={navbarcss.navlink}>
-                contact
-              </a>
-
               <li>
                <button onClick={logout} className={navbarcss.navbtn}>Logout</button>
               </li>
