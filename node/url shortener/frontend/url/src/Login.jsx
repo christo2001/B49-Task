@@ -24,13 +24,13 @@ function Login() {
     e.preventDefault();
   
     try {
-      const response = await axios.post('http://localhost:3000/api/user/login', formdata);
+      const response = await axios.post('https://url-short-3gtm.onrender.com/api/user/login', formdata);
       const token = response.data.token;
   
       // Store the token in localStorage
       localStorage.setItem('token', token);
       console.log('token');
-      navigate('/markhome')
+      navigate('/urlhome')
     } catch (error) {
       console.error(error);
   
