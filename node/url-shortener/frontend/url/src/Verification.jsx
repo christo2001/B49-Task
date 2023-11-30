@@ -11,7 +11,7 @@ const Verification = ({ token }) => {
   useEffect(() => {
     const verifyUser = async () => {
       try {
-        const response = await fetch(`https://url-short-3gtm.onrender.com/api/user/verify/${token}`);
+        const response = await fetch(`https://url-shorteners-t7h3.onrender.com/api/user/verify/${token}`);
         const data = await response.json();
 
         if (response.ok) {

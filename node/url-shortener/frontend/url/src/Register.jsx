@@ -40,7 +40,7 @@ function Signup() {
     e.preventDefault();
 
     try {
-      const response = await axios.post('https://url-short-3gtm.onrender.com/api/user/registered', signupformdata);
+      const response = await axios.post('https://url-shorteners-t7h3.onrender.com/api/user/registered', signupformdata);
       const token = response.data.token;
 
       // Store the token in localStorage

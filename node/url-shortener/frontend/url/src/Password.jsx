@@ -25,7 +25,7 @@ function Password() {
     e.preventDefault();
 
     try {
-      const response = await axios.post(`https://url-short-3gtm.onrender.com/api/user/change/${token}`, {
+      const response = await axios.post(`https://url-shorteners-t7h3.onrender.com/api/user/change/${token}`, {
         email: email,
         newpassword: newpassword,
       });

@@ -19,7 +19,7 @@ function Forget() {
     e.preventDefault();
 
     try {
-      const response = await axios.post('https://url-short-3gtm.onrender.com/api/user/forgetpassword', forgetformdata);
+      const response = await axios.post('https://url-shorteners-t7h3.onrender.com/api/user/forgetpassword', forgetformdata);
       console.log('Success:', response.data); // Log the response data
       setmessage('Password reset link sent successfully.'); // Set a success message
     } catch (error) {
