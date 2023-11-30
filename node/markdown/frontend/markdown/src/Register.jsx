@@ -40,7 +40,7 @@ function Signup() {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:3000/api/user/registered', signupformdata);
+      const response = await axios.post('https://url-short-3gtm.onrender.com/api/user/registered', signupformdata);
       const token = response.data.token;
 
       // Store the token in localStorage
