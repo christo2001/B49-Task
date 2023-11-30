@@ -2,7 +2,6 @@ import express from "express";
 import { generatetoken, getuserbyemail,generateUniqueActivationToken, insertverifyuser,changepassword } from "../controllers/customercontroller.mjs";
 import bcrypt from "bcrypt"
 import { customermodel } from "../models/customermodel.mjs"
-import nodemailer from "nodemailer"
 import { usermodel } from "../models/verify.js";
 import { sendmail } from "../controllers/sendmail.js";
 import { forgetmodel } from "../models/forget.js";
