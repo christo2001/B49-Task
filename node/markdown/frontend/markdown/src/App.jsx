@@ -25,9 +25,7 @@ function App() {
         <Route path='/shorturl' element={<Shorturl/>} />
         <Route path='/nav' element={<Navbar/>} />
         <Route path='/dash' element={<Dashboard/>} />
-        <Route
-          path='/verify/:token'
-          element={<Verification token={userToken} />} // Pass the token as a prop
+        <Route path='/verify/:token' element={<Verification token={userToken} />}
         />
       </Routes>
     </BrowserRouter>

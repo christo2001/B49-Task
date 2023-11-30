@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import verifycss from './verify.module.css';
 
+// ... (previous imports)
+
 const Verification = ({ token }) => {
   const [verificationStatus, setVerificationStatus] = useState(null);
   const navigate = useNavigate();
@@ -16,7 +18,6 @@ const Verification = ({ token }) => {
           setVerificationStatus(data.message || 'User successfully verified!');
         } else {
           setVerificationStatus(data.error || 'Verification failed.');
-          navigate('/register');
         }
       } catch (error) {
         console.error('Error during verification:', error);
@@ -35,7 +36,11 @@ const Verification = ({ token }) => {
           {verificationStatus === 'User successfully verified!' && <Link to="/login" className={verifycss.verifybutton}>Go to Login</Link>}
         </>
       ) : (
-        <p>Verifying user...</p>
+        <>
+        <p>verifying user....</p>
+          <p className={verifycss.verifymessage}>{verificationStatus}</p>
+          {verificationStatus === 'Verification failed' && <p>verification failed</p>}
+        </>
       )}
     </div>
   );
