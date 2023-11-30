@@ -27,7 +27,8 @@ router.post("/registered", async (req, res) => {
     const token = generatetoken(req.body.email);
     
     const verify = `http://localhost:5173/verify/:token`;
-    const content = `<h1>welcome to our app</h1>
+    const content = `<p>welcome to our app</p>
+    <p>please click the above link to activate your account</p>
       <a href="${verify}">click here</a>`;
     
 
@@ -117,7 +118,7 @@ router.post("/forgetpassword", async (req, res) => {
 
     // Generate JWT token using user's email
     const token = generatetoken(req.body.email);
-    const content = `<h1>Access to change your old password</h1>
+    const content = `<p>Access to change your old password</p>
       <a href="http://localhost:5173/change/:token">"${token}"</a>`;
 
     // Create new forgetuser
