@@ -7,14 +7,14 @@ import { sendmail } from "./sendmail.js";
 import { forgetmodel } from "../models/forget.js";
 
 
-
+//this function check the user is already registered or not
 export async function getuserbyemail(request) {
   return  customermodel.findOne({
       email: request.body.email
   });
 }
 
-
+//this function generate json web token
 export function generatetoken(email) {
   return jwt.sign({ email }, process.env.SECRET_KEY);
 }
@@ -29,7 +29,7 @@ export function generateUniqueActivationToken() {
   }
 
 
-
+//this function check the token and if it matches it removes the user data in usermodel and stores it in customer model
   export async function insertverifyuser(token) {
     try {
         const userverify = await usermodel.findOne({ token: token });
@@ -58,7 +58,8 @@ export function generateUniqueActivationToken() {
     }
 }
 
-
+//this function helps to change the password and it stores an generate stiring in the database
+//and removes it once we successfully changes the password
 export async function changepassword(token) {
   try {
     const changepasswordEntry = await forgetmodel.findOne({ token: token });
