@@ -128,7 +128,7 @@ router.post("/forgetpassword", async (req, res) => {
       token,
     }).save();
 
-    // Send email using the sendmail function
+    // Send email using the sendmail functions
     await sendmail(req.body.email, 'Change Password', content);
 
     res.status(201).json({ message: 'Successfully email sent to change password', token });
