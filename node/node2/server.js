@@ -28,7 +28,7 @@ app.post('/rooms', (req, res) => {
   res.json(room);
 });
 
-// 2. Book a room
+// 2. Book a room with date and time conflict check
 app.post('/bookings', (req, res) => {
   const { customerName, date, startTime, endTime, roomId } = req.body;
 
@@ -37,6 +37,19 @@ app.post('/bookings', (req, res) => {
     return res.status(400).json({ error: 'Room not found' });
   }
 
+  // Check for date and time conflicts
+  const conflictBooking = bookings.find(
+    (booking) =>
+      booking.roomId === roomId &&
+      booking.date === date &&
+      !(endTime <= booking.startTime || startTime >= booking.endTime)
+  );
+
+  if (conflictBooking) {
+    return res.status(400).json({ error: 'Room already booked for the specified date and time' });
+  }
+
+  // Create a new booking
   const booking = {
     id: bookings.length + 1,
     roomName: room.roomName,
@@ -50,6 +63,7 @@ app.post('/bookings', (req, res) => {
   bookings.push(booking);
   res.json(booking);
 });
+
 
 // 3. List all rooms with booked data
 app.get('/rooms/booked-data', (req, res) => {
