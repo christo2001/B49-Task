@@ -30,7 +30,7 @@ app.post('/rooms', (req, res) => {
 
 // 2. Book a room with improved date and time conflict check
 app.post('/bookings', (req, res) => {
-  const { customerName, date, startTime, endTime, roomId } = req.body;
+  const { customerName, date, startTime, endTime, roomId, customerId } = req.body;
 
   const room = rooms.find((r) => r.id === roomId);
   if (!room) {
