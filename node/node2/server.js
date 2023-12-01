@@ -73,6 +73,7 @@ app.post('/bookings', (req, res) => {
 
 // 3. List all rooms with booked data
 app.get('/rooms/booked-data', (req, res) => {
+  res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
   const result = rooms.map((room) => {
     const booking = bookings.find((b) => b.roomId === room.id);
     return {
@@ -107,6 +108,7 @@ app.get('/customers/booked-data', (req, res) => {
 
 // 5. List customer booking details
 app.get('/customers/:customerId/bookings', (req, res) => {
+  res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
   const customerId = parseInt(req.params.customerId);
 
   const result = bookings
