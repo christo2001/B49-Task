@@ -90,6 +90,7 @@ app.get('/rooms/booked-data', (req, res) => {
 
 // 4. List all customers with booked data
 app.get('/customers/booked-data', (req, res) => {
+  res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
   const result = bookings.map((booking) => {
     const room = rooms.find((r) => r.id === booking.roomId);
     return {
