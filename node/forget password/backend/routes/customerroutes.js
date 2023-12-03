@@ -106,24 +106,17 @@ router.post("/changes/:token", async (req, res) => {
   try {
     const { token } = req.params;
 
-    // Check if the user exists
-    const userResponse = await changepassword(token);
-
-    if (!userResponse.success) {
-      return res.status(400).json({ success: false, error: userResponse.message });
-    }
-
-    // Get the user data from the response
-    const user = userResponse;
-
-    // Update the user's password with the new password
+    // Use findOneAndUpdate to update the password directly in the database
     const hashedPassword = await bcrypt.hash(req.body.newpassword, 10);
+    const user = await forgetmodel.findOneAndUpdate(
+      { token },
+      { $set: { password: hashedPassword } },
+      { new: true }
+    );
 
-    // Assuming 'password' is the field in your schema for storing the password
-    user.password = hashedPassword;
-
-    // Save the updated user data
-    await user.save();
+    if (!user) {
+      return res.status(400).json({ success: false, message: 'User not found or invalid token' });
+    }
 
     res.json({ success: true, message: 'Password successfully changed' });
   } catch (error) {
@@ -131,6 +124,7 @@ router.post("/changes/:token", async (req, res) => {
     res.status(500).json({ success: false, message: 'Internal Server Error' });
   }
 });
+
 
 
 
