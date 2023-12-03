@@ -130,7 +130,4 @@ router.post("/change-password/:token", async (req, res) => {
 });
 
 
-
-  
-
 export const userRouter = router;
