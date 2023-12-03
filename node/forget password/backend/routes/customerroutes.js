@@ -81,7 +81,7 @@ router.post("/forgetpasswords", async (req, res) => {
     // Generate JWT token using user's email
     const token = generatetoken(req.body.email);
     const content = `<p>Access to change your old password</p>
-      <a href="https://656c73fc78668a7d527fd2c6--relaxed-faun-da5d5a.netlify.app/change/:token/${token}">Reset Password</a>`;
+      <a href="https://656c7569cd95ea7d55633ec3--relaxed-faun-da5d5a.netlify.app/change/:token/${token}">Reset Password</a>`;
 
     // Create new forgetuser
     const forgetuser = await new forgetmodel({
