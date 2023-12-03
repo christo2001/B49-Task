@@ -124,10 +124,9 @@ router.post("/change-password/:token", async (req, res) => {
 
     res.json({ success: true, message: 'Password successfully changed' });
   } catch (error) {
-    console.error(error);
+    console.error('Error in /change-password route:', error);
     res.status(500).json({ success: false, message: 'Internal Server Error' });
   }
 });
-
 
 export const userRouter = router;
