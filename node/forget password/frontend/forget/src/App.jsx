@@ -5,11 +5,9 @@ import Register from "./Register"
 import Login from './Login';
 import Forget from './Forget';
 import Password from './Password';
-import Navbar from './Navbar';
-import Verification from './Verification';
 import Urlhome from './Urlhome';
-import Shorturl from './Shorturl';
-import Dashboard from './Dashboard';
+
+
 
 function App() {
   const userToken = localStorage.getItem("token");
@@ -22,11 +20,6 @@ function App() {
         <Route path='/forget' element={<Forget />} />
         <Route path='/change/:token' element={<Password />} />
         <Route path='/urlhome' element={<Urlhome />} />
-        <Route path='/shorturl' element={<Shorturl/>} />
-        <Route path='/nav' element={<Navbar/>} />
-        <Route path='/dash' element={<Dashboard/>} />
-        <Route path='/verify/:token' element={<Verification token={userToken} />}
-        />
       </Routes>
     </BrowserRouter>
   );

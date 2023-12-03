@@ -5,12 +5,14 @@ import img6 from "../images/image7.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faLock, faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 
 function Signup() {
 
   //register page code
+  const navigate = useNavigate(); // Initialize the useNavigate hook
 
   const [signupformdata, setsignupformdata] = useState({
     username: '',
@@ -33,7 +35,11 @@ function Signup() {
       // Store the token in localStorage
       localStorage.setItem('token', token);
 
-      setmessage("Registration successful, An Email set your Registerd Email address"); // Set success message
+      setmessage("Registration successful"); // Set success message
+      // Navigate to the login page after 1 second
+      setTimeout(() => {
+        navigate('/login'); // Redirect to the login page
+      }, 1000);
     } catch (error) {
       const errorMessage = error.response ? error.response.data.error : 'An error occurred';
       setmessage(errorMessage); // Set error message
