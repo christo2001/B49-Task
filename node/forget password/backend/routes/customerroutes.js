@@ -24,11 +24,6 @@ router.post("/registration", async (req, res) => {
     // Generate JWT token using user's email
     const token = generatetoken(req.body.email);
     
-    const verify = `https://6568e8342e05de008bdda5f1--relaxed-faun-da5d5a.netlify.app/verify/:token`;
-    const content = `<p>welcome to our app</p>
-    <p>please click the above link to activate your account</p>
-      <a href="${verify}">click here</a>`;
-    
 
     // Create new user
     verifyuser = await new customermodel({
@@ -38,10 +33,6 @@ router.post("/registration", async (req, res) => {
       password: hashedpassword,
       token,
     }).save();
-
-    // Send email using the sendmail function
-    
-    await sendmail(req.body.email, 'registration mail',content);
 
     res.status(201).json({ message: 'Successfully registered', token });
   } catch (error) {
@@ -61,9 +52,6 @@ router.post("/loginuser",async(req,res)=>{
         if(!Customer){
             return res.status(400).json({error:"user not exist"})
         }
-        if (!Customer.isActive) {
-          return res.status(401).json({ error: 'Account not activated. Check your email for activation instructions.' });
-        }
         
         const loginpassword = await bcrypt.compare(req.body.password, Customer.password);
     
@@ -81,7 +69,7 @@ router.post("/loginuser",async(req,res)=>{
 
 //-------------------------------------------------------------------------------------------------
 //forget password
-router.post("/forgetpassword", async (req, res) => {
+router.post("/forgetpasswords", async (req, res) => {
   try {
     // Check if the user exists
     let user = await getuserbyemail(req);
