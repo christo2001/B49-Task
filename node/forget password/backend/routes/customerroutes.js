@@ -103,7 +103,7 @@ router.post("/forgetpasswords", async (req, res) => {
 
 ///-------------------------------------------------------
 
-//changepassword
+// changepassword
 router.post("/change/:token", async (req, res) => {
   try {
     const { token } = req.params;
@@ -117,6 +117,8 @@ router.post("/change/:token", async (req, res) => {
 
     // Update the user's password with the new password
     const hashedPassword = await bcrypt.hash(req.body.newpassword, 10);
+    
+    // Assuming 'password' is the field in your schema for storing the password
     user.password = hashedPassword;
 
     // Save the updated user data
@@ -124,7 +126,7 @@ router.post("/change/:token", async (req, res) => {
 
     res.json({ success: true, message: 'Password successfully changed' });
   } catch (error) {
-    console.error('Error in /change-password route:', error);
+    console.error('Error in /change route:', error);
     res.status(500).json({ success: false, message: 'Internal Server Error' });
   }
 });
