@@ -7,7 +7,7 @@ function Home() {
 
     return (
         <div>
-            <h2>successfully logged in </h2>
+            <h1>successfully logged in </h1>
         </div>
     );
 }
