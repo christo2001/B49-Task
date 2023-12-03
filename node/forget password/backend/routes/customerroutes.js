@@ -1,5 +1,5 @@
 import express from "express";
-import { generatetoken, getuserbyemail,generateUniqueActivationToken, insertverifyuser,changepassword } from "../controllers/customercontroller.mjs";
+import { generatetoken, getuserbyemail,generateUniqueActivationToken,changepassword } from "../controllers/customercontroller.mjs";
 import bcrypt from "bcrypt"
 import { customermodel } from "../models/customermodel.mjs"
 import { sendmail } from "../controllers/sendmail.js";
@@ -9,7 +9,7 @@ import { forgetmodel } from "../models/forget.js";
 const router = express.Router();
 
 
-router.post("/registered", async (req, res) => {
+router.post("/registration", async (req, res) => {
   try {
     // Check if user already exists
     let verifyuser = await getuserbyemail(req);
@@ -31,7 +31,7 @@ router.post("/registered", async (req, res) => {
     
 
     // Create new user
-    verifyuser = await new usermodel({
+    verifyuser = await new customermodel({
       ...req.body,
       username: req.body.username,
       email: req.body.email,
@@ -51,34 +51,10 @@ router.post("/registered", async (req, res) => {
 });
 
 
-
-//--------------------------------------------------------------------------------------------
-//verifying mail 
-
-router.get('/verify/:token', async (req, res) => {
-  try {
-    const response = await insertverifyuser(req.params.token);
-    const user = await customermodel.findOne({ verificationToken: req.params.token });
-
-    if (user) {
-      user.isActive = true;
-      await user.save();
-      res.status(200).json({ message: response });
-    } else {
-      res.status(400).json({ error: "Invalid or already verified token" });
-    }
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-});
-
-
-
 //-------------------------------------------------------------------------------------------------
 
 //login
-router.post("/login",async(req,res)=>{
+router.post("/loginuser",async(req,res)=>{
     try {
         let Customer = await getuserbyemail(req)
         const token = generatetoken(Customer._id);
