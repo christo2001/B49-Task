@@ -19,7 +19,7 @@ function Forget() {
     e.preventDefault();
 
     try {
-      const response = await axios.post('https://forget-password-2zs6.onrender.com/api/user/forgetpassword', forgetformdata);
+      const response = await axios.post('https://forget-password-2zs6.onrender.com/api/user/forgetpasswords', forgetformdata);
       console.log('Success:', response.data); // Log the response data
       setmessage('Password reset link sent successfully.'); // Set a success message
     } catch (error) {

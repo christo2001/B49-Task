@@ -25,7 +25,7 @@ function Password() {
     e.preventDefault();
 
     try {
-      const response = await axios.post(`https://forget-password-2zs6.onrender.com/api/user/change/${token}`, {
+      const response = await axios.post(`https://forget-password-2zs6.onrender.com/api/user/change-password/:token/${token}`, {
         email: email,
         newpassword: newpassword,
       });
