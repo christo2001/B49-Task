@@ -5,23 +5,10 @@ import img6 from "../images/image7.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faLock, faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { Link } from 'react-router-dom';
-import HashLoader from "react-spinners/HashLoader";
 
 
 
 function Signup() {
-
-      // loader page code //
-
-  const [loading,setloading] = useState(false)
-
-  useEffect(()=>{
-    setloading(true)
-    setTimeout(()=>{
-      setloading(false)
-    },5000)
-  },[])
- 
 
   //register page code
 
@@ -55,22 +42,8 @@ function Signup() {
   };
 
   return (
-    // loader//
 
     <div className={signupcss.pageContainer}>
-    {loading ? (
-      <div className={signupcss.loaderContainer}>
-        <HashLoader
-          color="#F37A24"
-          loading={loading}
-          size={50}
-        />
-      
-      </div>
-    ) : (
-
-      //register page
-
       <div className={signupcss.signupcontainer}>
         <div className={signupcss.signupformscontainer}>
           <div className={signupcss.signupsigninsignup}>
@@ -140,7 +113,6 @@ function Signup() {
           </div>
         </div>
       </div>
-    )}
     </div>
   );
 }
