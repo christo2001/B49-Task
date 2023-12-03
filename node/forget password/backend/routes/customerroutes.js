@@ -103,21 +103,22 @@ router.post("/forgetpasswords", async (req, res) => {
 
 ///-------------------------------------------------------
 
-// changepassword
-router.post("/change/:token", async (req, res) => {
+router.post("/changes/:token", async (req, res) => {
   try {
     const { token } = req.params;
 
     // Check if the user exists
-    let user = await changepassword(token);
+    const userResponse = await changepassword(token);
 
-    if (!user.success) {
-      return res.status(400).json({ success: false, error: user.message });
+    if (!userResponse.success) {
+      return res.status(400).json({ success: false, error: userResponse.message });
     }
+
+    const user = userResponse; // Get the user data from the response
 
     // Update the user's password with the new password
     const hashedPassword = await bcrypt.hash(req.body.newpassword, 10);
-    
+
     // Assuming 'password' is the field in your schema for storing the password
     user.password = hashedPassword;
 
@@ -130,5 +131,6 @@ router.post("/change/:token", async (req, res) => {
     res.status(500).json({ success: false, message: 'Internal Server Error' });
   }
 });
+
 
 export const userRouter = router;
