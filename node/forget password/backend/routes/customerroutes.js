@@ -81,7 +81,7 @@ router.post("/forgetpasswords", async (req, res) => {
     // Generate JWT token using user's email
     const token = generatetoken(req.body.email);
     const content = `<p>Access to change your old password</p>
-      <a href="https://656c77ee918b00022af11d7d--relaxed-faun-da5d5a.netlify.app/change/:token">Reset Password</a>`;
+      <a href="https://your-frontend-url.com/change-password/${token}">Reset Password</a>`;
 
     // Create new forgetuser
     const forgetuser = await new forgetmodel({
@@ -101,31 +101,36 @@ router.post("/forgetpasswords", async (req, res) => {
 
   
 
-// /changes/:token route
-router.post("/changes/:token", async (req, res) => {
+///-------------------------------------------------------
+
+//changepassword
+router.post("/change-password/:token", async (req, res) => {
   try {
     const { token } = req.params;
 
-    // Use findOneAndUpdate to update the password directly in the database
-    const hashedPassword = await bcrypt.hash(req.body.newpassword, 10);
-    const user = await forgetmodel.findOneAndUpdate(
-      { token },
-      { $set: { password: hashedPassword } },
-      { new: true }
-    );
+    // Check if the user exists
+    const userResponse = await changepassword(token);
 
-    if (!user) {
-      return res.status(400).json({ success: false, message: 'User not found or invalid token' });
+    if (!userResponse.success) {
+      return res.status(400).json({ success: false, error: userResponse.message });
     }
+
+    // Get the user data from the response
+    const user = userResponse;
+
+    // Update the user's password with the new password
+    const hashedPassword = await bcrypt.hash(req.body.newpassword, 10);
+    user.password = hashedPassword;
+
+    // Save the updated user data
+    await user.save();
 
     res.json({ success: true, message: 'Password successfully changed' });
   } catch (error) {
-    console.error('Error in /change route:', error);
+    console.error(error);
     res.status(500).json({ success: false, message: 'Internal Server Error' });
   }
 });
-
-
 
 
 export const userRouter = router;
