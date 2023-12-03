@@ -28,36 +28,6 @@ export function generateUniqueActivationToken() {
   }
 
 
-
-  export async function insertverifyuser(token) {
-    try {
-        const userverify = await usermodel.findOne({ token: token });
-
-        if (userverify) {
-            const newuser = new customermodel({
-                username: userverify.username,
-                email: userverify.email,
-                password: userverify.password,
-                token:userverify.token
-            });
-
-            await newuser.save();
-            await usermodel.deleteOne({ token: token });
-
-            // Assuming you have a sendmail function defined
-            const content = `<p>Successfully registered</p><p>Regards</p>`;
-            
-            // Send email asynchronously and wait for it to complete
-            await sendmail(newuser.email, "Registration successful", content);
-
-        } 
-    } catch (error) {
-        console.error(error);
-        return `<p>Error occurred</p><h4>Registration failed</h4>`;
-    }
-}
-
-
 export async function changepassword(token) {
   try {
     const changepasswordEntry = await forgetmodel.findOne({ token });
