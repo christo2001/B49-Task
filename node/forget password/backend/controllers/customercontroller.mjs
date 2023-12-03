@@ -28,21 +28,19 @@ export function generateUniqueActivationToken() {
   }
 
 
+
 export async function changepassword(token) {
   try {
-    const changepasswordEntry = await forgetmodel.findOne({ token });
+    const changepasswordEntry = await forgetmodel.findOne({ token: token });
 
     if (changepasswordEntry) {
       // Log token details for troubleshooting
       console.log('Found token in forgetmodel:', changepasswordEntry);
 
       // Remove the token from forgetmodel after password change
-      await forgetmodel.deleteOne({ token });
+      await forgetmodel.deleteOne({ token: token });
 
-      // Fetch user by email and return it for further processing
-      const user = await getuserbyemail({ body: { email: changepasswordEntry.email } });
-
-      return user;
+      return { success: true, message: 'Password changed successfully' };
     } else {
       // Log token details for troubleshooting
       console.log('Invalid token:', token);

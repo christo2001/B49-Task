@@ -23,7 +23,6 @@ router.post("/registration", async (req, res) => {
 
     // Generate JWT token using user's email
     const token = generatetoken(req.body.email);
-    
 
     // Create new user
     verifyuser = await new customermodel({
@@ -45,12 +44,15 @@ router.post("/registration", async (req, res) => {
 //-------------------------------------------------------------------------------------------------
 
 //login
-router.post("/loginuser",async(req,res)=>{
+router.post("/login",async(req,res)=>{
     try {
         let Customer = await getuserbyemail(req)
-        const token = generatetoken(Customer._id);
+        const token = generatetoken(req.body.email);
         if(!Customer){
             return res.status(400).json({error:"user not exist"})
+        }
+        if (!Customer.isActive) {
+          return res.status(401).json({ error: 'Account not activated. Check your email for activation instructions.' });
         }
         
         const loginpassword = await bcrypt.compare(req.body.password, Customer.password);
@@ -81,10 +83,11 @@ router.post("/forgetpasswords", async (req, res) => {
     // Generate JWT token using user's email
     const token = generatetoken(req.body.email);
     const content = `<p>Access to change your old password</p>
-      <a href="https://your-frontend-url.com/change-password/${token}">Reset Password</a>`;
+      <a href="https://6568e8342e05de008bdda5f1--relaxed-faun-da5d5a.netlify.app/change/:token">"${token}"</a>`;
 
     // Create new forgetuser
     const forgetuser = await new forgetmodel({
+      ...req.body,
       email: req.body.email,
       token,
     }).save();
@@ -104,26 +107,24 @@ router.post("/forgetpasswords", async (req, res) => {
 ///-------------------------------------------------------
 
 //changepassword
-router.post("/change-password/:token", async (req, res) => {
+router.post("/changes/:token", async (req, res) => {
   try {
-    const { token } = req.params;
-
     // Check if the user exists
-    const userResponse = await changepassword(token);
+    let customer = await getuserbyemail(req);
 
-    if (!userResponse.success) {
-      return res.status(400).json({ success: false, error: userResponse.message });
+    if (!customer) {
+      return res.status(400).json({ success: false, error: "User not exist" });
     }
-
-    // Get the user data from the response
-    const user = userResponse;
 
     // Update the user's password with the new password
     const hashedPassword = await bcrypt.hash(req.body.newpassword, 10);
-    user.password = hashedPassword;
+    customer.password = hashedPassword;
 
     // Save the updated user data
-    await user.save();
+    await customer.save();
+
+    // Remove the token from forgetmodel
+    await forgetmodel.findOneAndDelete({ email: req.body.email });
 
     res.json({ success: true, message: 'Password successfully changed' });
   } catch (error) {
@@ -132,5 +133,7 @@ router.post("/change-password/:token", async (req, res) => {
   }
 });
 
+
+  
 
 export const userRouter = router;
