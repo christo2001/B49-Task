@@ -104,7 +104,7 @@ router.post("/forgetpasswords", async (req, res) => {
 ///-------------------------------------------------------
 
 //changepassword
-router.post("/change-password/:token", async (req, res) => {
+router.post("/change/:token", async (req, res) => {
   try {
     const { token } = req.params;
 
