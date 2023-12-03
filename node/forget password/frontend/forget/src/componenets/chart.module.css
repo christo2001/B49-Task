@@ -1,0 +1,42 @@
+/* Default styles for the chart container */
+.chart{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    margin-top: 50px;
+    margin-bottom: 100px;
+  }
+
+  .line {
+    width: 600px; /* Set the width as desired */
+    height: 350px; /* Set the height as desired */
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    
+  }
+  .doughnut{
+    width: 600px; /* Set the width as desired */
+    height: 350px; 
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    
+  }
+  
+  /* Responsive styles for smaller screens */
+  @media screen and (max-width: 768px) {
+    .chart {
+      flex-direction: column; /* Change to a column layout for small screens */
+      gap: 20px; /* Adjust spacing between charts */
+    }
+    .line {
+      width: 450px; /* Set the width as desired */
+      height: 350px; /* Set the height as desired */
+    }
+    .doughnut{
+      width: 400px; /* Set the width as desired */
+      height: 350px; 
+      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+      
+    }
+  }
+  

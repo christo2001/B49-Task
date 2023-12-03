@@ -1,0 +1,154 @@
+.nav{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #0f172a;
+  margin: 0 50px;
+  margin-top: 30px;
+  border-radius: 10px;
+}
+
+.navtitle{
+  font-size: 1.5rem;
+  margin: 1rem;
+  font-weight: bold;
+  text-decoration: none;
+  color: white;
+}
+
+.navtitle::before,.navtitle::after{
+  content:'';
+  padding: 10px;
+  position: absolute;
+  left: 20;
+  top: 11;
+  display: block;
+  transform: translateX(-10%) translateY(-50%) rotate(120deg);
+}
+
+.navtitle::before{
+  border-top:5px solid blue;
+  border-left:5px solid #ff126d;
+}
+
+.navtitle::after{
+  border-bottom:5px solid blue;
+  border-right:5px solid #ff126d;
+}
+
+
+.nav ul{
+  display: flex;
+}
+
+.nav ul li{
+  list-style: none;
+}
+
+.navlink{
+  color: aliceblue;
+  display: block;
+  text-decoration: none;
+  padding: 0.5rem;
+  margin: 0 1.1rem;
+  border-radius: 0.5rem;
+  text-transform: capitalize;
+}
+
+.navlink:hover {
+  text-decoration: none; /* Remove the default underline */
+  border-bottom: 1px solid orange; /* Add a bottom border with your desired color */
+  color: #fff;
+  border-radius: 0px;
+}
+
+
+.navmenu{
+  display: none;
+  position: absolute;
+  top: 0.75rem;
+  right: 0.5rem;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 2.25rem;
+  height: 2rem;
+}
+
+.navmenu span{
+  height: 0.4rem;
+  width: 100%;
+  background-color: #f6f3f3;
+  border-radius: 0.2rem;
+}
+
+.navbtn{
+  background-color: blue;
+  color: #fff;
+  text-transform: capitalize;
+  margin-top: 7px;
+  padding: 20x;
+  border-radius: 5px;
+  margin-right: 10px;
+  font-size: medium;
+}
+
+@media (max-width: 576px){
+  .navmenu{
+    display: flex;
+  }
+  .nav{
+    flex-direction: column;
+    align-items: start;
+    margin: 0 0px;
+  }
+  .nav ul{
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 0.25rem;
+  }
+
+  .nav ul.open{
+    display: flex;
+  }
+
+  .nav ul li{
+    width: 100%;
+    text-align: center;
+  }
+  .navlink{
+    margin: 0.2rem 0.5rem;
+  }
+
+}
+
+@media (max-width: 720px){
+  .navmenu{
+    display: flex;
+  }
+  .nav{
+    flex-direction: column;
+    align-items: start;
+    margin: 0 0px;
+    border-radius: 0px;
+  }
+  .nav ul{
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 0.25rem;
+  }
+
+  .nav ul.open{
+    display: flex;
+  }
+
+  .nav ul li{
+    width: 100%;
+    text-align: center;
+  }
+  .navlink{
+    margin: 0.2rem 0.5rem;
+  }
+
+}
