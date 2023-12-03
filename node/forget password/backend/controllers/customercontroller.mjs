@@ -28,36 +28,38 @@ export function generateUniqueActivationToken() {
   }
 
 
-  export async function changepassword(token) {
-    try {
-      const changepasswordEntry = await forgetmodel.findOne({ token });
-  
-      if (changepasswordEntry) {
-        // Log token details for troubleshooting
-        console.log('Found token in forgetmodel:', changepasswordEntry);
-  
-        // Remove the token from forgetmodel after password change
-        await forgetmodel.deleteOne({ token });
-  
-        // Fetch user by email and return it for further processing
-        const user = await getuserbyemail({ body: { email: changepasswordEntry.email } });
-  
-        if (!user) {
-          console.log('User not found for email:', changepasswordEntry.email);
-          return { success: false, message: 'User not found for the provided email' };
-        }
-  
-        return user;
-      } else {
-        // Log token details for troubleshooting
-        console.log('Invalid token:', token);
-        return { success: false, message: 'Invalid token' };
+// changepassword function
+export async function changepassword(token) {
+  try {
+    // Find the entry in forgetmodel using the provided token
+    const changepasswordEntry = await forgetmodel.findOne({ token });
+
+    if (changepasswordEntry) {
+      // Log token details for troubleshooting
+      console.log('Found token in forgetmodel:', changepasswordEntry);
+
+      // Remove the token from forgetmodel after password change
+      await forgetmodel.deleteOne({ token });
+
+      // Fetch user by email and return it for further processing
+      const user = await getuserbyemail({ body: { email: changepasswordEntry.email } });
+
+      if (!user) {
+        console.log('User not found for email:', changepasswordEntry.email);
+        return { success: false, message: 'User not found for the provided email' };
       }
-    } catch (error) {
-      console.error('Error in changepassword function:', error);
-      return { success: false, message: 'Error occurred during password change' };
+
+      return user;
+    } else {
+      // Log token details for troubleshooting
+      console.log('Invalid token:', token);
+      return { success: false, message: 'Invalid token' };
     }
+  } catch (error) {
+    console.error('Error in changepassword function:', error);
+    return { success: false, message: 'Error occurred during password change' };
   }
+}
 
 
 

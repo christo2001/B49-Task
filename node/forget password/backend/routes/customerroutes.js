@@ -101,8 +101,7 @@ router.post("/forgetpasswords", async (req, res) => {
 
   
 
-///-------------------------------------------------------
-
+// /changes/:token route
 router.post("/changes/:token", async (req, res) => {
   try {
     const { token } = req.params;
@@ -114,7 +113,8 @@ router.post("/changes/:token", async (req, res) => {
       return res.status(400).json({ success: false, error: userResponse.message });
     }
 
-    const user = userResponse; // Get the user data from the response
+    // Get the user data from the response
+    const user = userResponse;
 
     // Update the user's password with the new password
     const hashedPassword = await bcrypt.hash(req.body.newpassword, 10);
@@ -131,6 +131,7 @@ router.post("/changes/:token", async (req, res) => {
     res.status(500).json({ success: false, message: 'Internal Server Error' });
   }
 });
+
 
 
 export const userRouter = router;
