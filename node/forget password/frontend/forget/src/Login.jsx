@@ -24,7 +24,7 @@ function Login() {
     e.preventDefault();
   
     try {
-      const response = await axios.post('https://url-short-3gtm.onrender.com/api/user/login', formdata);
+      const response = await axios.post('https://forget-password-2zs6.onrender.com/api/user/login', formdata);
       const token = response.data.token;
   
       // Store the token in localStorage
