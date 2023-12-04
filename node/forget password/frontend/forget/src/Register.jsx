@@ -29,7 +29,7 @@ function Signup() {
     e.preventDefault();
 
     try {
-      const response = await axios.post('https://forget-password-2zs6.onrender.com/api/user/registration', signupformdata);
+      const response = await axios.post('https://forget-password-2zs6.onrender.com/api/user/registered', signupformdata);
       const token = response.data.token;
 
       // Store the token in localStorage
