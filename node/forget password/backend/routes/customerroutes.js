@@ -87,6 +87,8 @@ router.post("/forgetpassword", async (req, res) => {
 
     // Generate token for password reset
     const token = generatetoken(req.body.email);
+    const content = `<p>Access to change your old password</p>
+    <a href="http://localhost:5173/change/:token">"${token}"</a>`;
 
     // Save token in forgetmodel
     await new forgetmodel({
@@ -94,6 +96,10 @@ router.post("/forgetpassword", async (req, res) => {
       token,
     }).save();
 
+    
+
+// Send email using the sendmail function
+   await sendmail(req.body.email, 'Change Password', content);
     // Send an email to the user with the reset link (optional)
 
     res.json({ message: 'Token generated successfully',token });
