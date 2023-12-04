@@ -127,6 +127,10 @@ router.post('/changepassword/:token', async (req, res) => {
     // Check if the token exists in forgetmodel
     const tokenRecord = await forgetmodel.findOne({ email, token });
 
+    // Debugging: Log token information
+    console.log('Received Token:', token);
+    console.log('Stored Token:', tokenRecord?.token);
+
     if (!tokenRecord) {
       return res.status(400).json({ message: 'Invalid or expired token' });
     }

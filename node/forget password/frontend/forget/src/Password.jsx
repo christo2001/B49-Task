@@ -12,14 +12,15 @@ function Password() {
   const [successMessage, setSuccessMessage] = useState('');
   const { token } = useParams();
 
-const handleChange = (e) => {
-  const { name, value } = e.target;
-  if (name === 'email') {
-    setEmail(value);
-  } else if (name === 'newPassword') {
-    setNewPassword(value);
-  }
-};
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    if (name === 'email') {
+      setEmail(value);
+    } else if (name === 'newPassword') { // <-- Update to 'newPassword'
+      setNewPassword(value);
+    }
+  };
+  
 
 
   const handleSubmit = async (e) => {
@@ -79,16 +80,17 @@ const handleChange = (e) => {
             </div>
 
             <div className={passwordcss.formcontrol}>
-              <input
-                type='password'
-                placeholder='password'
-                name='password'
-                id='password'
-                className={passwordcss.inputfield}
-                onChange={handleChange}
-                value={newpassword}
-                required
-              />
+            <input
+  type='password'
+  placeholder='password'
+  name='newPassword'  // <-- Corrected name
+  id='password'
+  className={passwordcss.inputfield}
+  onChange={handleChange}
+  value={newPassword}
+  required
+/>
+
             </div>
 
             <button type='submit' className={passwordcss.submits}>
