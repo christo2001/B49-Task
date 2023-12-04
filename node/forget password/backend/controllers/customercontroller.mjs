@@ -2,8 +2,9 @@ import { customermodel } from "../models/customermodel.mjs"
 import jwt  from "jsonwebtoken";
 import { v4 as uuidv4 } from "uuid";
 import crypto from "crypto";
+import { usermodel } from "../models/verify.js";
 import { sendmail } from "./sendmail.js";
-import { forgetmodel } from "../models/forget.js";
+// import { forgetmodel } from "../models/forget.js";
 
 
 
@@ -29,28 +30,57 @@ export function generateUniqueActivationToken() {
 
 
 
-export async function changepassword(token) {
-  try {
-    const changepasswordEntry = await forgetmodel.findOne({ token: token });
+  export async function insertverifyuser(token) {
+    try {
+        const userverify = await usermodel.findOne({ token: token });
 
-    if (changepasswordEntry) {
-      // Log token details for troubleshooting
-      console.log('Found token in forgetmodel:', changepasswordEntry);
+        if (userverify) {
+            const newuser = new customermodel({
+                username: userverify.username,
+                email: userverify.email,
+                password: userverify.password,
+                token:userverify.token
+            });
 
-      // Remove the token from forgetmodel after password change
-      await forgetmodel.deleteOne({ token: token });
+            await newuser.save();
+            await usermodel.deleteOne({ token: token });
 
-      return { success: true, message: 'Password changed successfully' };
-    } else {
-      // Log token details for troubleshooting
-      console.log('Invalid token:', token);
-      return { success: false, message: 'Invalid token' };
+            // Assuming you have a sendmail function defined
+            const content = `<p>Successfully registered</p><p>Regards</p>`;
+            
+            // Send email asynchronously and wait for it to complete
+            await sendmail(newuser.email, "Registration successful", content);
+
+        } 
+    } catch (error) {
+        console.error(error);
+        return `<p>Error occurred</p><h4>Registration failed</h4>`;
     }
-  } catch (error) {
-    console.error(error);
-    return { success: false, message: 'Error occurred during password change' };
-  }
 }
+
+
+// export async function changepassword(token) {
+//   try {
+//     const changepasswordEntry = await forgetmodel.findOne({ token: token });
+
+//     if (changepasswordEntry) {
+//       // Log token details for troubleshooting
+//       console.log('Found token in forgetmodel:', changepasswordEntry);
+
+//       // Remove the token from forgetmodel after password change
+//       await forgetmodel.deleteOne({ token: token });
+
+//       return { success: true, message: 'Password changed successfully' };
+//     } else {
+//       // Log token details for troubleshooting
+//       console.log('Invalid token:', token);
+//       return { success: false, message: 'Invalid token' };
+//     }
+//   } catch (error) {
+//     console.error(error);
+//     return { success: false, message: 'Error occurred during password change' };
+//   }
+// }
 
 
 
