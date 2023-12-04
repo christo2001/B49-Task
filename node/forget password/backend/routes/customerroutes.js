@@ -24,15 +24,9 @@ router.post("/registered", async (req, res) => {
 
     // Generate JWT token using user's email
     const token = generatetoken(req.body.email);
-    
-    const verify = `https://6568e8342e05de008bdda5f1--relaxed-faun-da5d5a.netlify.app/verify/:token`;
-    const content = `<p>welcome to our app</p>
-    <p>please click the above link to activate your account</p>
-      <a href="${verify}">click here</a>`;
-    
 
     // Create new user
-    verifyuser = await new usermodel({
+    verifyuser = await new customermodel({
       ...req.body,
       username: req.body.username,
       email: req.body.email,
@@ -40,37 +34,11 @@ router.post("/registered", async (req, res) => {
       token,
     }).save();
 
-    // Send email using the sendmail function
-    
-    await sendmail(req.body.email, 'registration mail',content);
 
     res.status(201).json({ message: 'Successfully registered', token });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal error' });
-  }
-});
-
-
-
-//--------------------------------------------------------------------------------------------
-//verifying mail 
-
-router.get('/verify/:token', async (req, res) => {
-  try {
-    const response = await insertverifyuser(req.params.token);
-    const user = await customermodel.findOne({ verificationToken: req.params.token });
-
-    if (user) {
-      user.isActive = true;
-      await user.save();
-      res.status(200).json({ message: response });
-    } else {
-      res.status(400).json({ error: "Invalid or already verified token" });
-    }
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
@@ -105,38 +73,76 @@ router.post("/login",async(req,res)=>{
 })
 
 //-------------------------------------------------------------------------------------------------
-///-------------------------------------------------------
 
-//changepassword
-router.post('/changepassword', async (req, res) => {
-    try {
-        const { email, newPassword } = req.body; // Extract email and newPassword
-  
-        // Find the user by email
-        const user = await customermodel.findOne({ email });
-  
-        // Check if the user exists
-        if (!user) {
-            return res.status(404).json({ message: 'User not found' });
-        }
+router.post("/forgetpassword", async (req, res) => {
+  try {
+    const { email } = req.body;
 
-        // Generate hashed password
-        const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(newPassword, salt);
-  
-        // Update the user's password with the new hashed password
-        user.password = hashedPassword;
-  
-        // Save the updated user data
-        await user.save();
-  
-        res.json({ message: 'Password changed successfully' });
-    } catch (error) {
-        res.status(400).send(error);
+    // Find the user by email
+    const user = await customermodel.findOne({ email });
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
     }
+
+    // Generate token for password reset
+    const token = generatetoken(req.body.email);
+
+    // Save token in forgetmodel
+    await new forgetmodel({
+      email: req.body.email,
+      token,
+    }).save();
+
+    // Send an email to the user with the reset link (optional)
+
+    res.json({ message: 'Token generated successfully',token });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal error' });
+  }
 });
 
 
-  
+// Change Password
+router.post('/changepassword/:token', async (req, res) => {
+  try {
+    const { email, newPassword } = req.body;
+    const token = req.params.token; // Extract token from URL parameters
+
+    // Find the user by email
+    const user = await customermodel.findOne({ email });
+
+    // Check if the user exists
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Check if the token exists in forgetmodel
+    const tokenRecord = await forgetmodel.findOne({ email, token });
+
+    if (!tokenRecord) {
+      return res.status(400).json({ message: 'Invalid or expired token' });
+    }
+
+    // Generate hashed password
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(newPassword, salt);
+
+    // Update the user's password with the new hashed password
+    user.password = hashedPassword;
+
+    // Save the updated user data
+    await user.save();
+
+    // Delete the token record from forgetmodel
+    await forgetmodel.findOneAndDelete({ email, token });
+
+    res.json({ message: 'Password changed successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal error' });
+  }
+});
 
 export const userRouter = router;

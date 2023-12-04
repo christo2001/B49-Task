@@ -34,12 +34,7 @@ function Signup() {
 
       // Store the token in localStorage
       localStorage.setItem('token', token);
-
-      setmessage("Registration successful"); // Set success message
-      // Navigate to the login page after 1 second
-      setTimeout(() => {
-        navigate('/login'); // Redirect to the login page
-      }, 1000);
+      navigate('/login'); // Redirect to the login page
     } catch (error) {
       const errorMessage = error.response ? error.response.data.error : 'An error occurred';
       setmessage(errorMessage); // Set error message
