@@ -26,10 +26,11 @@ function Password() {
 
     try {
       const response = await axios.post(`https://forget-password-2zs6.onrender.com/api/user/changepassword/${token}`, {
-        email: email,
-        newpassword: newpassword,
+        email: email,  // Ensure this property is named 'email'
+        newPassword: newpassword,  // Ensure this property is named 'newPassword'
       });
       
+
       console.log("Success:", response.data);
       setSuccessMessage("Password changed successfully!");
       setError(null);
