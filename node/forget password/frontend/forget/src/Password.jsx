@@ -8,8 +8,9 @@ const ChangePassword = () => {
   const [message, setMessage] = useState('');
 
   useEffect(() => {
-    // You can use 'token' here as needed
+    console.log('Token:', token);
   }, [token]);
+  
 
   const handleChange = (e) => {
     if (e.target.name === 'email') {
@@ -21,29 +22,30 @@ const ChangePassword = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     try {
-      const response = await fetch(`/changepassword/${token}`, {
+      const response = await fetch(`https://forget-password-2zs6.onrender.com/api/user/changepassword/${token}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ email, newPassword }),
       });
-
-      const data = await response.json();
-
+  
+      console.log('Response:', response);
+  
       if (response.ok) {
+        const data = await response.json();
         setMessage(data.message);
       } else {
-        setMessage(data.message || 'Password change failed');
+        setMessage('Password change failed');
       }
     } catch (error) {
       console.error(error);
       setMessage('Internal error');
     }
   };
-
+  
   return (
     <div>
       <h2>Change Password</h2>
