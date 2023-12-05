@@ -21,6 +21,10 @@ const customerschema = new mongoose.Schema({
     token: {
       type: String,
   },
+  isverified: {
+    type: Boolean,
+    default: false // Set a default value if necessary
+}
 })
 
 const customermodelss = mongoose.model("users", customerschema)
