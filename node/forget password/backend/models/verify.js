@@ -11,6 +11,10 @@ const userschema = new mongoose.Schema({
     token: {
         type: String,
         required: true
+    },
+    isverified: {
+        type: Boolean,
+        default: false // Set a default value if necessary
     }
 });
 
