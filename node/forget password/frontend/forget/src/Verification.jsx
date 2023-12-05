@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
-const VerifyUser = ({ match }) => {
+const VerifyUser = () => {
+  const { token } = useParams();
   const [verificationStatus, setVerificationStatus] = useState(null);
 
   useEffect(() => {
     const verifyUser = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/api/user/verify/${match.params.token}`);
+        const response = await fetch(`/api/verify/${token}`);
         const data = await response.json();
 
         if (response.ok) {
@@ -21,7 +23,7 @@ const VerifyUser = ({ match }) => {
     };
 
     verifyUser();
-  }, [match.params.token]);
+  }, [token]);
 
   return (
     <div>
