@@ -54,25 +54,6 @@ router.post("/registered", async (req, res) => {
 
 
 //--------------------------------------------------------------------------------------------
-//verifying mail 
-
-router.get('/verify/:token', async (req, res) => {
-  try {
-    const response = await insertverifyuser(req.params.token);
-    const user = await forgetmodel.findOne({ verificationToken: req.params.token });
-
-    if (user) {
-      user.isActive = true;
-      await user.save();
-      res.status(200).json({ message: "success" });
-    } else {
-      res.status(400).json({ error: "Invalid or already verified token" });
-    }
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-});
 
 
 
