@@ -1,4 +1,4 @@
-import { customermodel } from "../models/customermodel.mjs"
+import { customermodelss } from "../models/customermodel.mjs"
 import jwt  from "jsonwebtoken";
 import { v4 as uuidv4 } from "uuid";
 import crypto from "crypto";
@@ -9,7 +9,7 @@ import { sendmail } from "./sendmail.js";
 
 
 export async function getuserbyemail(request) {
-  return  customermodel.findOne({
+  return  customermodelss.findOne({
       email: request.body.email
   });
 }
