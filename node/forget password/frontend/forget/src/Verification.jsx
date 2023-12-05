@@ -8,7 +8,7 @@ const VerifyUser = () => {
   useEffect(() => {
     const verifyUser = async () => {
       try {
-        const response = await fetch(`/api/verify/${token}`);
+        const response = await fetch(`http://localhost:3000/api/user/verify/${token}`);
         const data = await response.json();
 
         if (response.ok) {
@@ -17,7 +17,7 @@ const VerifyUser = () => {
           setVerificationStatus('error');
         }
       } catch (error) {
-        console.error(error);
+        console.log(error);
         setVerificationStatus('error');
       }
     };
