@@ -150,7 +150,7 @@ router.get('/verify/:token', async (req, res) => {
 
 //----------------------------------------------------------------------
 //changepassword
-router.post("/change/:token", async (req, res) => {
+router.post("/change", async (req, res) => {
   try {
     // Check if the user exists
     let customer = await getuserbyemail(req);

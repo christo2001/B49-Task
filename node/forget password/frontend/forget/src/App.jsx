@@ -18,7 +18,7 @@ function App() {
         <Route path='/' element={<Register/>} />
         <Route path='/login' element={<Login />} />
         <Route path='/forget' element={<Forget />} />
-        <Route path='/change/:token' element={<Password />} />
+        <Route path='/change' element={<Password />} />
         <Route path='/urlhome' element={<Urlhome />} />
         <Route path='api/user/verify/:token' element={<Verification token={userToken} />}
         />
