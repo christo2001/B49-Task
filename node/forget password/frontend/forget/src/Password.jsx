@@ -1,10 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
-const ChangePassword = ({ match }) => {
+const ChangePassword = () => {
+  const { token } = useParams();
   const [email, setEmail] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [message, setMessage] = useState('');
-  
+
+  useEffect(() => {
+    // You can use 'token' here as needed
+  }, [token]);
+
   const handleChange = (e) => {
     if (e.target.name === 'email') {
       setEmail(e.target.value);
@@ -17,9 +23,7 @@ const ChangePassword = ({ match }) => {
     e.preventDefault();
 
     try {
-      const token = match.params.token;
-
-      const response = await fetch(`https://forget-password-2zs6.onrender.com/api/user/changepassword/${token}`, {
+      const response = await fetch(`/changepassword/${token}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
