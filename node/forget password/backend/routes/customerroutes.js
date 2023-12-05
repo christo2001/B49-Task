@@ -166,9 +166,6 @@ router.post("/change", async (req, res) => {
     // Save the updated user data
     await customer.save();
 
-    // Remove the token from forgetmodel
-    await forgetmodel.findOneAndDelete({ email: req.body.email });
-
     res.json({ success: true, message: 'Password successfully changed' });
   } catch (error) {
     console.error(error);
