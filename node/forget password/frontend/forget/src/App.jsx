@@ -6,7 +6,7 @@ import Login from './Login';
 import Forget from './Forget';
 import Password from './Password';
 import Urlhome from './Urlhome';
-
+import Verification from './Verification';
 
 
 function App() {
@@ -20,6 +20,8 @@ function App() {
         <Route path='/forget' element={<Forget />} />
         <Route path='/change/:token' element={<Password />} />
         <Route path='/urlhome' element={<Urlhome />} />
+        <Route path='/verify/:token' element={<Verification token={userToken} />}
+        />
       </Routes>
     </BrowserRouter>
   );

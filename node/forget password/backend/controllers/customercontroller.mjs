@@ -1,10 +1,10 @@
 import { customermodelss } from "../models/customermodel.mjs"
+import { forgetmodelss } from "../models/forget.js";
 import jwt  from "jsonwebtoken";
 import { v4 as uuidv4 } from "uuid";
 import crypto from "crypto";
 import { usermodel } from "../models/verify.js";
 import { sendmail } from "./sendmail.js";
-// import { forgetmodel } from "../models/forget.js";
 
 
 
@@ -32,24 +32,22 @@ export function generateUniqueActivationToken() {
 
   export async function insertverifyuser(token) {
     try {
-        const userverify = await usermodel.findOne({ token: token });
+        const userverify = await forgetmodelss.findOne({ token: token });
 
         if (userverify) {
-            const newuser = new customermodel({
-                username: userverify.username,
+            const newuser = new usermodel({
                 email: userverify.email,
-                password: userverify.password,
                 token:userverify.token
             });
 
             await newuser.save();
-            await usermodel.deleteOne({ token: token });
+            await forgetmodelss.deleteOne({ token: token });
 
             // Assuming you have a sendmail function defined
             const content = `<p>Successfully registered</p><p>Regards</p>`;
             
             // Send email asynchronously and wait for it to complete
-            await sendmail(newuser.email, "Registration successful", content);
+            await sendmail(newuser.email, "password changes successfull", content);
 
         } 
     } catch (error) {

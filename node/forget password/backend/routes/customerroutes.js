@@ -88,7 +88,7 @@ router.post("/forgetpassword", async (req, res) => {
     // Generate token for password reset
     const token = generatetoken(req.body.email);
     const content = `<p>Access to change your old password</p>
-    <a href="http://localhost:5173/change/:token">"${token}"</a>`;
+    <a href="http://localhost:5173/verify/:token">"${token}"</a>`;
 
     // Save token in forgetmodel
     await new forgetmodelss({
@@ -109,12 +109,31 @@ router.post("/forgetpassword", async (req, res) => {
   }
 });
 
+//------------------------------------------------------------------
+router.get('/verify/:token', async (req, res) => {
+  try {
+    const response = await insertverifyuser(req.params.token);
+    const user = await usermodel.findOne({ verificationToken: req.params.token });
+
+    if (user) {
+      user.isActive = true;
+      await user.save();
+      res.status(200).json({ message: response });
+    } else {
+      res.status(400).json({ error: "Invalid or already verified token" });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+//----------------------------------------------------------------
+
 
 // Change Password
-router.post('/changepassword/:token', async (req, res) => {
+router.post('/changepassword', async (req, res) => {
   try {
     const { email, newPassword } = req.body;
-    const token = req.params.token; // Extract token from URL parameters
 
     // Find the user by email
     const user = await customermodelss.findOne({ email });
@@ -122,17 +141,6 @@ router.post('/changepassword/:token', async (req, res) => {
     // Check if the user exists
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
-    }
-
-    // Check if the token exists in forgetmodel
-    const tokenRecord = await forgetmodelss.findOne({token: token });
-
-    // Debugging: Log token information
-    console.log('Received Token:', token);
-    console.log('Stored Token:', tokenRecord?.token);
-
-    if (!tokenRecord) {
-      return res.status(400).json({ message: 'Invalid or expired token' });
     }
 
     // Generate hashed password
@@ -144,9 +152,6 @@ router.post('/changepassword/:token', async (req, res) => {
 
     // Save the updated user data
     await user.save();
-
-    // Delete the token record from forgetmodel
-    await forgetmodelss.findOneAndDelete({ email: req.body.email });
 
     res.json({ message: 'Password changed successfully' });
   } catch (error) {
