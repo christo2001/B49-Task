@@ -20,7 +20,7 @@ function App() {
         <Route path='/forget' element={<Forget />} />
         <Route path='/change/:token' element={<Password />} />
         <Route path='/urlhome' element={<Urlhome />} />
-        <Route path='/verify/:token' element={<Verification token={userToken} />}
+        <Route path='api/user/verify/:token' element={<Verification token={userToken} />}
         />
       </Routes>
     </BrowserRouter>
