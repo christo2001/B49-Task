@@ -1,10 +1,10 @@
 import express from "express";
-import { generatetoken, getuserbyemail,generateUniqueActivationToken, insertverifyuser } from "../controllers/customercontroller.mjs";
+import { generatetoken, getuserbyemail,generateUniqueActivationToken, insertverifyuser,changepassword } from "../controllers/customercontroller.mjs";
 import bcrypt from "bcrypt"
-import { customermodelss } from "../models/customermodel.mjs"
+import { customermodel } from "../models/customermodel.mjs"
 import { usermodel } from "../models/verify.js";
 import { sendmail } from "../controllers/sendmail.js";
-import {  forgetmodelss } from "../models/forget.js";
+import { forgetmodel } from "../models/forget.js";
 
 
 const router = express.Router();
@@ -24,9 +24,15 @@ router.post("/registered", async (req, res) => {
 
     // Generate JWT token using user's email
     const token = generatetoken(req.body.email);
+    
+    const verify = `https://6568e8342e05de008bdda5f1--relaxed-faun-da5d5a.netlify.app/verify/:token`;
+    const content = `<p>welcome to our app</p>
+    <p>please click the above link to activate your account</p>
+      <a href="${verify}">click here</a>`;
+    
 
     // Create new user
-    verifyuser = await new customermodelss({
+    verifyuser = await new usermodel({
       ...req.body,
       username: req.body.username,
       email: req.body.email,
@@ -34,11 +40,37 @@ router.post("/registered", async (req, res) => {
       token,
     }).save();
 
+    // Send email using the sendmail function
+    
+    await sendmail(req.body.email, 'registration mail',content);
 
     res.status(201).json({ message: 'Successfully registered', token });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal error' });
+  }
+});
+
+
+
+//--------------------------------------------------------------------------------------------
+//verifying mail 
+
+router.get('/verify/:token', async (req, res) => {
+  try {
+    const response = await insertverifyuser(req.params.token);
+    const user = await forgetmodel.findOne({ verificationToken: req.params.token });
+
+    if (user) {
+      user.isActive = true;
+      await user.save();
+      res.status(200).json({ message: "success" });
+    } else {
+      res.status(400).json({ error: "Invalid or already verified token" });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
@@ -73,93 +105,87 @@ router.post("/login",async(req,res)=>{
 })
 
 //-------------------------------------------------------------------------------------------------
-
+//forget password
 router.post("/forgetpassword", async (req, res) => {
   try {
-    const { email } = req.body;
-
-    // Find the user by email
-    const user = await customermodelss.findOne({ email });
+    // Check if the user exists
+    let user = await getuserbyemail(req);
 
     if (!user) {
-      return res.status(404).json({ message: 'User not found' });
+      return res.status(400).json({ error: "User not exist" });
     }
 
-    // Generate token for password reset
+    // Generate JWT token using user's email
     const token = generatetoken(req.body.email);
     const content = `<p>Access to change your old password</p>
-    <a href="http://localhost:5173/verify/:token">"${token}"</a>`;
+      <a href="https://6568e8342e05de008bdda5f1--relaxed-faun-da5d5a.netlify.app/change/:token">"${token}"</a>`;
 
-    // Save token in forgetmodel
-    await new forgetmodelss({
+    // Create new forgetuser
+    const forgetuser = await new forgetmodel({
+      ...req.body,
       email: req.body.email,
       token,
     }).save();
 
-    
+    // Send email using the sendmail function
+    await sendmail(req.body.email, 'Change Password', content);
 
-// Send email using the sendmail function
-   await sendmail(req.body.email, 'Change Password', content);
-    // Send an email to the user with the reset link (optional)
-
-    res.json({ message: 'Token generated successfully',token });
+    res.status(201).json({ message: 'Successfully email sent to change password', token });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Internal error' });
+    console.error("Error in forget password route:", error);
+    res.status(500).json({ error: "Internal server error" });
   }
 });
 
-//------------------------------------------------------------------
+  
+
+///-------------------------------------------------------
 router.get('/verify/:token', async (req, res) => {
   try {
     const response = await insertverifyuser(req.params.token);
-    const user = await customermodelss.findOne({ verificationToken: req.params.token });
+    const user = await usermodel.findOne({ verificationToken: req.params.token });
 
-  // Assuming there's an 'isVerified' field in the usermodel
-if (user && !user.isverified) {
-  user.isverified = true;
-  await user.save();
-  res.status(200).json({ message: "verified" });
-} else {
-  res.status(400).json({ error: "Invalid or already verified token" });
-}
-
+    if (user) {
+      user.isActive = true;
+      await user.save();
+      res.status(200).json({ message: "success" });
+    } else {
+      res.status(400).json({ error: "Invalid or already verified token" });
+    }
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
-//----------------------------------------------------------------
 
-
-// Change Password
-router.post('/changepassword', async (req, res) => {
+//changepassword
+router.post("/change/:token", async (req, res) => {
   try {
-    const { email, newPassword } = req.body;
-
-    // Find the user by email
-    const user = await customermodelss.findOne({ email });
-
     // Check if the user exists
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
+    let customer = await getuserbyemail(req);
+
+    if (!customer) {
+      return res.status(400).json({ success: false, error: "User not exist" });
     }
 
-    // Generate hashed password
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(newPassword, salt);
-
-    // Update the user's password with the new hashed password
-    user.password = hashedPassword;
+    // Update the user's password with the new password
+    const hashedPassword = await bcrypt.hash(req.body.newpassword, 10);
+    customer.password = hashedPassword;
 
     // Save the updated user data
-    await user.save();
+    await customer.save();
 
-    res.json({ message: 'Password changed successfully' });
+    // Remove the token from forgetmodel
+    await forgetmodel.findOneAndDelete({ email: req.body.email });
+
+    res.json({ success: true, message: 'Password successfully changed' });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Internal error' });
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
   }
 });
+
+
+  
 
 export const userRouter = router;

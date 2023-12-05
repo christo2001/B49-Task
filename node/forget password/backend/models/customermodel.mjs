@@ -21,11 +21,14 @@ const customerschema = new mongoose.Schema({
     token: {
       type: String,
   },
-  isverified: {
-    type: Boolean,
-    default: false // Set a default value if necessary
-}
+    isActive: {
+        type: Boolean,
+        default: false,
+      },
+      otp:{
+        type:String,
+      },
 })
 
-const customermodelss = mongoose.model("users", customerschema)
-export { customermodelss };
+const customermodel = mongoose.model("users", customerschema)
+export { customermodel };

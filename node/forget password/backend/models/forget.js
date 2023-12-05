@@ -9,7 +9,8 @@ const forgetschema = new mongoose.Schema({
     type:String,
     required:true,
 },
+
 })
 
-const forgetmodelss = mongoose.model("forgetpassword", forgetschema)
-export { forgetmodelss };
+const forgetmodel = mongoose.model("forget", forgetschema)
+export { forgetmodel };

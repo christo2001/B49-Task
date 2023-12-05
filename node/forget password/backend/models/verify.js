@@ -12,10 +12,10 @@ const userschema = new mongoose.Schema({
         type: String,
         required: true
     },
-    isverified: {
+    isActive: {
         type: Boolean,
-        default: false // Set a default value if necessary
-    }
+        default: false,
+      },
 });
 
 const usermodel = mongoose.model("Verifyuser", userschema);
