@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 
@@ -10,10 +10,23 @@ function ChangePassword() {
   const [successMessage, setSuccessMessage] = useState('');
   const { token } = useParams();
 
+  useEffect(() => {
+    // Fetch user details based on the token to pre-fill the email field
+    const fetchUserDetails = async () => {
+      try {
+        const response = await axios.get(`https://forget-password-2zs6.onrender.com/api/user/token/${token}`);
+        setEmail(response.data.email);
+      } catch (error) {
+        console.error('Error fetching user details:', error);
+        setError('An error occurred while fetching user details');
+      }
+    };
+
+    fetchUserDetails();
+  }, [token]);
+
   const handleChange = (e) => {
-    if (e.target.name === 'email') {
-      setEmail(e.target.value);
-    } else if (e.target.name === 'newPassword') {
+    if (e.target.name === 'newPassword') {
       setNewPassword(e.target.value);
     }
   };
@@ -27,34 +40,29 @@ function ChangePassword() {
         newPassword: newPassword,
       });
 
-      console.log("Success:", response.data);
-      setSuccessMessage("Password changed successfully!");
+      console.log('Success:', response.data);
+      setSuccessMessage('Password changed successfully!');
       setError(null);
 
-      // Navigate to login after a 2-second delay
-      const delayInSeconds = 2;
-      const intervalId = setInterval(() => {
-        clearInterval(intervalId);
+      // Navigate to login after a delay
+      setTimeout(() => {
         navigate('/login');
-      }, delayInSeconds * 1000);
+      }, 2000);
     } catch (error) {
-      console.error("Error:", error);
-      setError(error.response?.data?.message || "An error occurred");
+      console.error('Error:', error);
+      setError(error.response?.data?.message || 'An error occurred');
       setSuccessMessage('');
     }
   };
 
   return (
     <div>
-      {/* Your JSX structure goes here */}
       <form onSubmit={handleSubmit}>
         <label>Email:
           <input
             type="email"
-            name="email"
             value={email}
-            onChange={handleChange}
-            required
+            disabled
           />
         </label>
         <br />
@@ -78,3 +86,4 @@ function ChangePassword() {
 }
 
 export default ChangePassword;
+

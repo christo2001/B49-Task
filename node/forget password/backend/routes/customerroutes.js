@@ -88,8 +88,7 @@ router.post("/forgetpassword", async (req, res) => {
     // Generate token for password reset
     const token = generatetoken(req.body.email);
     const content = `<p>Access to change your old password</p>
-    <a href="http://localhost:5173/change/${token}">${token}</a>`;
-    
+    <a href="http://localhost:5173/change/:token">"${token}"</a>`;
 
     // Save token in forgetmodel
     await new forgetmodelss({
@@ -128,7 +127,6 @@ router.post('/changepassword/:token', async (req, res) => {
     // Check if the token exists in forgetmodel
     const tokenRecord = await forgetmodelss.findOne({token: token });
 
-
     // Debugging: Log token information
     console.log('Received Token:', token);
     console.log('Stored Token:', tokenRecord?.token);
@@ -149,7 +147,6 @@ router.post('/changepassword/:token', async (req, res) => {
 
     // Delete the token record from forgetmodel
     await forgetmodelss.findOneAndDelete({ email: req.body.email });
-
 
     res.json({ message: 'Password changed successfully' });
   } catch (error) {
