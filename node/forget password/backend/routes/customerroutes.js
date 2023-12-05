@@ -112,8 +112,14 @@ router.post("/forgetpassword", async (req, res) => {
 //------------------------------------------------------------------
 router.get('/verify/:token', async (req, res) => {
   try {
-    const response = await insertverifyuser(req.params.token);
-    const user = await usermodel.findOne({ verificationToken: req.params.token });
+    const token = req.params.token;
+    console.log('Received token:', token);
+
+    const response = await insertverifyuser(token);
+    console.log('insertverifyuser response:', response);
+
+    const user = await usermodel.findOne({ verificationToken: token });
+    console.log('User found in usermodel:', user);
 
     if (user) {
       await user.save();

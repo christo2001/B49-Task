@@ -32,24 +32,29 @@ export function generateUniqueActivationToken() {
 
   export async function insertverifyuser(token) {
     try {
-        const userverify = await forgetmodelss.findOne({ token: token });
-
-        if (userverify) {
-            const newuser = new usermodel({
-                email: userverify.email,
-                token:userverify.token
-            });
-
-            await newuser.save();
-            await forgetmodelss.deleteOne({ token: token });
-        }else {
-          return `<p>Error occurred</p><h4>Token not found</h4>`;
+      const userverify = await forgetmodelss.findOne({ token: token });
+      console.log('User found in forgetmodelss:', userverify);
+  
+      if (userverify) {
+        const newuser = new usermodel({
+          email: userverify.email,
+          token: userverify.token
+        });
+  
+        await newuser.save();
+        console.log('User saved in usermodel:', newuser);
+  
+        await forgetmodelss.deleteOne({ token: token });
+        console.log('Token deleted from forgetmodelss:', token);
+      } else {
+        console.log('Token not found in forgetmodelss');
+        return `<p>Error occurred</p><h4>Token not found</h4>`;
       }
     } catch (error) {
-        console.error(error);
-        return `<p>Error occurred</p><h4>Registration failed</h4>`;
+      console.error(error);
+      return `<p>Error occurred</p><h4>Registration failed</h4>`;
     }
-}
+  }
 
 
 
