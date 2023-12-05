@@ -57,28 +57,6 @@ export function generateUniqueActivationToken() {
 }
 
 
-// export async function changepassword(token) {
-//   try {
-//     const changepasswordEntry = await forgetmodel.findOne({ token: token });
-
-//     if (changepasswordEntry) {
-//       // Log token details for troubleshooting
-//       console.log('Found token in forgetmodel:', changepasswordEntry);
-
-//       // Remove the token from forgetmodel after password change
-//       await forgetmodel.deleteOne({ token: token });
-
-//       return { success: true, message: 'Password changed successfully' };
-//     } else {
-//       // Log token details for troubleshooting
-//       console.log('Invalid token:', token);
-//       return { success: false, message: 'Invalid token' };
-//     }
-//   } catch (error) {
-//     console.error(error);
-//     return { success: false, message: 'Error occurred during password change' };
-//   }
-// }
 
 
 
