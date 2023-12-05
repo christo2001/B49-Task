@@ -1,10 +1,10 @@
 import express from "express";
 import { generatetoken, getuserbyemail,generateUniqueActivationToken, insertverifyuser } from "../controllers/customercontroller.mjs";
 import bcrypt from "bcrypt"
-import { customermodel } from "../models/customermodel.mjs"
+import { customermodelss } from "../models/customermodel.mjs"
 import { usermodel } from "../models/verify.js";
 import { sendmail } from "../controllers/sendmail.js";
-import { forgetmodel } from "../models/forget.js";
+import {  forgetmodelss } from "../models/forget.js";
 
 
 const router = express.Router();
@@ -26,7 +26,7 @@ router.post("/registered", async (req, res) => {
     const token = generatetoken(req.body.email);
 
     // Create new user
-    verifyuser = await new customermodel({
+    verifyuser = await new customermodelss({
       ...req.body,
       username: req.body.username,
       email: req.body.email,
@@ -79,7 +79,7 @@ router.post("/forgetpassword", async (req, res) => {
     const { email } = req.body;
 
     // Find the user by email
-    const user = await customermodel.findOne({ email });
+    const user = await customermodelss.findOne({ email });
 
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
@@ -117,7 +117,7 @@ router.post('/changepassword/:token', async (req, res) => {
     const token = req.params.token; // Extract token from URL parameters
 
     // Find the user by email
-    const user = await customermodel.findOne({ email });
+    const user = await customermodelss.findOne({ email });
 
     // Check if the user exists
     if (!user) {
@@ -125,7 +125,7 @@ router.post('/changepassword/:token', async (req, res) => {
     }
 
     // Check if the token exists in forgetmodel
-    const tokenRecord = await forgetmodel.findOne({ email, token });
+    const tokenRecord = await forgetmodelss.findOne({token: token });
 
     // Debugging: Log token information
     console.log('Received Token:', token);
@@ -146,7 +146,7 @@ router.post('/changepassword/:token', async (req, res) => {
     await user.save();
 
     // Delete the token record from forgetmodel
-    await forgetmodel.findOneAndDelete({ email, token });
+    await forgetmodelss.findOneAndDelete({ email: req.body.email });
 
     res.json({ message: 'Password changed successfully' });
   } catch (error) {

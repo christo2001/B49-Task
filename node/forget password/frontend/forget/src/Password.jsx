@@ -1,16 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useState } from 'react';
+import axios from 'axios';
+import { useParams, useNavigate } from 'react-router-dom';
 
-const ChangePassword = () => {
-  const { token } = useParams();
+function ChangePassword() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [newPassword, setNewPassword] = useState('');
-  const [message, setMessage] = useState('');
-
-  useEffect(() => {
-    console.log('Token:', token);
-  }, [token]);
-  
+  const [error, setError] = useState(null);
+  const [successMessage, setSuccessMessage] = useState('');
+  const { token } = useParams();
 
   const handleChange = (e) => {
     if (e.target.name === 'email') {
@@ -24,47 +22,59 @@ const ChangePassword = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch(`https://forget-password-2zs6.onrender.com/api/user/changepassword/${token}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, newPassword }),
+      const response = await axios.post(`https://forget-password-2zs6.onrender.com/api/user/changepassword/${token}`, {
+        email: email,
+        newPassword: newPassword,
       });
 
-      console.log('Response:', response);
+      console.log("Success:", response.data);
+      setSuccessMessage("Password changed successfully!");
+      setError(null);
 
-      if (response.ok) {
-        const data = await response.json();
-        setMessage(data.message);
-      } else {
-        setMessage('Password change failed');
-      }
+      // Navigate to login after a 2-second delay
+      const delayInSeconds = 2;
+      const intervalId = setInterval(() => {
+        clearInterval(intervalId);
+        navigate('/login');
+      }, delayInSeconds * 1000);
     } catch (error) {
-      console.error(error);
-      setMessage('Internal error');
+      console.error("Error:", error);
+      setError(error.response?.data?.message || "An error occurred");
+      setSuccessMessage('');
     }
   };
-  
+
   return (
     <div>
-      <h2>Change Password</h2>
+      {/* Your JSX structure goes here */}
       <form onSubmit={handleSubmit}>
-        <label>
-          Email:
-          <input type="email" name="email" value={email} onChange={handleChange} required />
+        <label>Email:
+          <input
+            type="email"
+            name="email"
+            value={email}
+            onChange={handleChange}
+            required
+          />
         </label>
         <br />
-        <label>
-          New Password:
-          <input type="password" name="newPassword" value={newPassword} onChange={handleChange} required />
+        <label>New Password:
+          <input
+            type="password"
+            name="newPassword"
+            value={newPassword}
+            onChange={handleChange}
+            required
+          />
         </label>
         <br />
         <button type="submit">Change Password</button>
+
+        {error && <div>{error}</div>}
+        {successMessage && <div>{successMessage}</div>}
       </form>
-      {message && <p>{message}</p>}
     </div>
   );
-};
+}
 
 export default ChangePassword;

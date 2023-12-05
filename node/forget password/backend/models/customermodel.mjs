@@ -30,5 +30,5 @@ const customerschema = new mongoose.Schema({
       },
 })
 
-const customermodel = mongoose.model("users", customerschema)
-export { customermodel };
+const customermodelss = mongoose.model("users", customerschema)
+export { customermodelss };
