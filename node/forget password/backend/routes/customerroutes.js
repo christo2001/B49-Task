@@ -135,6 +135,7 @@ router.get('/verify/:token', async (req, res) => {
   }
 });
 
+//----------------------------------------------------------------------
 //changepassword
 router.post("/change/:token", async (req, res) => {
   try {

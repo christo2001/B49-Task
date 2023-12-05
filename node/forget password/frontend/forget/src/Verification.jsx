@@ -1,57 +1,35 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
-import verifycss from './verify.module.css';
 
-const Verification = ({ token }) => {
+const VerifyUser = ({ match }) => {
   const [verificationStatus, setVerificationStatus] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const verifyUser = async () => {
       try {
-        // Update the URL to include the token dynamically
-        const response = await fetch(`http://localhost:3000/api/user/verify/${token}`);
+        const response = await fetch(`http://localhost:3000/api/user/verify/${match.params.token}`);
         const data = await response.json();
 
         if (response.ok) {
-          setVerificationStatus(data.message || 'User successfully verified!');
+          setVerificationStatus('success');
         } else {
-          setVerificationStatus(data.error || 'Verification failed.');
+          setVerificationStatus('error');
         }
       } catch (error) {
-        // Display the actual error message from the server
-        console.error('Error during verification:', error);
-        setVerificationStatus(`An error occurred during verification: ${error.message}`);
-      } finally {
-        setLoading(false); // Set loading to false regardless of success or failure
+        console.error(error);
+        setVerificationStatus('error');
       }
     };
 
     verifyUser();
-  }, [token, navigate]);
+  }, [match.params.token]);
 
   return (
-    <div className={verifycss.verifybox}>
-      {loading ? (
-        <p>Verifying user....</p>
-      ) : (
-        <>
-          <p className={verifycss.verifymessage}>{verificationStatus}</p>
-          {verificationStatus && (
-            <>
-              {verificationStatus.includes('User successfully verified') && (
-                <Link to="/login" className={verifycss.verifybutton}>
-                  Go to Login
-                </Link>
-              )}
-              {verificationStatus.includes('Verification failed') && <p>Verification failed</p>}
-            </>
-          )}
-        </>
-      )}
+    <div>
+      {verificationStatus === 'success' && <p>Verification successful! You can now log in.</p>}
+      {verificationStatus === 'error' && <p>Verification failed. Please try again.</p>}
+      {verificationStatus === null && <p>Verifying...</p>}
     </div>
   );
 };
 
-export default Verification;
+export default VerifyUser;
