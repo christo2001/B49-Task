@@ -22,7 +22,7 @@ const ChangePassword = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     try {
       const response = await fetch(`https://forget-password-2zs6.onrender.com/api/user/changepassword/${token}`, {
         method: 'POST',
@@ -31,9 +31,9 @@ const ChangePassword = () => {
         },
         body: JSON.stringify({ email, newPassword }),
       });
-  
+
       console.log('Response:', response);
-  
+
       if (response.ok) {
         const data = await response.json();
         setMessage(data.message);
