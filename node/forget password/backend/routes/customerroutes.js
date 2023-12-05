@@ -125,21 +125,25 @@ router.get('/verify/:token', async (req, res) => {
     if (user) {
       user.isActive = true;
       await user.save();
-      res.status(200).json({
-        message: "success",
-        loginLink: "/login", // Add the login page link here
-      });
+      const successHtml = `
+        <p>Verification successful! You can now <a href="/login">login</a>.</p>
+      `;
+      res.status(200).send(successHtml);
     } else {
-      res.status(400).json({
-        error: "Invalid or already verified token",
-        loginLink: "/login", // Add the login page link here
-      });
+      const errorHtml = `
+        <p>Invalid or already verified token. Please <a href="/login">login</a>.</p>
+      `;
+      res.status(400).send(errorHtml);
     }
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Internal Server Error" });
+    const internalErrorHtml = `
+      <p>Internal Server Error</p>
+    `;
+    res.status(500).send(internalErrorHtml);
   }
 });
+
 
 
 
