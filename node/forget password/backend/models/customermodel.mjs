@@ -20,14 +20,7 @@ const customerschema = new mongoose.Schema({
     },
     token: {
       type: String,
-  },
-    isActive: {
-        type: Boolean,
-        default: false,
-      },
-      otp:{
-        type:String,
-      },
+  }
 })
 
 const customermodel = mongoose.model("users", customerschema)

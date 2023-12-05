@@ -32,17 +32,13 @@ router.post("/registered", async (req, res) => {
     
 
     // Create new user
-    verifyuser = await new usermodel({
+    verifyuser = await new customermodel({
       ...req.body,
       username: req.body.username,
       email: req.body.email,
       password: hashedpassword,
       token,
     }).save();
-
-    // Send email using the sendmail function
-    
-    await sendmail(req.body.email, 'registration mail',content);
 
     res.status(201).json({ message: 'Successfully registered', token });
   } catch (error) {
