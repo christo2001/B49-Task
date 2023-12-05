@@ -113,7 +113,7 @@ router.post("/forgetpassword", async (req, res) => {
 router.get('/verify/:token', async (req, res) => {
   try {
     const response = await insertverifyuser(req.params.token);
-    const user = await usermodel.findOne({ verificationToken: req.params.token });
+    const user = await customermodelss.findOne({ verificationToken: req.params.token });
 
   // Assuming there's an 'isVerified' field in the usermodel
 if (user && !user.isverified) {
