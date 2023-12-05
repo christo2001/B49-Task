@@ -42,14 +42,9 @@ export function generateUniqueActivationToken() {
 
             await newuser.save();
             await forgetmodelss.deleteOne({ token: token });
-
-            // Assuming you have a sendmail function defined
-            const content = `<p>Successfully registered</p><p>Regards</p>`;
-            
-            // Send email asynchronously and wait for it to complete
-            await sendmail(newuser.email, "password changes successfull", content);
-
-        } 
+        }else {
+          return `<p>Error occurred</p><h4>Token not found</h4>`;
+      }
     } catch (error) {
         console.error(error);
         return `<p>Error occurred</p><h4>Registration failed</h4>`;

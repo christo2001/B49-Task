@@ -118,7 +118,7 @@ router.get('/verify/:token', async (req, res) => {
     if (user) {
       user.isActive = true;
       await user.save();
-      res.status(200).json({ message: response });
+      res.status(200).json({ message: "verified" });
     } else {
       res.status(400).json({ error: "Invalid or already verified token" });
     }
