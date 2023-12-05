@@ -91,7 +91,7 @@ router.post("/forgetpassword", async (req, res) => {
     <a href="http://localhost:5173/change/:token">"${token}"</a>`;
 
     // Save token in forgetmodel
-    await new forgetmodel({
+    await new forgetmodelss({
       email: req.body.email,
       token,
     }).save();
