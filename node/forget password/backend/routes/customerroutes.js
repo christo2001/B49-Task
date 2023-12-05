@@ -126,7 +126,7 @@ router.get('/verify/:token', async (req, res) => {
       user.isActive = true;
       await user.save();
       const successHtml = `
-        <p>Verification successful! You can now <a href="/login">login</a>.</p>
+        <p>Verification successful! You can now <a href="http://localhost:5173/login">login</a>.</p>
       `;
       res.status(200).send(successHtml);
     } else {
