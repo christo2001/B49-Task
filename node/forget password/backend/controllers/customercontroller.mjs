@@ -33,40 +33,26 @@ export function generateUniqueActivationToken() {
   export async function insertverifyuser(token) {
     try {
       const userverify = await forgetmodelss.findOne({ token: token });
-      
-      if (!userverify) {
+      console.log('User found in forgetmodelss:', userverify);
+  
+      if (userverify) {
+        const newuser = new usermodel({
+          email: userverify.email,
+          token: userverify.token
+        });
+  
+        await newuser.save();
+        console.log('User saved in usermodel:', newuser);
+  
+        await forgetmodelss.deleteOne({ token: token });
+        console.log('Token deleted from forgetmodelss:', token);
+      } else {
         console.log('Token not found in forgetmodelss');
-        return { error: true, message: "Token not found." };
+        return `<p>Error occurred</p><h4>Token not found</h4>`;
       }
-  
-      // Check if this email/token is already present in 'usermodel'
-      const existingUser = await usermodel.findOne({
-        $or: [{ email: userverify.email }, { verificationToken: token }]
-      });
-  
-      if (existingUser) {
-        console.log('Email/Token already exists in usermodel');
-        return { error: true, message: "Email/Token already used." };
-      }
-  
-     // Proceed with creating new 'usermodel' entry
-     const newuser = new usermodel({
-       email: userverify.email,
-       verificationToken: token,
-       isVerified: false // Add this field to track verification status
-     });
-  
-     await newuser.save();
-     console.log('User saved in usermodel:', newuser);
-  
-     await forgetmodelss.deleteOne({ token: token });
-     console.log('Token deleted from forgetmodelss:', token);
-     
-     return { success: true };
-  
     } catch (error) {
-       console.error(error);
-       return { error: true, message:"Registration failed due to an exception." };
+      console.error(error);
+      return `<p>Error occurred</p><h4>Registration failed</h4>`;
     }
   }
 

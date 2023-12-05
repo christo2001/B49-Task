@@ -112,30 +112,18 @@ router.post("/forgetpassword", async (req, res) => {
 //------------------------------------------------------------------
 router.get('/verify/:token', async (req, res) => {
   try {
-    const token = req.params.token;
-    console.log('Received token:', token);
+    const response = await insertverifyuser(req.params.token);
+    const user = await usermodel.findOne({ verificationToken: req.params.token });
 
-    const response = await insertverifyuser(token);
-    console.log('insertverifyuser response:', response);
+  // Assuming there's an 'isVerified' field in the usermodel
+if (user && !user.isverified) {
+  user.isverified = true;
+  await user.save();
+  res.status(200).json({ message: "verified" });
+} else {
+  res.status(400).json({ error: "Invalid or already verified token" });
+}
 
-    // Assuming 'response' contains meaningful information about the operation
-    if (response.error) {
-      res.status(400).json({ error: response.message });
-      return;
-    }
-
-    const user = await usermodel.findOne({ verificationToken: token });
-    console.log('User found in usermodel:', user);
-
-    // Check if 'user' has already been verified
-    if (user && !user.isVerified) {
-      // Update 'isVerified' flag or any other relevant fields
-      user.isVerified = true;
-      await user.save();
-      res.status(200).json({ message: "verified" });
-    } else {
-      res.status(400).json({ error: "Invalid or already verified token" });
-    }
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
