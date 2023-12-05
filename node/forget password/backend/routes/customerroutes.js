@@ -116,7 +116,6 @@ router.get('/verify/:token', async (req, res) => {
     const user = await usermodel.findOne({ verificationToken: req.params.token });
 
     if (user) {
-      user.isActive = false;
       await user.save();
       res.status(200).json({ message: "verified" });
     } else {
