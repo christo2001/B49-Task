@@ -150,29 +150,29 @@ router.get('/verify/:token', async (req, res) => {
 
 //----------------------------------------------------------------------
 //changepassword
-router.post("/change", async (req, res) => {
+router.post('/changepassword', async (req, res) => {
   try {
-    // Check if the user exists
-    let customer = await getuserbyemail(req);
+      const { email, newPassword } = req.body; // Extract email and newPassword
 
-    if (!customer) {
-      return res.status(400).json({ success: false, error: "User not exist" });
-    }
+      // Find the user by email
+      const user = await customermodel.findOne({ email });
 
-    // Update the user's password with the new password
-    const hashedPassword = await bcrypt.hash(req.body.newpassword, 10);
-    customer.password = hashedPassword;
+      // Check if the user exists
+      if (!user) {
+          return res.status(404).json({ message: 'User not found' });
+      }
 
-    // Save the updated user data
-    await customer.save();
+      // Update the user's password with the new password
+      user.password = newPassword;
 
-    res.json({ success: true, message: 'Password successfully changed' });
+      // Save the updated user data
+      await user.save();
+
+      res.json({ message: 'Password changed successfully' });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ success: false, message: 'Internal Server Error' });
+      res.status(400).send(error);
   }
 });
-
 
   
 
