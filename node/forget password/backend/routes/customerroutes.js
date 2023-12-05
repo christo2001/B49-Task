@@ -95,7 +95,7 @@ router.post("/forgetpassword", async (req, res) => {
     // Generate JWT token using user's email
     const token = generatetoken(req.body.email);
     const content = `<p>Access to change your old password</p>
-    <a href="http://localhost:5173/api/user/verify/:token">${token}</a>`;
+    <a href="https://forget-password-2zs6.onrender.com/api/user/verify/${token}">${token}</a>`;
 
     // Create new forgetuser
     const forgetuser = await new forgetmodel({
@@ -125,15 +125,23 @@ router.get('/verify/:token', async (req, res) => {
     if (user) {
       user.isActive = true;
       await user.save();
-      res.status(200).json({ message: "success" });
+      res.status(200).json({
+        message: "success",
+        loginLink: "/login", // Add the login page link here
+      });
     } else {
-      res.status(400).json({ error: "Invalid or already verified token" });
+      res.status(400).json({
+        error: "Invalid or already verified token",
+        loginLink: "/login", // Add the login page link here
+      });
     }
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
+
+
 
 
 //----------------------------------------------------------------------
