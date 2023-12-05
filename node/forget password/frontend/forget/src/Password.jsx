@@ -22,7 +22,7 @@ function ChangePassword() {
     e.preventDefault();
 
     try {
-      const response = await axios.post(`https://forget-password-2zs6.onrender.com/api/user/changepassword/${token}`, {
+      const response = await axios.post(`http://localhost:3000/api/user/changepassword`, {
         email: email,
         newPassword: newPassword,
       });
