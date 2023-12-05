@@ -95,7 +95,7 @@ router.post("/forgetpassword", async (req, res) => {
     // Generate JWT token using user's email
     const token = generatetoken(req.body.email);
     const content = `<p>Access to change your old password</p>
-      <a href="http://localhost:5173/verify/:token">"${token}"</a>`;
+    <a href="http://localhost:3000/api/user/verify/${token}">${token}</a>`;
 
     // Create new forgetuser
     const forgetuser = await new forgetmodel({
@@ -134,6 +134,7 @@ router.get('/verify/:token', async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
+
 
 //----------------------------------------------------------------------
 //changepassword
