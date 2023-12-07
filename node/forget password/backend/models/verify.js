@@ -18,6 +18,6 @@ const userschema = new mongoose.Schema({
       },
 });
 
-const usermodel = mongoose.model("Verifyuser", userschema);
+const usermodel = mongoose.model("forgetVerifyuser", userschema);
 
 export { usermodel };

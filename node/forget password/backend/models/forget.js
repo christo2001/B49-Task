@@ -12,5 +12,5 @@ const forgetschema = new mongoose.Schema({
 
 })
 
-const forgetmodel = mongoose.model("forget", forgetschema)
+const forgetmodel = mongoose.model("forgetpage", forgetschema)
 export { forgetmodel };

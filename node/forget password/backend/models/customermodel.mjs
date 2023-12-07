@@ -23,5 +23,5 @@ const customerschema = new mongoose.Schema({
   }
 })
 
-const customermodel = mongoose.model("users", customerschema)
+const customermodel = mongoose.model("forgetusers", customerschema)
 export { customermodel };

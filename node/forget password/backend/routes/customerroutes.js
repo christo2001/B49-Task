@@ -123,11 +123,10 @@ router.get('/verify/:token', async (req, res) => {
     const user = await usermodel.findOne({ verificationToken: req.params.token });
 
     if (user) {
-      user.isActive = true;
       await user.save();
       const successHtml = `
       <div style="text-align: center; margin-top: 50px;">
-        <p>Verification successful! You can now <a href="http://localhost:5173/change">Change Password</a>.</p>
+        <p>Verification successful! You can now <a href="https://6571daa0f7a8ea006e22c28d--relaxed-faun-da5d5a.netlify.app/change">Change Password</a>.</p>
       </div>
     `;
       res.status(200).send(successHtml);

@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import img2 from '../images/image3.png';
 import passwordcss from './password.module.css';
+import {useNavigate} from 'react-router-dom'
 
 const ChangePasswordForm = () => {
+  const navigate = useNavigate(); // Initialize the useNavigate hook
   const [email, setEmail] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [message, setMessage] = useState(null);
@@ -25,6 +27,9 @@ const ChangePasswordForm = () => {
 
       // Handle the success case
       setMessage(response.data.message);
+      setTimeout(() => {
+        navigate('/login');
+      }, 1000);
     } catch (error) {
       // Handle the error case
       setMessage('Error changing password');
