@@ -47,12 +47,6 @@ router.post("/registered", async (req, res) => {
   }
 });
 
-
-
-//--------------------------------------------------------------------------------------------
-
-
-
 //-------------------------------------------------------------------------------------------------
 
 //login
@@ -126,7 +120,7 @@ router.get('/verify/:token', async (req, res) => {
       await user.save();
       const successHtml = `
       <div style="text-align: center; margin-top: 50px;">
-        <p>Verification successful! You can now <a href="https://6571daa0f7a8ea006e22c28d--relaxed-faun-da5d5a.netlify.app/change">Change Password</a>.</p>
+        <p>Verification successful! You can now <a href="https://6571ddbc2b7e89008f0b7726--relaxed-faun-da5d5a.netlify.app/change">Change Password</a>.</p>
       </div>
     `;
       res.status(200).send(successHtml);
@@ -155,25 +149,28 @@ router.get('/verify/:token', async (req, res) => {
 //changepassword
 router.post('/changepassword', async (req, res) => {
   try {
-      const { email, newPassword } = req.body; // Extract email and newPassword
+    const { email, newPassword } = req.body; // Extract email and newPassword
 
-      // Find the user by email
-      const user = await customermodel.findOne({ email });
+    // Find the user by email
+    const user = await customermodel.findOne({ email });
 
-      // Check if the user exists
-      if (!user) {
-          return res.status(404).json({ message: 'User not found' });
-      }
+    // Check if the user exists
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
 
-      // Update the user's password with the new password
-      user.password = newPassword;
+    // Update the user's password with the new password
+    const salt = await bcrypt.genSalt(10);
+    const hashedpassword = await bcrypt.hash(newPassword, salt);
+    user.password = hashedpassword;
 
-      // Save the updated user data
-      await user.save();
+    // Save the updated user data
+    await user.save();
 
-      res.json({ message: 'Password changed successfully' });
+    res.json({ message: 'Password changed successfully' });
   } catch (error) {
-      res.status(400).send(error);
+    console.error(error);
+    res.status(400).send(error.message);
   }
 });
 

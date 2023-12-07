@@ -43,12 +43,6 @@ export function generateUniqueActivationToken() {
             await newuser.save();
             await forgetmodel.deleteOne({ token: token });
 
-            // Assuming you have a sendmail function defined
-            const content = `<p>Successfully registered</p><p>Regards</p>`;
-            
-            // Send email asynchronously and wait for it to complete
-            await sendmail(newuser.email, "Registration successful", content);
-
         } 
     } catch (error) {
         console.error(error);
@@ -69,6 +63,11 @@ export async function changepassword(token) {
       await forgetmodel.deleteOne({ token: token });
 
       return { success: true, message: 'Password changed successfully' };
+      // Assuming you have a sendmail function defined
+      const content = `<p>password changed successfully</p><p>Regards</p>`;
+            
+      // Send email asynchronously and wait for it to complete
+      await sendmail(newuser.email, "password changed successfully", content);
     } else {
       // Log token details for troubleshooting
       console.log('Invalid token:', token);
