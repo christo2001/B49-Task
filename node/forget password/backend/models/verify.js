@@ -12,10 +12,6 @@ const userschema = new mongoose.Schema({
         type: String,
         required: true
     },
-    isActive: {
-        type: Boolean,
-        default: false,
-      },
 });
 
 const usermodel = mongoose.model("forgetVerifyuser", userschema);
