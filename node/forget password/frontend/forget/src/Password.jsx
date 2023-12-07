@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import img2 from '../images/image3.png';
+import passwordcss from './password.module.css';
 
 const ChangePasswordForm = () => {
   const [email, setEmail] = useState('');
@@ -31,23 +33,60 @@ const ChangePasswordForm = () => {
   };
 
   return (
-    <div>
-      <h2>Change Password</h2>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Email:
-          <input type="email" name="email" value={email} onChange={handleChange} required />
-        </label>
-        <br />
-        <label>
-          New Password:
-          <input type="password" name="newPassword" value={newPassword} onChange={handleChange} required />
-        </label>
-        <br />
-        <button type="submit">Change Password</button>
-      </form>
-      {message && <p>{message}</p>}
-    </div>
+    <div className={passwordcss.body}>
+    <section className={passwordcss.side}>
+      <img src={img2}/>
+    </section>
+
+
+    <section className={passwordcss.main}>
+      <div className={passwordcss.logincontainer}>
+        <div className={passwordcss.title}>welcome</div>
+        <div className={passwordcss.seprator}></div>
+        <p className={passwordcss.welcomemessage}>please provide registered email to proceed and have access to change password</p>
+
+
+        <form onSubmit={handleSubmit} className={passwordcss.loginform}>
+          <div className={passwordcss.formcontrol}>
+
+            <input 
+             type='email'
+             placeholder='email'
+             name='email'
+             id='email'
+             className={passwordcss.inputfield}
+             onChange={handleChange}
+             value={email}
+             required
+             />
+
+          </div>
+
+          <div className={passwordcss.formcontrol}>
+
+            <input 
+            type='password'
+            placeholder='password'
+            name='newPassword'
+            id='password'
+            className={passwordcss.inputfield}
+            onChange={handleChange}
+            value={newPassword}
+            required
+            />
+
+          </div>
+
+          <button type='submit' className={passwordcss.submits}>submit</button>
+
+          {message && <p className={passwordcss.message}>{message}</p>}
+
+
+
+        </form>
+      </div>
+    </section>
+  </div>
   );
 };
 

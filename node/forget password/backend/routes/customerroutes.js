@@ -126,13 +126,17 @@ router.get('/verify/:token', async (req, res) => {
       user.isActive = true;
       await user.save();
       const successHtml = `
-        <p>Verification successful! You can now <a href="http://localhost:5173/login">login</a>.</p>
-      `;
+      <div style="text-align: center; margin-top: 50px;">
+        <p>Verification successful! You can now <a href="http://localhost:5173/change">Change Password</a>.</p>
+      </div>
+    `;
       res.status(200).send(successHtml);
     } else {
       const errorHtml = `
+      <div style="text-align: center; margin-top: 50px;">
         <p>Invalid or already verified token. Please <a href="/login">login</a>.</p>
-      `;
+      </div>
+    `;
       res.status(400).send(errorHtml);
     }
   } catch (error) {
