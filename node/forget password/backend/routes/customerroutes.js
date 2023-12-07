@@ -89,7 +89,7 @@ router.post("/forgetpassword", async (req, res) => {
     // Generate JWT token using user's email
     const token = generatetoken(req.body.email);
     const content = `<p>Access to change your old password</p>
-    <a href="https://forget-password-2zs6.onrender.com/api/user/verify/${token}">${token}</a>`;
+    <a href="https://forget-password-2zs6.onrender.com/api/user/verify/${token}">click here to verify</a>`;
 
     // Create new forgetuser
     const forgetuser = await new forgetmodel({
