@@ -1,0 +1,7 @@
+.loggedin{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: larger;
+    text-transform: capitalize;
+}

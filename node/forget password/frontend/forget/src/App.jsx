@@ -7,10 +7,10 @@ import Forget from './Forget';
 import Password from './Password';
 import Urlhome from './Urlhome';
 import Verification from './Verification';
+import Home from './Urlhome';
 
 
 function App() {
-  const userToken = localStorage.getItem("token");
 
   return (
     <BrowserRouter>
@@ -20,8 +20,8 @@ function App() {
         <Route path='/forget' element={<Forget />} />
         <Route path='/change' element={<Password />} />
         <Route path='/urlhome' element={<Urlhome />} />
-        <Route path='api/user/verify/:token' element={<Verification token={userToken} />}
-        />
+        <Route path='api/user/verify/:token' element={<Verification/>}/>
+        <Route path='/home' element={<Home />} />
       </Routes>
     </BrowserRouter>
   );

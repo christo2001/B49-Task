@@ -53,12 +53,9 @@ router.post("/registered", async (req, res) => {
 router.post("/login",async(req,res)=>{
     try {
         let Customer = await getuserbyemail(req)
-        const token = generatetoken(Customer._id);
+        const token = generatetoken(req.body.email);
         if(!Customer){
             return res.status(400).json({error:"user not exist"})
-        }
-        if (!Customer.isActive) {
-          return res.status(401).json({ error: 'Account not activated. Check your email for activation instructions.' });
         }
         
         const loginpassword = await bcrypt.compare(req.body.password, Customer.password);

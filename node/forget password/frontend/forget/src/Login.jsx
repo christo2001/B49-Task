@@ -30,7 +30,7 @@ function Login() {
       // Store the token in localStorage
       localStorage.setItem('token', token);
       console.log('token');
-      navigate('/urlhome')
+      navigate('/home')
     } catch (error) {
       console.error(error);
   
