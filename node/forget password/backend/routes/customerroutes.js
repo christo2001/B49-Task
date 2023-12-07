@@ -117,7 +117,7 @@ router.get('/verify/:token', async (req, res) => {
       await user.save();
       const successHtml = `
       <div style="text-align: center; margin-top: 50px;">
-        <p>Verification successful! You can now <a href="https://6571e13c0bb0a1009d967859--relaxed-faun-da5d5a.netlify.app/change">Change Password</a>.</p>
+        <p>Verification successful! You can now <a href="https://6571e2ecd1301c03a4126a87--relaxed-faun-da5d5a.netlify.app/change">Change Password</a>.</p>
       </div>
     `;
       res.status(200).send(successHtml);
