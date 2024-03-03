@@ -11,11 +11,13 @@ import CarComponent from './Cars';
 import Footer from './Footer';
 import Testimonial from './Testimonial';
 import Contact from './Contact';
+import Register from './Register';
 
 
 function App() {
   return (
     <div className="App">
+      <Register/>
       <Home/>
       <About/>
       <Ourservice/>
