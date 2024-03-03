@@ -1,69 +1,52 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 
 const RegistrationForm = () => {
-  const [formData, setFormData] = useState({
-    username: '',
-    password: '',
-    email: '',
-  });
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-  
+  const handleRegistration = async () => {
     try {
-      // Send POST request to the backend endpoint
-      const response = await axios.post('http://localhost:4000/a/reg', formData);
-  
-      // Check if response and response.data are defined
-      if (response && response.data) {
-        // Handle the response
-        console.log(response.data.message); // Assuming the backend sends a 'message' property in the response
-  
-        // Reset the form after successful registration
-        setFormData({
-          username: '',
-          password: '',
-          email: '',
-        });
+      const response = await fetch('/a/reg', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password, email }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setMessage(data.message);
       } else {
-        console.error('Invalid response format from the server');
+        setMessage(data.message || 'Registration failed');
       }
     } catch (error) {
-      // Check if error.response and error.response.data are defined
-      if (error.response && error.response.data) {
-        console.error(error.response.data.message);
-      } else {
-        console.error('An unexpected error occurred:', error.message);
-      }
+      console.error('Error during registration:', error);
+      setMessage('Registration failed');
     }
   };
-  
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Username:
-        <input type="text" name="username" value={formData.username} onChange={handleChange} />
-      </label>
-      <br />
-      <label>
-        Password:
-        <input type="password" name="password" value={formData.password} onChange={handleChange} />
-      </label>
-      <br />
-      <label>
-        Email:
-        <input type="email" name="email" value={formData.email} onChange={handleChange} />
-      </label>
-      <br />
-      <button type="submit">Register</button>
-    </form>
+    <div>
+      <h2>Registration Form</h2>
+      <div>
+        <label>Username:</label>
+        <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+      </div>
+      <div>
+        <label>Password:</label>
+        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+      </div>
+      <div>
+        <label>Email:</label>
+        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+      </div>
+      <button onClick={handleRegistration}>Register</button>
+      {message && <p>{message}</p>}
+    </div>
   );
 };
 
