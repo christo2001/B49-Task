@@ -66,6 +66,32 @@ app.post('/a/log', async (req, res) => {
     res.json({ token });
 });
 
+app.post('/a/forgot', async (req, res) => {
+    const { email, newPassword } = req.body;
+
+    try {
+        // Find the user based on the provided email
+        const user = await customermodel.findOne({ email });
+
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        // Generate a new hashed password
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+        // Update the user's password with the new hashed password
+        user.password = hashedPassword;
+        await user.save();
+
+        res.json({ message: 'Password reset successful' });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: 'Failed to reset password' });
+    }
+});
+
+
 
 
 app.listen(port, () => {
