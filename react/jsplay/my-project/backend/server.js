@@ -8,6 +8,7 @@ const bcrypt = require('bcrypt')
 
 const app = express();
 app.use(bodyParser.json());
+app.use(cors()); // Enable CORS for all routes
 const { databaseconnection } = require('./db'); 
 const {customermodel } = require('./customermodel')
 
