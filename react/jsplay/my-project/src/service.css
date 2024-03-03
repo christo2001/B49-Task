@@ -1,0 +1,94 @@
+.services{
+    position: relative;
+    top: 300px;
+}
+
+
+.card-group{
+    position: relative;
+    top: 300px;
+    
+}
+
+.icon{
+    background-color: rgb(255, 145, 0);
+    padding: 30px 30px;
+    font-size: 90px;
+    position: relative;top: 30px;
+}
+
+.c2body{
+    text-align: left;
+    position: relative;top: 30px;
+    
+   
+}
+
+.c2group{
+    margin: 50px 20px;
+    border: none;
+}
+
+.c2{
+    background-color: rgb(248, 246, 246);
+    margin-right: 30px;
+    height: 330px;
+    transition: background-color 0.3s ease, color 0.3s ease, text-transform 0.3s ease, border-radius 0.3s ease;
+   
+}
+.c2:hover {
+    background-color: rgba(8, 8, 56, 0.899);
+    color: aliceblue;
+    text-transform: capitalize;
+    border-radius: 0px;
+}
+.c2:nth-child(2){
+    background-color: rgba(8, 8, 56, 0.899);
+    color: aliceblue;
+    text-transform: capitalize;
+    border-radius: 0px;
+}
+
+.c3{
+    background-color: rgb(248, 246, 246);
+    margin-right: 30px;
+    height: 330px;
+    transition: background-color 0.3s ease, color 0.3s ease, text-transform 0.3s ease, border-radius 0.3s ease;
+}
+.c3:hover {
+    background-color: rgba(8, 8, 56, 0.899);
+    color: aliceblue;
+    text-transform: capitalize;
+    border-radius: 0px;
+}
+
+
+
+
+@media (max-width: 768px) {
+  .c2group{
+   display: grid;
+  }
+  .c2{
+    margin-top: 30px;
+  }
+  .c3{
+    margin-top: 30px;
+  }
+  }
+  
+  @media (max-width: 576px) {
+    .c2{
+        display: grid;
+    }
+    .c2{
+        display: grid;
+      }
+    .icon{
+        background-color: orange;
+        padding: 20px 20px;
+        font-size: 70px;
+        position: relative;top: 30px;
+    }
+
+  }

@@ -1,0 +1,112 @@
+.about{
+    position: relative;
+    top: 130px;
+}
+
+.number{
+    color: orange;
+    font-size: 90px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    position: relative;
+    bottom: 20px;
+}
+
+.card-title{
+    font-weight: 700;
+    font-size: x-large;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    
+}
+
+.textcenter{
+    font-size: 60px;
+    text-transform: capitalize;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: rgba(8, 8, 56, 0.899);
+    
+}
+
+.textcenter-span{
+    color: rgba(8, 8, 56, 0.899);
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.card-text{
+    text-transform: capitalize;
+}
+
+.flexcard{
+    display: flex;
+    margin-top: 50px;
+    position: relative;
+}
+
+.cards:nth-child(2){
+    background-color: rgba(8, 8, 56, 0.899);
+    color: aliceblue;
+    text-transform: capitalize;
+    border-radius: 0px;
+}
+
+.cards{
+    border: none;
+    max-Width: '540px';
+    background-color: rgb(248, 246, 246);
+    padding: 20px 20px;
+    margin-left: 10px;
+    text-transform: capitalize;
+}
+
+.cimg{
+    background-color: rgb(255, 145, 0);
+    padding: 28px 15px;
+    margin-top: 10px;
+}
+.abox{
+    background-color: rgba(8, 8, 56, 0.899);
+    padding: 20px;
+    color: aliceblue;
+}
+.abox p{
+    color: aliceblue;
+}
+
+@media (max-width: 768px) {
+    .cards{
+        border: none;
+        max-Width: '540px';
+        background-color: rgb(241, 239, 239);
+        padding: 10px 10px;
+        margin-left: 10px;
+        display: flex;
+    }
+    .number{
+        font-size: 50px;
+    }
+    .textcenter{
+        font-size: 40px;
+    }
+  }
+  
+  @media (max-width: 576px) {
+
+    .about{
+        position: relative;
+        top: 50px;
+    }
+    .cards{
+        border: none;
+        Width: '540px';
+        background-color: rgb(241, 239, 239);
+        margin-left: 10px;
+    }
+    .number{
+        font-size: 50px;
+    }
+    .textcenter{
+        font-size: 40px;
+    }
+    .flexcard{
+        display: grid;
+    }
+  }
