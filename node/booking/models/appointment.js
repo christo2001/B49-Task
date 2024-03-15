@@ -1,28 +1,27 @@
+import { ObjectId } from "bson";
 import mongoose from "mongoose";
 
 const appointmentSchema = new mongoose.Schema({
   doctor: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Doctor',
-    required: true
+    type: ObjectId,
+    ref: 'doctor',
   },
   doctorName: {
     type: String,
-    required: true
   },
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: true
-  },
-  userName: {
+  patient:{
+    type:ObjectId,
+    ref:"patient"
+},
+  patientName: {
     type: String,
-    required: true
+    required:true
+  
   },
-  appointmentDate: {
-    type: Date,
-    required: true
-  }
+  // appointmentDate: {
+  //   type: String,
+  //   required: true
+  // }
 });
 
 const Appointment = mongoose.model('appointment', appointmentSchema);

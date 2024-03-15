@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 
 
 const doctorschema = new mongoose.Schema({
-    doctorname:{
+    doctorName:{
         type:String,
         required:true,
         maxlength:32,
