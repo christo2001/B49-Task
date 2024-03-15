@@ -1,6 +1,12 @@
 import React from 'react';
 import './home.css'; // Assuming style.css is in the same directory as your React component
 import car from './images/car.png'
+import About from './About';
+import Ourservice from './Ourservice';
+import CarComponent from './Cars';
+import Footer from './Footer';
+import Testimonial from './Testimonial';
+import Contact from './Contact';
 
 
 const Home = () => {
@@ -77,7 +83,16 @@ const Home = () => {
         <div className="sq-box2"></div>
       </header>
       {/* End Header Section */}
+
+      <About />
+      <Ourservice />
+      <CarComponent />
+      <Testimonial />
+      <Contact />
+      <Footer />
     </div>
+
+    
   );
 };
 
