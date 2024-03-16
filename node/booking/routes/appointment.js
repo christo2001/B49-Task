@@ -1,6 +1,7 @@
 import express from "express";
 import { Appointment } from "../models/appointment.js";
 import { postnewbookings } from "../controllers/appointment.js";
+import { Doctor } from "../models/doctor.js";
 
 const router = express.Router();
 

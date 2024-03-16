@@ -2,14 +2,14 @@ import { ObjectId } from "bson";
 import mongoose from "mongoose";
 
 const appointmentSchema = new mongoose.Schema({
-  doctor: {
+  doctorID: {
     type: ObjectId,
     ref: 'doctor',
   },
   doctorName: {
     type: String,
   },
-  patient:{
+  patientID:{
     type:ObjectId,
     ref:"patient"
 },
