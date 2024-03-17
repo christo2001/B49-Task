@@ -11,7 +11,8 @@ export function getdoctornyname(request){
 
 
 export function getdoctor(req) {
-    // Find all doctors and populate the patient field with patientName
-    return Doctor.find({}).populate("patient", "patientName");
+    // Find all doctors and populate the doctorName field
+    return Doctor.find({}).populate("doctorName", "doctorName");
 }
+
 

@@ -1,9 +1,11 @@
 import express from "express";
-import { generatetoken, getuserbyemail } from "../controllers/patient.js";
+import { generatetoken, getuserbyemail,getuserbooking } from "../controllers/patient.js";
 import bcrypt from "bcrypt";
 import { Patient } from "../models/patient.js";
+import { isauthorized } from "../middlewares/auth.js";
 
 const router = express.Router();
+
 
 // Login route handler
 router.post("/login", async (req, res) => {
@@ -61,4 +63,20 @@ router.post("/register", async (req, res) => {
   }
 });
 
+
+
+
+router.get("/getappointment", isauthorized, async (req, res) => {
+  try {
+      const patientId = req.patient._id; // Obtaining patient's ID from the authentication middleware
+      const notes = await getuserbooking(patientId);
+      if (!notes || notes.length <= 0) {
+          return res.status(404).json({ error: "No bookings found for the user" });
+      }
+      res.status(200).json({ data: notes });
+  } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Internal server error" });
+  }
+});
 export const userRouter = router;

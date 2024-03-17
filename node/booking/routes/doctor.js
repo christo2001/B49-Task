@@ -2,6 +2,7 @@ import express from "express";
 import { getdoctor, getdoctornyname } from "../controllers/doctor.js";
 import { Doctor } from "../models/doctor.js";
 
+
 const router = express.Router();
 
 
@@ -26,7 +27,7 @@ router.post("/docregister", async (req, res) => {
   });
 
 
-  
+
 
 router.get("/getdoctor", async(req,res)=>{
  try {
@@ -45,8 +46,6 @@ router.get("/getdoctor", async(req,res)=>{
   res.status(500).json({error:"internal server"})
  }
 })
-
-
 
 
   export const doctorRouter = router;
