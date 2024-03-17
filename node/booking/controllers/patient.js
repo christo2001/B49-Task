@@ -16,8 +16,13 @@ export function generatetoken(id){
     return jwt.sign({id}, process.env.SECRET_KEY)
 }
 
-// controllers/appointment.js
 
 export function getuserbooking(patientId) {
     return Appointment.find({ patientID: patientId }).populate("doctorName", "doctorName");
+}
+
+export function deletebooking(req){
+    return Appointment.findByIdAndDelete({
+        _id:req.params.id,
+    });
 }

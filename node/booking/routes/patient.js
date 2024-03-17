@@ -1,5 +1,5 @@
 import express from "express";
-import { generatetoken, getuserbyemail,getuserbooking } from "../controllers/patient.js";
+import { generatetoken, getuserbyemail,getuserbooking, deletebooking } from "../controllers/patient.js";
 import bcrypt from "bcrypt";
 import { Patient } from "../models/patient.js";
 import { isauthorized } from "../middlewares/auth.js";
@@ -80,3 +80,23 @@ router.get("/getappointment", isauthorized, async (req, res) => {
   }
 });
 export const userRouter = router;
+
+
+
+
+router.put("/booking/:id", async(req,res)=>{
+try {
+  const Deletebooking = await deletebooking(req);
+  if(!Deletebooking){
+    return res.status(400).json({message:"error while deleting"})
+  }
+
+  res.status(200).json({
+    message:"successfully deleted",
+    data:Deletebooking
+  })
+} catch (error) {
+  console.log(error);
+  res.status(500).json({message:"internal server"})
+}
+})
