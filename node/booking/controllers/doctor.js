@@ -15,4 +15,10 @@ export function getdoctor(req) {
     return Doctor.find({}).populate("doctorName", "doctorName");
 }
 
+export function deletedoctor(req){
+    return Doctor.findByIdAndDelete({
+        _id:req.params.id,
+    });
+}
+
 

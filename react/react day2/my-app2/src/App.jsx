@@ -1,82 +1,64 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faEnvelope,faCheck,faCircleXmark } from '@fortawesome/free-solid-svg-icons'
+import React, { useState } from 'react';
+import axios from 'axios';
 
-import React, { Component } from 'react'
+function App() {
+    const [doctorName, setDoctorName] = useState('');
+    const [selectedDate, setSelectedDate] = useState('');
+    const [selectedDay, setSelectedDay] = useState('');
+    const [selectedTime, setSelectedTime] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
 
-export class App extends Component {
-  render() {
-    return React.createElement('div',{className:"container"},  React.createElement('div', {className:"card"}, React.createElement('div',{className:"cards"},
-    
-    //card1
-    React.createElement('div',{className:'card1'}, React.createElement('p',{className:"type"},"free"), React.createElement('h1',{className:'heading'},"$0/month"),
-    //card1 body
-    React.createElement('div',{className:'card-body'},
-    // availability
-    React.createElement('p',{className:"available"},<FontAwesomeIcon icon={faCheck} />,"single user"),
-    React.createElement('p',{className:"available"},<FontAwesomeIcon icon={faCheck} />,"50 gb storage"),
-    React.createElement('p',{className:"available"},<FontAwesomeIcon icon={faCheck} />,"unlimited public projects"),
-    React.createElement('p',{className:"available"},<FontAwesomeIcon icon={faCheck} />,"community access"),
-    //declined
-    React.createElement('p',{className:"declined"},<FontAwesomeIcon icon={faCircleXmark} />,"unlimited private projects"),
-    React.createElement('p',{className:"declined"},<FontAwesomeIcon icon={faCircleXmark} />,"dedicated phone support"),
-    React.createElement('p',{className:"declined"},<FontAwesomeIcon icon={faCircleXmark} />,"free subdomain"),
-    React.createElement('p',{className:"declined"},<FontAwesomeIcon icon={faCircleXmark} />,"monthly status reports"),
-    //button
-    React.createElement('div',{className:'button-dec'},"button"))),
-  
-    
+    const handleDaySelect = (date) => {
+        const selectedDateObj = new Date(date);
+        const selectedDay = selectedDateObj.toLocaleString('en-us', { weekday: 'long' });
 
+        setSelectedDay(selectedDay);
+    };
 
+    const handleSubmit = async (event) => {
+        event.preventDefault();
 
+        try {
+            // Make a request to book the appointment
+            const response = await axios.post('/api/bookings', {
+                doctorName: doctorName,
+                times: selectedTime,
+                day: selectedDay,
+                date: selectedDate
+            });
 
+            // Appointment booked successfully
+            console.log('Appointment booked:', response.data);
+        } catch (error) {
+            // Handle errors
+            setErrorMessage(error.response.data.message);
+        }
+    };
 
-
-
-
-  //card2
-  React.createElement('div',{className:'card1'}, React.createElement('p',{className:"type"},"plus"), React.createElement('h1',{className:'heading'},"$9/month"),
-  //card2 body
-  React.createElement('div',{className:'card-body'},
-  // availability
-  React.createElement('p',{className:"available"},<FontAwesomeIcon icon={faCheck} />,"5 users"),
-  React.createElement('p',{className:"available"},<FontAwesomeIcon icon={faCheck} />,"50 gb storage"),
-  React.createElement('p',{className:"available"},<FontAwesomeIcon icon={faCheck} />,"unlimited public projects"),
-  React.createElement('p',{className:"available"},<FontAwesomeIcon icon={faCheck} />,"community access"),
-  //declined
-  React.createElement('p',{className:"available"},<FontAwesomeIcon icon={faCheck} />,"unlimited private projects"),
-  React.createElement('p',{className:"available"},<FontAwesomeIcon icon={faCheck} />,"dedicated phone support"),
-  React.createElement('p',{className:"available"},<FontAwesomeIcon icon={faCheck} />,"free subdomain"),
-  React.createElement('p',{className:"declined"},<FontAwesomeIcon icon={faCircleXmark} />,"monthly status reports"),
-  //button
-  React.createElement('div',{className:'button-dec'},"button"))),
-
-
-  //card3
-  React.createElement('div',{className:'card1'}, React.createElement('p',{className:"type"},"pro"), React.createElement('h1',{className:'heading'},"$49/month"),
-  //card3 body
-  React.createElement('div',{className:'card-body'},
-  // availability
-  React.createElement('p',{className:"available"},<FontAwesomeIcon icon={faCheck} />,"unlimited users"),
-  React.createElement('p',{className:"available"},<FontAwesomeIcon icon={faCheck} />,"50 gb storage"),
-  React.createElement('p',{className:"available"},<FontAwesomeIcon icon={faCheck} />,"unlimited public projects"),
-  React.createElement('p',{className:"available"},<FontAwesomeIcon icon={faCheck} />,"community access"),
-  //declined
-  React.createElement('p',{className:"available"},<FontAwesomeIcon icon={faCheck} />,"unlimited private projects"),
-  React.createElement('p',{className:"available"},<FontAwesomeIcon icon={faCheck} />,"dedicated phone support"),
-  React.createElement('p',{className:"available"},<FontAwesomeIcon icon={faCheck} />,"free subdomain"),
-  React.createElement('p',{className:"available"},<FontAwesomeIcon icon={faCheck} />,"monthly status reports"),
-  //button
-  React.createElement('div',{className:'button-avai'},"button"))),
-
-
-
-    
-    )))
-  }
+    return (
+        <div>
+            <h2>Book an Appointment</h2>
+            {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
+            <div>
+                <label htmlFor="doctorName">Doctor Name:</label>
+                <input type="text" id="doctorName" value={doctorName} onChange={(e) => setDoctorName(e.target.value)} />
+            </div>
+            <div>
+                <label htmlFor="selectedDate">Select Date:</label>
+                <input type="date" id="selectedDate" value={selectedDate} onChange={(e) => setSelectedDate(e.target.value)} />
+                <button onClick={() => handleDaySelect(selectedDate)}>Get Day</button>
+            </div>
+            <div>
+                <label htmlFor="selectedDay">Day:</label>
+                <input type="text" id="selectedDay" value={selectedDay} readOnly />
+            </div>
+            <div>
+                <label htmlFor="selectedTime">Select Time:</label>
+                <input type="text" id="selectedTime" value={selectedTime} onChange={(e) => setSelectedTime(e.target.value)} />
+            </div>
+            <button onClick={handleSubmit}>Book Appointment</button>
+        </div>
+    );
 }
 
-export default App
+export default App;

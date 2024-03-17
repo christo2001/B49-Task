@@ -16,12 +16,16 @@ const appointmentSchema = new mongoose.Schema({
   patientName: {
     type: String,
     required:true
-  
   },
-  // appointmentDate: {
-  //   type: String,
-  //   required: true
-  // }
+  date:{
+    type:String
+  },
+  day:{
+    type:String
+  },
+  times:{
+    type:String,
+  }
 });
 
 const Appointment = mongoose.model('appointment', appointmentSchema);

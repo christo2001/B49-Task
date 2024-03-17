@@ -1,6 +1,7 @@
 import express from "express";
-import { getdoctor, getdoctornyname } from "../controllers/doctor.js";
+import { deletedoctor, getdoctor, getdoctornyname } from "../controllers/doctor.js";
 import { Doctor } from "../models/doctor.js";
+import { deletebooking } from "../controllers/patient.js";
 
 
 const router = express.Router();
@@ -48,4 +49,21 @@ router.get("/getdoctor", async(req,res)=>{
 })
 
 
-  export const doctorRouter = router;
+router.put("/doc/:id", async(req,res)=>{
+try {
+  const Deletedoc = await deletedoctor(req);
+  if(!Deletedoc){
+    return res.status(400).json({message:"error while deleting"})
+  }
+
+  res.status(200).json({
+    message:"successfully deleted",
+    data:Deletedoc
+  })
+  
+} catch (error) {
+  console.log(error);
+  res.status(500).json({message:"internal server"})
+}
+})
+export const doctorRouter = router;
