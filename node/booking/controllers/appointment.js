@@ -2,7 +2,7 @@ import { Appointment } from "../models/appointment.js";
 import { Doctor } from "../models/doctor.js";
 
 export async function postnewbookings(req) {
-    const { doctorName, times, day, date } = req.body;
+    const { doctorName, timeSlots, day, date } = req.body;
 
     try {
         // Find the doctor with the specified name
@@ -12,16 +12,22 @@ export async function postnewbookings(req) {
             throw new Error("Doctor not found");
         }
 
-        // Check if there's an existing appointment for the same doctor, day, date, and time
+        // Check if there's an existing appointment for the same doctor, day, and date
         const existingAppointment = await Appointment.findOne({
             doctorID: doctor._id,
-            times: times,
             day: day,
-            date: date
+            date: date,
+            timeSlots:timeSlots
         });
 
         if (existingAppointment) {
-            throw new Error("Appointment already booked for this time");
+            // If an appointment exists for the same doctor, day, and date,
+            // check if the requested time slot is already booked
+            const isTimeSlotBooked = existingAppointment.timeSlots.includes(timeSlots);
+
+            if (isTimeSlotBooked) {
+                throw new Error("Appointment already booked for this time");
+            }
         }
 
         // Create the appointment with the found doctor's ID

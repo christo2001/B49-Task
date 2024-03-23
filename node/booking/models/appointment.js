@@ -23,9 +23,9 @@ const appointmentSchema = new mongoose.Schema({
   day:{
     type:String
   },
-  times:{
-    type:String,
-  }
+  timeSlots: {
+    type: [String], // Define times as an array of strings
+},
 });
 
 const Appointment = mongoose.model('appointment', appointmentSchema);
