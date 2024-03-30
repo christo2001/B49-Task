@@ -39,6 +39,7 @@ function Login() {
         setErrorMessage('');
         // Save token to local storage
         localStorage.setItem('token', data.token);
+        navigate('/home')
         // You can handle token storage or redirection here
       } else {
         // Registration failed
@@ -50,7 +51,7 @@ function Login() {
       // Handle error
       setErrorMessage('Internal server error');
     }
-    navigate('/home')
+
   };
 
   return (

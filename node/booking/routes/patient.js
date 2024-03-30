@@ -63,6 +63,39 @@ router.post("/register", async (req, res) => {
   }
 });
 
+router.post("/changepassword", async (req, res) => {
+  try {
+    let patient = await getuserbyemail(req);
+
+    if (!patient) {
+      return res.status(400).json({ error: "User does not exist" });
+    }
+
+    // Check if new password is provided
+    if (!req.body.newpassword) {
+      return res.status(400).json({ error: "New password is required" });
+    }
+
+    // Generate hashed password
+    const saltRounds = 10;
+    const hashedPassword = await bcrypt.hash(req.body.newpassword, saltRounds);
+
+    // Update the user's password with the new hashed password
+    patient.password = hashedPassword;
+
+    // Save the updated user data
+    await patient.save(); // Change this line to save the patient instance
+
+    res.json({ message: 'Password changed successfully' });
+  } catch (error) {
+    console.error("Error occurred:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+
+
+
 
 
 
@@ -79,7 +112,7 @@ router.get("/getappointment", isauthorized, async (req, res) => {
       res.status(500).json({ error: "Internal server error" });
   }
 });
-export const userRouter = router;
+
 
 
 
@@ -100,3 +133,5 @@ try {
   res.status(500).json({message:"internal server"})
 }
 })
+
+export const userRouter = router;

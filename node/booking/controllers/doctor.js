@@ -5,7 +5,8 @@ export function getdoctornyname(request){
     return Doctor.findOne({
         doctorName:request.body.doctorName,
         specialization:request.body.specialization,
-        timeSlots:request.body.timeSlots
+        timeSlots:request.body.timeSlots,
+        fee:request.body.fee
     }); 
 }
 

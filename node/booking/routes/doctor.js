@@ -66,4 +66,5 @@ try {
   res.status(500).json({message:"internal server"})
 }
 })
+
 export const doctorRouter = router;

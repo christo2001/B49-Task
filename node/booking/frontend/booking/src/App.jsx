@@ -8,10 +8,11 @@ import Home from './Home'
 import Service from './Service'
 import Proud from './Proud'
 import Login from './Login'
+import Myappointment from './Myappointment';
+import Changepassword from './Changepassword';
 
 function App() {
-  const [count, setCount] = useState(0)
-  const [selectedDoctorName, setSelectedDoctorName] = useState('');
+
 
   const handleSelectDoctor = (doctorName) => {
     setSelectedDoctorName(doctorName);
@@ -24,7 +25,8 @@ function App() {
           <Route path="/" element={<Register />} />
           <Route path="/login" element={<Login/>} />
           <Route path="/home" element={<Home/>} />
-          
+          <Route path="/myappointment" element={<Myappointment/>} />
+          <Route path="/changepassword" element={<Changepassword/>} />
         </Routes>
       </Router>
     </>

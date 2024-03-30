@@ -7,6 +7,7 @@ function Booking() {
     const [patientName, setPatientName] = useState('');
     const [selectedDate, setSelectedDate] = useState('');
     const [selectedDay, setSelectedDay] = useState('');
+    const[fee,setfee]=useState('')
     const [timeSlots, setTimeSlots] = useState([]);
     const [specialization, setSpecialization] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
@@ -50,14 +51,17 @@ function Booking() {
         return `${year}-${month}-${day}`;
     };
 
-    const handleDoctorSelect = (selectedDoctorName) => {
-        const selectedDoctor = doctors.find(doctor => doctor.doctorName === selectedDoctorName);
-        if (selectedDoctor) {
-            setDoctorName(selectedDoctorName);
-            setSpecialization(selectedDoctor.specialization);
-            setTimeSlots(Array.isArray(selectedDoctor.timeSlots) ? selectedDoctor.timeSlots : []);
-        }
-    };
+  const handleDoctorSelect = (selectedDoctorName) => {
+    const selectedDoctor = doctors.find(doctor => doctor.doctorName === selectedDoctorName);
+    if (selectedDoctor) {
+        setDoctorName(selectedDoctorName);
+        setSpecialization(selectedDoctor.specialization);
+        setTimeSlots(Array.isArray(selectedDoctor.timeSlots) ? selectedDoctor.timeSlots : []);
+        setfee(selectedDoctor.fee); // Use setfee instead of setFee
+    }
+};
+
+    
 
     const handleDaySelect = (date) => {
         const selectedDateObj = new Date(date);
@@ -67,6 +71,12 @@ function Booking() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+    
+        // Check if any required field is empty
+        if (!doctorName || !patientName || !selectedDate || !selectedDay || timeSlots.length === 0 || !specialization) {
+            setErrorMessage('Please fill in all fields.');
+            return;
+        }
     
         try {
             const token = localStorage.getItem('token');
@@ -83,16 +93,15 @@ function Booking() {
                     timeSlots: timeSlots,
                     day: selectedDay,
                     date: selectedDate,
-                    specialization: specialization
+                    specialization: specialization,
+                    fee:fee
                 })
     
             });
     
             if (response.ok) {
                 const data = await response.json();
-                
-              
-               
+    
                 setShowModal(false); // Hide modal after successful booking
                 // Clear input values
                 setDoctorName('');
@@ -101,8 +110,9 @@ function Booking() {
                 setSelectedDay('');
                 setTimeSlots([]);
                 setSpecialization('');
+                setfee('')
                 alert('Appointment booked successfully');
-               
+    
             } else {
                 const errorMessage = await response.text();
                 console.error('Error:', errorMessage);
@@ -114,10 +124,9 @@ function Booking() {
         }
     };
     
-
     return (
         <div>
-            <button onClick={() => setShowModal(true)} className="w-full py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            <button onClick={() => setShowModal(true)} className="w-full mt-10 py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                 Open Booking Modal
             </button>
 
@@ -157,6 +166,14 @@ function Booking() {
                                                 type="text" 
                                                 id="specialization" 
                                                 value={specialization} 
+                                                readOnly 
+                                                className="font-bold capitalize text-center text-l mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                                                />
+                                                 <label htmlFor="specialization" className="block text-sm font-medium text-gray-700">Fee:</label>
+                                            <input 
+                                                type="text" 
+                                                id="fee" 
+                                                value={fee} 
                                                 readOnly 
                                                 className="font-bold capitalize text-center text-l mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                                                 />

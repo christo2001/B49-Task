@@ -21,6 +21,9 @@ const doctorschema = new mongoose.Schema({
         type: String, // Assuming you'll store the image URL
         default: "" // Provide a default value if needed
     },
+    fee:{
+        type:String   
+    },
     // Adding a field for time slots
     timeSlots: [{
         type: String // Each element in the array is a string representing a time slot

@@ -23,7 +23,7 @@ const Doctor = ({ onSelectDoctor }) => {
 
   return (
     <div className="container mx-auto">
-      <h1 className="text-3xl font-bold mb-4">Doctor List</h1>
+      <h1 class="text-5xl font-bold text-center pb-10 mt-24"><span class="text-blue-700">Our</span> Doctors</h1>
       {loading ? (
         <p>Loading...</p>
       ) : doctors.length === 0 ? (
@@ -33,7 +33,7 @@ const Doctor = ({ onSelectDoctor }) => {
           {doctors.map((doctor, index) => (
             <div
               key={doctor._id}
-              className="bg-white rounded-lg border-t-4 border-green-200 p-4"
+              className="bg-white rounded-lg border-t-4 border-blue-700 p-4"
               style={{ maxWidth: "350px" }} // Adjust the max width of the card
             >
               <img
@@ -44,6 +44,7 @@ const Doctor = ({ onSelectDoctor }) => {
               />
               <h2 className="text-xl  mb-2 text-left capitalize">{doctor.doctorName}</h2>
               <p className="text-gray-600 mb-2 text-left bg-green-300 w-30 capitalize">{doctor.specialization}</p>
+              <p className="text-white  mb-2 text-left bg-green-300 w-12 capitalize">{doctor.fee}</p>
             </div>
           ))}
         </div> 

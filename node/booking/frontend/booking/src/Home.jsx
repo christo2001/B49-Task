@@ -1,15 +1,22 @@
 import React from 'react';
 import doc1 from "./images/doc1.png";
+import doc2 from "./images/doc2.png";
+import doc3 from "./images/doc3.png";
 import bgImage from "./images/bg.jpg";
 import Service from './Service';
 import Doctor from './Doctor';
 import Booking from './Booking';
 import Proud from './Proud';
 import Myappointment from './Myappointment';
+import Footer from './Footer';
+import Navbar from './Navbar';
+import About from './About';
 
 function Home() {
   return (
     <div>
+           <Navbar/>
+          
       <div>
         <div className="absolute top-0 -right-1 w-72 h-72 bg-purple-400 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob "></div>
         <div className="absolute top-60 -left-4 w-72 h-72 bg-yellow-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
@@ -100,12 +107,12 @@ function Home() {
                     <div className="flex flex-col items-end px-3">
                       <img
                         className="object-cover w-40 h-40 rounded shadow-lg sm:hbg-green-500ray-50-64 xl:h-80 sm:w-full xl:w-80 bg-purple-500"
-                        src={doc1}
+                        src={doc2}
                         alt=""
                       />
                       <img
                         className="object-cover w-40 h-40 rounded shadow-lg sm:hbg-green-500ray-50-64 xl:h-80 sm:w-full xl:w-80 bg-yellow-200"
-                        src={doc1}
+                        src={doc3}
                         alt=""
                       />
                     </div>
@@ -116,11 +123,13 @@ function Home() {
           </div>
         </section>
       </div>
+      <About/>
       <Service/>
       <Doctor/>
       <Booking/>
       <Proud/>
-      <Myappointment/>
+      <Footer/>
+
     </div>
   );
 }
