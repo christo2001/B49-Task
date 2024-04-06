@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Navigate, useNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 
 const RegistrationForm = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
+  const navigate = useNavigate(); // Using useNavigate hook
 
   const handleRegistration = async () => {
     try {
@@ -28,7 +29,7 @@ const RegistrationForm = () => {
       console.error('Error during registration:', error);
       setMessage({ text: 'Registration failed', type: 'error' });
     }
-    Navigate("/login")
+    navigate("/login")
   };
 
   return (
@@ -87,7 +88,7 @@ const RegistrationForm = () => {
         <p className="text-center text-lg">
           Already have an account?
           <a
-            href="#"
+            href="/login"
             className="font-medium text-indigo-500 underline-offset-4 hover:underline"
           >
             Log In

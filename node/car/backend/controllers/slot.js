@@ -2,7 +2,7 @@ import { Slot } from "../models/slot.js";
 import { Car } from "../models/car.js";
 
 export async function postnewbookings(req) {
-    const { carname, day, date, customername } = req.body;
+    const { carname, day, date, customername,phone } = req.body;
 
     try {
         // Find the car with the specified name

@@ -22,4 +22,31 @@ router.post("/bookslot", async (req, res) => {
     }
   });
 
+  router.get("/bookeddates", async (req, res) => {
+    try {
+        // Fetch all slots from the database
+        const slots = await Slot.find();
+
+        // Construct an object to store booked dates
+        const bookedDates = {};
+
+        // Iterate over the slots and populate bookedDates object
+        slots.forEach(slot => {
+            const { carID, date } = slot;
+
+            if (!bookedDates[date]) {
+                bookedDates[date] = [];
+            }
+
+            bookedDates[date].push(carID); // Store carID for the booked date
+        });
+
+        // Send the bookedDates object as the response
+        res.json(bookedDates);
+    } catch (error) {
+        console.error("Error fetching booked dates:", error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
+
   export const slotRouter = router;

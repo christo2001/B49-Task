@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { useNavigate} from 'react-router-dom';
 
 const Login = () => {
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
+  const navigate = useNavigate(); // Using useNavigate hook
 
   const handleLogin = async () => {
     try {
@@ -28,6 +30,7 @@ const Login = () => {
       console.error('Error during login:', error);
       setMessage({ text: 'Login failed', type: 'error' });
     }
+    navigate("/home")
   };
 
   return (
@@ -73,7 +76,7 @@ const Login = () => {
         )}
 
         <a
-          href="#"
+          href="/forget"
           className="transform text-center font-semibold  duration-300 hover:text-gray-300"
         >
           FORGOT PASSWORD?
@@ -82,7 +85,7 @@ const Login = () => {
         <p className="text-center text-lg">
           No account?
           <a
-            href="#"
+            href="/"
             className="font-medium text-indigo-500 underline-offset-4 hover:underline"
           >
             Create One

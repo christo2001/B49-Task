@@ -24,7 +24,7 @@ function Register() {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:5000/api/patient/register', {
+      const response = await fetch('https://b49-task-1.onrender.com/api/patient/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

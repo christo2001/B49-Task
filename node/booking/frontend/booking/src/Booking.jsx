@@ -20,7 +20,7 @@ function Booking() {
         const fetchData = async () => {
             try {
                 const response = await axios.get(
-                    "http://localhost:5000/api/doctor/getdoctor"
+                    "https://b49-task-1.onrender.com/api/doctor/getdoctor"
                 );
                 setDoctors(response.data.data);
                 setLoading(false);
@@ -81,7 +81,7 @@ function Booking() {
         try {
             const token = localStorage.getItem('token');
     
-            const response = await fetch('http://localhost:5000/api/appointment/bookappointment', {
+            const response = await fetch('https://b49-task-1.onrender.com/api/appointment/bookappointment', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

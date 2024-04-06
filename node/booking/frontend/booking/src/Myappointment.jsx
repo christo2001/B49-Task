@@ -11,7 +11,7 @@ function Myappointment() {
     const fetchAppointments = async () => {
         try {
             const token = localStorage.getItem('token');
-            const response = await fetch('http://localhost:5000/api/patient/getappointment', {
+            const response = await fetch('https://b49-task-1.onrender.com/api/patient/getappointment', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -42,7 +42,7 @@ function Myappointment() {
             );
 
             const token = localStorage.getItem('token');
-            const response = await fetch(`http://localhost:5000/api/patient/booking/${appointmentId}`, {
+            const response = await fetch(`https://b49-task-1.onrender.com/api/patient/booking/${appointmentId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

@@ -23,7 +23,7 @@ function Login() {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:5000/api/patient/login', {
+      const response = await fetch('https://b49-task-1.onrender.com/api/patient/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

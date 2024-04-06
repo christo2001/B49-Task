@@ -1,6 +1,7 @@
 import React from 'react';
 import './home.css'; // Assuming style.css is in the same directory as your React component
 import car from './images/car.png'
+import About from './About';
 
 
 
@@ -75,7 +76,9 @@ const Home = () => {
       </header>
       {/* End Header Section */}
 
+      <About/>
     </div>
+    
 
     
   );

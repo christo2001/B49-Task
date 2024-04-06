@@ -20,7 +20,7 @@ function ChangePasswordForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:5000/api/patient/changepassword', {
+      const response = await fetch('https://b49-task-1.onrender.com/api/patient/changepassword', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

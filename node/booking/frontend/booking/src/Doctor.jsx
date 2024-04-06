@@ -9,7 +9,7 @@ const Doctor = ({ onSelectDoctor }) => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/doctor/getdoctor"
+          "https://b49-task-1.onrender.com/api/doctor/getdoctor"
         );
         setDoctors(response.data.data);
         setLoading(false);

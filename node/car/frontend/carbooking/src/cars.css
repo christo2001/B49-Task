@@ -171,6 +171,7 @@
 .success-message{
   text-align: center;
   text-transform: capitalize;
+  color: green;
 }
 
 .close:hover,
