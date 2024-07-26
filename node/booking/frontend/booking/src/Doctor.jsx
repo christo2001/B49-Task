@@ -22,7 +22,7 @@ const Doctor = ({ onSelectDoctor }) => {
   }, []);
 
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto" id="doctor" >
       <h1 class="text-5xl font-bold text-center pb-10 mt-24"><span class="text-blue-700">Our</span> Doctors</h1>
       {loading ? (
         <p>Loading...</p>

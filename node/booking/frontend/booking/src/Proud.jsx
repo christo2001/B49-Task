@@ -2,6 +2,7 @@ import React from 'react'
 import doc1 from "./images/doc1.png";
 
 
+
 function Proud() {
   return (
     <div class=" mt-60">

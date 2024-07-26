@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import register from "./images/register.png"
-import { useNavigate } from 'react-router-dom';
+import { useNavigate , NavLink} from 'react-router-dom';
 
 function Login() {
     const navigate = useNavigate()
@@ -89,6 +89,18 @@ function Login() {
                 </form>
               </div>
              
+<NavLink to='/changepassword' className="transform text-center font-semibold ">
+                  Forget Password
+                </NavLink>
+                
+                
+                <p className="text-center text-lg" style={{ marginTop: '20px' }}>
+  No account?
+  <NavLink to='/' className="font-medium text-indigo-500 underline-offset-4 hover:underline">
+    Create One
+  </NavLink>
+</p>
+
             </div>
           </div>
         </div>

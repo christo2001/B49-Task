@@ -12,15 +12,17 @@ import Footer from './Footer';
 import Navbar from './Navbar';
 import About from './About';
 
+
 function Home() {
+
   return (
     <div>
            <Navbar/>
           
       <div>
-        <div className="absolute top-0 -right-1 w-72 h-72 bg-purple-400 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob "></div>
+        <div className="absolute top-20 -right-1 w-72 h-72 bg-purple-400 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob "></div>
         <div className="absolute top-60 -left-4 w-72 h-72 bg-yellow-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
-        <div className="absolute -bottom-32 -right-1 w-72 h-72 bg-purple-400 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
+        
         <section className="pb-24 relative z-30">
           <div className="mx-auto">
             <div className="relative z-40 container mx-auto h-full lg:px-8">
@@ -87,8 +89,9 @@ function Home() {
           </div>
 
           <div class="relative -left-3 top-5 h-32 w-56 mt-5 flex flex-col"> 
-    <button class="rounded-full bg-blue-500 px-8 py-4 text-sm mb-3 font-medium text-white transition duration-200 hover:bg-blue-600 active:bg-blue-700">
-        Request an Appointment
+    <button class="rounded-full bg-blue-500 px-8 py-4 text-sm mb-3 font-medium text-white transition duration-200 hover:bg-blue-600 active:bg-blue-700" >
+      <a href='#doctor'> Request an Appointment</a>
+       
     </button> 
 </div>
 

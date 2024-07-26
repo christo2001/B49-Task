@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate from react-router-dom
+import React, { useState,useEffect } from 'react';
+import { useNavigate,NavLink } from 'react-router-dom'; // Import useNavigate from react-router-dom
 import register from "./images/register.png";
+import GridLoader from "react-spinners/GridLoader";
 
 function Register() {
   const navigate = useNavigate(); // Get the navigate function using useNavigate
@@ -12,6 +13,15 @@ function Register() {
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 5000);
+  }, []);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prevState => ({
@@ -22,7 +32,7 @@ function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     try {
       const response = await fetch('https://b49-task-1.onrender.com/api/patient/register', {
         method: 'POST',
@@ -31,31 +41,48 @@ function Register() {
         },
         body: JSON.stringify(formData)
       });
-
+  
       const data = await response.json();
-
+  
       if (response.ok) {
         // Registration successful
         setSuccessMessage(data.message);
         setErrorMessage('');
         // Save token to local storage
         localStorage.setItem('token', data.token);
-       
+        navigate("/login"); // Navigate only if registration is successful
       } else {
         // Registration failed
         setSuccessMessage('');
-        setErrorMessage(data.error);
+        if (response.status === 409) {
+          // Email already exists
+          setErrorMessage("Email already exists. Please use a different email.");
+        } else {
+          // Other errors
+          setErrorMessage(data.error || 'Registration failed');
+        }
       }
     } catch (error) {
       console.error('Error occurred:', error);
       // Handle error
       setErrorMessage('Internal server error');
     }
-    navigate("/login"); // Use navigate function to navigate to "/login"
   };
-
+  
   return (
     <div >
+{loading ? (
+  <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', background: 'black' }}>
+    <GridLoader
+      color="white" // Change color to blue
+      loading={loading}
+      size={20} // Adjust the size as needed
+    />
+  </div>
+) : (
+
+
+
       <div>
         <div className=" relative">
           <div className="absolute top-0 -right-1 w-72 h-72 bg-purple-400 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob "></div>
@@ -91,19 +118,27 @@ function Register() {
 
                     {successMessage && <p className="text-green-500">{successMessage}</p>}
                     {errorMessage && <p className="text-red-500">{errorMessage}</p>}
+
+                    <p className="text-center text-lg" style={{ marginTop: '20px' }}>
+  Already have an account ?
+  <NavLink to='/login' className="font-medium text-indigo-500 underline-offset-4 hover:underline">
+    Login
+  </NavLink>
+</p>
                   </form>
                 </div>
-                <svg viewbox="0 0 91 91" className="absolute top-0 left-0 z-0 w-32 h-32 -mt-12 -ml-12 text-yellow-300 fill-current">
-                  {/* SVG code */}
-                </svg>
-                <svg viewbox="0 0 91 91" className="absolute bottom-0 right-0 z-0 w-32 h-32 -mb-12 -mr-12 text-indigo-500 fill-current">
-                  {/* SVG code */}
-                </svg>
+              
               </div>
             </div>
           </div>
+          
     </div>
     </div>
+
+    
+      )}
+
+
     </div>
   );
 }
