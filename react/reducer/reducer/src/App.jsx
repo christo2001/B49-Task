@@ -19,7 +19,7 @@ function reducer(state, action) {
 }
 
 function App() {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [stte, dispatch] = useReducer(reducer, initialState);
   const [text, setText] = useState('');
   const [editId, setEditId] = useState(null); // Track the ID of the item being edited
 
@@ -62,7 +62,7 @@ function App() {
       </button>
 
       <ul>
-        {state.map((todo) => (
+        {stte.map((todo) => (
           <li key={todo.id}>
             {editId === todo.id ? '' : todo.text}
             {editId !== todo.id && (
