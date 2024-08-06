@@ -14,7 +14,7 @@ function reducer(stte, action) {
         task.id === action.id ? { ...task, text: action.text } : task
       );
     default:
-      return state;
+      return stte;
   }
 }
 
