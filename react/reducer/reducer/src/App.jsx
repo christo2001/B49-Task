@@ -3,35 +3,38 @@ import React, { useReducer, useState } from 'react';
 const initialState = []; // Initial state as an empty array
 
 // Define the reducer function
-function reducer(stte, action) {
+function reducer(state, action) {
   switch (action.type) {
     case 'add':
-      return [...stte, { id: Date.now(), text: action.text }];
+      return [...state, { id: action.id, text: action.text }];
     case 'del':
-      return stte.filter((task) => task.id !== action.iden);
+      return state.filter((task) => task.id !== action.iden);
     case 'edit':
-      return stte.map((task) =>
+      return state.map((task) =>
         task.id === action.id ? { ...task, text: action.text } : task
       );
     default:
-      return stte;
+      return state;
   }
 }
 
 function App() {
-  const [stte, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(reducer, initialState);
   const [text, setText] = useState('');
   const [editId, setEditId] = useState(null); // Track the ID of the item being edited
 
-  const handleAdd = () => {
+  const handleAdd = (id) => {
     if (text.trim() !== '') {
-      dispatch({ type: 'add', text });
+      dispatch({ type: 'add', text, id });
       setText('');
+      console.log({ id });
     }
   };
 
+
   const handledelete=(id)=>{
     dispatch({type:'del', iden:id})
+    console.log({iden:id})
   }
   const handleEdit = (todo) => {
     setText(todo.text); // Set the current text to the input
@@ -54,12 +57,12 @@ function App() {
         value={text}
         onChange={(e) => setText(e.target.value)}
       />
-      <button onClick={editId ? handleSave : handleAdd}>
+    <button onClick={editId ? handleSave : () => handleAdd(Date.now())}>
         {editId ? 'Save' : 'Add'}
       </button>
 
       <ul>
-        {stte.map((todo) => (
+        {state.map((todo) => (
           <li key={todo.id}>
             {editId === todo.id ? '' : todo.text}
             {editId !== todo.id && (
