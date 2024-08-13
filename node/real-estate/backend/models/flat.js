@@ -8,27 +8,10 @@ const flatschema = new mongoose.Schema({
         type:String,
         required:true
     },
-
-    flatname:{
-        type:String,
-        required:true,
-        maxlength:32,
-        trim:true
-    },
-
-
-    location:{
-        type:String,
-        required:true,
-        trim:true
-    },
-
-    price:{
+    name:{
         type:String,
         required:true
     },
-
-
     agent:{
         type:ObjectId,
         ref:'agent'

@@ -1,7 +1,19 @@
 import express from "express"
+import multer from "multer"
+import path from "path"
 import { addflat, deleteflat, getallagentflats, getallflats , updateflat} from "../controllers/flat.js"
+import { Flat } from "../models/flat.js"
+import { error } from "console"
+import { getuserbyemail } from "../controllers/agent.js"
 
 const router = express.Router()
+
+// Set up storage engine for multer
+const storage = multer.memoryStorage();
+
+// Initialize upload variable
+const upload = multer({ storage: storage });
+
 
 
 router.get('/all', async(req,res)=>{
@@ -32,20 +44,24 @@ router.get('/agent/all', async(req,res)=>{
     }
 })
 
-router.post('/add', async(req,res)=>{
+router.post('/add', upload.single('img'), async (req, res) => {
     try {
-        const newflat = await addflat(req)
-        if(!newflat){
-            res.status(404).json({error:'error occured while adding'})
+
+        const email = await getuserbyemail(req)
+
+        if(email){
+            res.status(404).json({error:'email already there'})
         }
-        res.status(200).json({
-            message:"flat added succesfully",
-            data:newflat
-        })
+        const flat = await addflat(req); // Call addflat only once
+        
+        // If addflat was successful, `flat` should be a saved document
+        res.send('Image uploaded successfully');
     } catch (error) {
-        res.status(500).json({ error: "error" });   
+        console.error(error);
+        res.status(400).send('Error uploading image: ' + error.message);
     }
-})
+});
+
 
 router.put('/upd/:id', async(req,res)=>{
   try {

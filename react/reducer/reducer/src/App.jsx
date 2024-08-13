@@ -1,4 +1,5 @@
 import React, { useReducer, useState } from 'react';
+import Weather from './Weather';
 
 const initialState = []; // Initial state as an empty array
 
@@ -19,7 +20,7 @@ function reducer(state, action) {
 }
 
 function App() {
-  const [stte, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(reducer, initialState);
   const [text, setText] = useState('');
   const [editId, setEditId] = useState(null); // Track the ID of the item being edited
 
@@ -62,7 +63,7 @@ function App() {
       </button>
 
       <ul>
-        {stte.map((todo) => (
+        {state.map((todo) => (
           <li key={todo.id}>
             {editId === todo.id ? '' : todo.text}
             {editId !== todo.id && (
@@ -75,6 +76,7 @@ function App() {
           </li>
         ))}
       </ul>
+      <Weather/>
     </>
   );
 }
