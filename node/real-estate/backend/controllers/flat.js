@@ -1,6 +1,10 @@
 import { Flat } from "../models/flat.js";
 
-
+export function getuserbyemail1(request){
+    return Flat.findOne({
+        email:request.body.email
+    })
+}
 export function getallflats(){
     return Flat.find().populate('agent', 'name')
 }
@@ -15,11 +19,12 @@ export function addflat(req) {
         img: req.file.originalname,
         contentType: req.file.mimetype,
         imageBase64: req.file.buffer.toString('base64'),
-        agent: req.agent._id
+        agent: req.agent._id // Ensure req.agent is correctly populated
     });
 
     return flat.save(); // Return the promise from .save()
 }
+
 
 export function updateflat(req){
     return Flat.findOneAndUpdate(

@@ -1,19 +1,27 @@
 import express from "express"
 import multer from "multer"
 import path from "path"
-import { addflat, deleteflat, getallagentflats, getallflats , updateflat} from "../controllers/flat.js"
+import { addflat, deleteflat, getallagentflats, getallflats , updateflat, getuserbyemail1} from "../controllers/flat.js"
 import { Flat } from "../models/flat.js"
 import { error } from "console"
 import { getuserbyemail } from "../controllers/agent.js"
 
 const router = express.Router()
 
-// Set up storage engine for multer
 const storage = multer.memoryStorage();
 
-// Initialize upload variable
-const upload = multer({ storage: storage });
+const fileFilter = (req, file, cb) => {
+    if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+        cb(null, true); // Accept file
+    } else {
+        cb(new Error('Only .jpg and .png files are allowed'), false); // Reject file
+    }
+};
 
+const upload = multer({ 
+    storage: storage, 
+    fileFilter: fileFilter 
+});
 
 
 router.get('/all', async(req,res)=>{
@@ -46,15 +54,16 @@ router.get('/agent/all', async(req,res)=>{
 
 router.post('/add', upload.single('img'), async (req, res) => {
     try {
-
-        const email = await getuserbyemail(req)
-
-        if(email){
-            res.status(404).json({error:'email already there'})
-        }
-        const flat = await addflat(req); // Call addflat only once
+        console.log("Checking for existing user with email:", req.body.email);
+        let agent = await getuserbyemail1(req);
+        console.log("Result from getuserbyemail:", agent);
         
-        // If addflat was successful, `flat` should be a saved document
+        if (agent) {
+            console.log("Email already exists, sending error response");
+            return res.status(400).json({ error: "Email already exists" });
+        }
+        
+        await addflat(req);
         res.send('Image uploaded successfully');
     } catch (error) {
         console.error(error);
