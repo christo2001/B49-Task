@@ -27,6 +27,32 @@ function Input() {
 
     let timepassed = (time - now) / 1000;
 
+    let promise = new Promise(function (resolve, reject) {
+        const x = "geeksforgeeks";
+        const y = "geeksforgeeks"
+        const z = 'geeks'
+        const a = 'geeks'
+        if (x === y) {
+            resolve();
+        } else if (z==a){
+            resolve()
+        }
+        else {
+            reject();
+        }
+    });
+    
+    promise.
+        then(function () {
+            console.log('Success, You are a GEEK');
+        }).
+        then(function(){
+            console.log('success, you are a geeks')
+        }).
+        catch(function () {
+            console.log('Some error has occurred');
+        }); 
+
     return (
         <div>
             <h4>timer: {timepassed.toFixed(2)} seconds</h4>
