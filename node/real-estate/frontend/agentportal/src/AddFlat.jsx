@@ -30,7 +30,7 @@ const AddFlat = () => {
     const fetchProfile = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:3333/api/flat/agent/info",
+          "https://b49-task-5.onrender.com/api/flat/agent/info",
           {
             headers: {
               "x-auth-token": token,
@@ -48,7 +48,7 @@ const AddFlat = () => {
   const handleUpdate = async () => {
     try {
       const res = await axios.put(
-        `http://localhost:3333/api/flat/upd/agent/${agentInfo._id}`,
+        `https://b49-task-5.onrender.com/api/flat/upd/agent/${agentInfo._id}`,
         { name: newName, age: newAge, dob: newDob, contact: newContact }, // Send the updated values
         {
           headers: {
