@@ -15,7 +15,7 @@ export const AuthProvider = ({ children }) => {
   // Login function
   const login = async (formData) => {
     try {
-      const response = await axios.post('http://localhost:3333/api/agent/log', formData);
+      const response = await axios.post('https://b49-task-5.onrender.com/api/agent/log', formData);
       const { token } = response.data;
       localStorage.setItem('token', token);
       setToken(token);
@@ -29,7 +29,7 @@ export const AuthProvider = ({ children }) => {
   // Register function
   const register = async (formData) => {
     try {
-      const response = await axios.post('http://localhost:3333/api/agent/regi', formData);
+      const response = await axios.post('https://b49-task-5.onrender.com/api/agent/regi', formData);
       setError('');
       navigate('/login');
     } catch (err) {
@@ -41,7 +41,7 @@ export const AuthProvider = ({ children }) => {
   const fetchProfile = async () => {
     if (!token) return;
     try {
-      const res = await axios.get('http://localhost:3333/api/flat/agent/info', {
+      const res = await axios.get('https://b49-task-5.onrender.com/api/flat/agent/info', {
         headers: {
           'x-auth-token': token,
         },
@@ -57,7 +57,7 @@ export const AuthProvider = ({ children }) => {
     if (!agentInfo) return;
     try {
       const res = await axios.put(
-        `http://localhost:3333/api/flat/upd/agent/${agentInfo._id}`,
+        `https://b49-task-5.onrender.com/api/flat/upd/agent/${agentInfo._id}`,
         { name: newName },
         {
           headers: {
