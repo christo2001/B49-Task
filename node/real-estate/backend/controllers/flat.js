@@ -9,7 +9,7 @@ export function getuserbyemail1(request){
 
 
 export function getusername(req) {
-    return Agent.findOne({ _id: req.agent._id }, 'name email'); 
+    return Agent.findOne({ _id: req.agent._id }, 'name email age dob contact'); 
 }
 
 export function updateagent(req){

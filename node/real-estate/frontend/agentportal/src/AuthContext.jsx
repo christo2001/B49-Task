@@ -53,23 +53,28 @@ export const AuthProvider = ({ children }) => {
   };
 
   // Update agent profile
-  const updateProfile = async (newName) => {
-    if (!agentInfo) return;
-    try {
-      const res = await axios.put(
-        `https://b49-task-5.onrender.com/api/flat/upd/agent/${agentInfo._id}`,
-        { name: newName },
-        {
-          headers: {
-            'x-auth-token': token,
-          },
-        }
-      );
-      setAgentInfo({ ...agentInfo, name: res.data.data.name });
-    } catch (err) {
-      console.log(err.response?.data?.error || 'Error updating username');
-    }
-  };
+// Update agent profile
+const updateProfile = async (profileData) => {
+  if (!agentInfo) return;
+  try {
+    const res = await axios.put(
+      `https://b49-task-5.onrender.com/api/flat/upd/agent/${agentInfo._id}`,
+      profileData,
+      {
+        headers: {
+          'x-auth-token': token,
+        },
+      }
+    );
+    // Update the agentInfo state with the response data
+    setAgentInfo({
+      ...agentInfo,
+      ...res.data.data, // Assuming the backend sends back the updated fields
+    });
+  } catch (err) {
+    console.log(err.response?.data?.error || 'Error updating profile');
+  }
+};
 
   return (
     <AuthContext.Provider value={{ agentInfo, login, register, fetchProfile, updateProfile, error }}>
