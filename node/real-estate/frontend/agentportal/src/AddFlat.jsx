@@ -1,88 +1,63 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 const AddFlat = () => {
-  const [flatData, setFlatData] = useState({
-    img: '',
-    flatname: '',
-    location: '',
-    price: '',
+  const [agentInfo, setAgentInfo] = useState({
+    name: "",
+    email: "",
   });
 
-  const [message, setMessage] = useState('');
+  const [newName, setNewName] = useState("");
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFlatData({
-      ...flatData,
-      [name]: value
-    });
-  };
+  const token = localStorage.getItem("token");
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const res = await axios.get("http://localhost:3333/api/flat/agent/info", {
+          headers: {
+            "x-auth-token": token,
+          },
+        });
+        setAgentInfo(res.data);
+      } catch (error) {
+        console.log(error.response.data.error);
+      }
+    };
+    fetchProfile();
+  }, [token]);
+
+  const handleUpdate = async () => {
     try {
-      const token = localStorage.getItem('token'); // Get the token from local storage
-      const response = await axios.post('http://localhost:3333/api/flat/add', flatData, {
-        headers: {
-          'x-auth-token': token // Include the token in the headers
+      const res = await axios.put(
+        `http://localhost:3333/api/flat/upd/agent/${agentInfo._id}`,
+        { name: newName },
+        {
+          headers: {
+            "x-auth-token": token,
+          },
         }
-      });
-      setMessage(response.data.message);
+      );
+      alert("Username updated successfully");
+      setAgentInfo({ ...agentInfo, name: res.data.data.name });
     } catch (error) {
-      console.error('Error occurred while adding flat:', error);
-      setMessage('Error occurred while adding flat');
+      console.log(error.response.data.error);
     }
   };
 
   return (
     <div>
-      <h2>Add a New Flat</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Image URL:</label>
-          <input
-            type="text"
-            name="img"
-            value={flatData.img}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label>Flat Name:</label>
-          <input
-            type="text"
-            name="flatname"
-            value={flatData.flatname}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label>Location:</label>
-          <input
-            type="text"
-            name="location"
-            value={flatData.location}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label>Price:</label>
-          <input
-            type="text"
-            name="price"
-            value={flatData.price}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        
-        <button type="submit">Add Flat</button>
-      </form>
-      {message && <p>{message}</p>}
+      <h2>Profile</h2>
+      <p>Name: {agentInfo.name}</p>
+      <p>Email: {agentInfo.email}</p>
+
+      <input
+        type="text"
+        placeholder="New Username"
+        value={newName}
+        onChange={(e) => setNewName(e.target.value)}
+      />
+      <button onClick={handleUpdate}>Update Username</button>
     </div>
   );
 };

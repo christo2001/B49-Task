@@ -2,7 +2,7 @@ import express from "express"
 import bcrypt from "bcrypt"
 import { getuserbyemail,generatetoken} from "../controllers/agent.js";
 import { Agent } from "../models/agent.js"
-import { error } from "console";
+
 
 const router = express.Router();
 
@@ -27,6 +27,25 @@ router.post('/regi', async(req,res)=>{
         res.status(500).json({ error: "Internal server error" }); // Send a generic error response
     }
 })
+
+router.get('/getregistered', async (req, res) => {
+    try {
+        let agent = await getuserbyemail(req)
+        
+        if (!agent) {
+            return res.status(404).json({ error: "Agent not found" });
+        }
+
+        // Return only username and password (hashed)
+        res.status(200).json({
+            username: agent.name,
+            password: agent.password // Be cautious when returning the password (even if it's hashed)
+        });
+    } catch (error) {
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
+
 
 
 

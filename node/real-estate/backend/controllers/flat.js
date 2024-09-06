@@ -1,41 +1,21 @@
 import { Flat } from "../models/flat.js";
+import { Agent } from "../models/agent.js";
 
 export function getuserbyemail1(request){
     return Flat.findOne({
         email:request.body.email
     })
 }
-export function getallflats(){
-    return Flat.find().populate('agent', 'name')
+
+
+export function getusername(req) {
+    return Agent.findOne({ _id: req.agent._id }, 'name email'); 
 }
 
-export function getallagentflats(req){
-    return Flat.find({agent:req.agent._id}).populate('agent', "name email")
-}
-
-export function addflat(req) {
-    const flat = new Flat({
-        ...req.body,
-        img: req.file.originalname,
-        contentType: req.file.mimetype,
-        imageBase64: req.file.buffer.toString('base64'),
-        agent: req.agent._id // Ensure req.agent is correctly populated
-    });
-
-    return flat.save(); // Return the promise from .save()
-}
-
-
-export function updateflat(req){
-    return Flat.findOneAndUpdate(
+export function updateagent(req){
+    return Agent.findOneAndUpdate(
         {_id:req.params.id},
         {$set:req.body},
         {new:true}
     )
-}
-
-export function deleteflat(req){
-    return Flat.findOneAndDelete({
-        _id:req.params.id
-    })
 }

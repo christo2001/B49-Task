@@ -1,12 +1,17 @@
 // RegistrationForm.js
 import React, { useState } from 'react';
+import { useNavigate,NavLink } from 'react-router-dom'; // Import useNavigate from react-router-dom
 import axios from 'axios';
 
 const Registration = () => {
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         name: '',
         email: '',
-        password: ''
+        password: '',
+        age:'',
+        dob:'',
+        contact:''
     });
     const [message, setMessage] = useState('');
     const [error, setError] = useState('');
@@ -23,6 +28,7 @@ const Registration = () => {
         try {
             const response = await axios.post('http://localhost:3333/api/agent/regi', formData);
             setMessage(response.data.message);
+            navigate("/login");
             setError('');
         } catch (err) {
             setMessage('');
@@ -45,6 +51,21 @@ const Registration = () => {
                 <div>
                     <label>Password</label>
                     <input type="password" name="password" value={formData.password} onChange={handleChange} required />
+                </div>
+
+                <div>
+                    <label>age</label>
+                    <input type='number' name="age" value={formData.age}  onChange={handleChange} required />
+                </div>
+
+                <div>
+                    <label>dob</label>
+                    <input type='date' name="dob" value={formData.dob}  onChange={handleChange} required />
+                </div>
+
+                <div>
+                    <label>contact</label>
+                    <input type='number' name="contact" value={formData.contact}  onChange={handleChange} required />
                 </div>
                 <button type="submit">Register</button>
             </form>

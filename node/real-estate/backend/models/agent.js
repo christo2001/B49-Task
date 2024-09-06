@@ -17,6 +17,15 @@ const agentSchema = new mongoose.Schema({
         type:String,
         required:true,
         trim:true
+    },
+    age:{
+        type:String,
+    },
+    dob:{
+        type:String,
+    },
+    contact:{
+        type:String,
     }
 })
 

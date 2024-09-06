@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate,NavLink } from 'react-router-dom'; // Import useNavigate from react-router-dom
 
 const Login = () => {
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         email: '',
         password: ''
@@ -23,6 +25,7 @@ const Login = () => {
             const { token } = response.data;
             localStorage.setItem('token', token); // Store the token in localStorage
             setMessage('Login successful!');
+            navigate("/home");
             setError('');
         } catch (err) {
             setMessage('');
