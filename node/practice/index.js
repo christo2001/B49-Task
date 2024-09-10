@@ -16,7 +16,7 @@ databaseconnection();
 let currentIndex = 0;
 
 app.get('/vehicle-location', (req, res) => {
-    if (currentIndex < vehicleLocations.length) { // Use vehicleLocations instead of locationData
+    if (currentIndex <= vehicleLocations.length) { // Use vehicleLocations instead of locationData
         res.json(vehicleLocations[currentIndex]); // Use vehicleLocations
         currentIndex++;
     } else {

@@ -23,6 +23,9 @@ const MapComponent = () => {
 
   if (!isLoaded) return <div>Loading...</div>;
 
+  // URL of the car icon image
+  const carIcon = 'https://example.com/path/to/car-icon.png'; // Replace with your car image URL
+
   return (
     <GoogleMap
       center={vehiclePosition}
@@ -31,7 +34,10 @@ const MapComponent = () => {
     >
       {vehiclePosition && (
         <>
-          <Marker position={vehiclePosition} />
+          <Marker 
+            position={vehiclePosition} 
+            icon={carIcon} // Set the car image as the marker icon
+          />
           <Polyline path={path} options={{ strokeColor: "red" }} />
         </>
       )}
