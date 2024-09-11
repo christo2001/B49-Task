@@ -15,8 +15,8 @@ const MapComponent = () => {
     const interval = setInterval(async () => {
       const response = await fetch('https://gps-hu05.onrender.com/vehicle-location');
       const data = await response.json();
-      console.log('Vehicle Data:', data); // Log the data for debugging
-      
+      console.log('Vehicle Data:', data);
+       
       // Set destination and initial vehicle position
       const newDestination = { lat: data.latitude, lng: data.longitude };
       if (!vehiclePosition) {
