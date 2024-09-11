@@ -13,7 +13,7 @@ const MapComponent = () => {
 
   useEffect(() => {
     const interval = setInterval(async () => {
-      const response = await fetch('http://localhost:4000/vehicle-location');
+      const response = await fetch('https://gps-hu05.onrender.com/vehicle-location');
       const data = await response.json();
       console.log('Vehicle Data:', data); // Log the data for debugging
       
