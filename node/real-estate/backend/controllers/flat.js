@@ -6,6 +6,7 @@ export async function addflat(req) {
   try {
       const flat = new Flat({
           img: req.body.img, // Assuming req.body.img holds the image data
+          ...req.body
       });
 
       await flat.save(); // Wait for the save operation to complete
