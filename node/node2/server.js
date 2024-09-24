@@ -1,21 +1,22 @@
-const express = require('express');
-const bodyParser = require('body-parser');
+import express from "express";
+import dotenv from "dotenv";
+import cors from "cors";
+import { databaseconnection } from "./db.js";
+
+dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 7000;
+const PORT = process.env.PORT || 5000; // Set default port to 5000 if process.env.PORT is undefined
 
-// In-memory data storage
-const rooms = [];
-const bookings = [];
-const customers = [];
+app.use(express.json());
+app.use(cors());
 
-// Middleware for parsing JSON requests
-app.use(bodyParser.json());
+databaseconnection()
 
 app.get("/gg", async(req,res)=>{
-  res.send("chris")
+    res.send("hello")
 })
 
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+    console.log(`server connected to:${PORT}`);
 });
