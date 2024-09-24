@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import ImageDetails from './ImageDeatils';
 
-
 const ImageGallery = () => {
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -31,6 +30,14 @@ const ImageGallery = () => {
     (category === '' || image.cat === category) &&
     (searchTerm === '' || (image.name && image.name.toLowerCase().includes(searchTerm.toLowerCase())))
   );
+
+  const handleOpenModal = (image) => {
+    setSelectedImage(image);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedImage(null); // Close the modal by setting selected image to null
+  };
 
   if (loading) {
     return <div>Loading images...</div>;
@@ -78,7 +85,7 @@ const ImageGallery = () => {
               />
               <p>{image.cat}</p>
               <p>{image.name || 'No Name Available'}</p>
-              <button onClick={() => setSelectedImage(image)}>Click</button> {/* Set selected image */}
+              <button onClick={() => handleOpenModal(image)}>Click</button> {/* Open modal with image details */}
             </div>
           ))
         ) : (
@@ -86,12 +93,9 @@ const ImageGallery = () => {
         )}
       </div>
 
-      {/* Conditionally render the ImageDetails component if an image is selected */}
-      {selectedImage && <ImageDetails image={selectedImage} />}
-      <ImageDetails/>
+      {/* Modal for displaying selected image details */}
+      <ImageDetails image={selectedImage} onClose={handleCloseModal} />
     </div>
-
-    
   );
 };
 
