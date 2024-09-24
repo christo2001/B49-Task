@@ -1,43 +1,34 @@
-import express from "express"
+import path from 'path';
+import fs from 'fs'; // Import the fs module
+import multer from 'multer';
+import express from 'express';
+import { addflat, getAllImages } from '../controllers/flat.js';
 
-import {getusername,updateagent} from "../controllers/flat.js"
+// Create the Express router
+const router = express.Router();
 
 
-const router = express.Router()
-
-
-router.get('/agent/info', async (req, res) => {
-    try {
-        // Get agent name and email
-        const agentInfo = await getusername(req);
-
-        if (!agentInfo) {
-            return res.status(404).json({ error: 'Agent not found' });
-        }
-
-        res.status(200).json(agentInfo);
-    } catch (error) {
-        res.status(500).json({ error: 'Error retrieving agent details' });
-    }
+// Route to add a flat image
+router.post('/add', async (req, res) => {
+  try {
+    await addflat(req);
+    res.send('Image uploaded successfully');
+  } catch (error) {
+    console.error(error);
+    res.status(400).send('Error uploading image: ' + error.message);
+  }
 });
 
+// Route to get all images
+router.get('/images', async (req, res) => {
+  try {
+    const images = await getAllImages(); // Assuming getAllImages returns the image data
+    res.json(images); // Return the images as JSON
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error fetching images: ' + error.message);
+  }
+});
 
-
-router.put('/upd/agent/:id', async(req,res)=>{
-    try {
-      const editflat = await updateagent(req)
-      if(!editflat){
-          res.status(404).json({message:'cant edit the data'})
-      }
-      res.status(200).json({
-          message:'edited successfully',
-          data:editflat
-      })
-  
-    } catch (error) {
-      res.status(500).json({ error: "error" });   
-    }
-  })
-
-
+// Export the router
 export const flatRouter = router;

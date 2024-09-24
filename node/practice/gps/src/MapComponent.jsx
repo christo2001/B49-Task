@@ -34,7 +34,7 @@ const MapComponent = () => {
   }, [vehiclePosition]);
 
   useEffect(() => {
-    if (destination) {
+    if (destination) {nd 
       const moveInterval = setInterval(() => {
         setVehiclePosition((prevPosition) => {
           if (prevPosition.lat === destination.lat && prevPosition.lng === destination.lng) {

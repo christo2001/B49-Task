@@ -1,21 +1,22 @@
 import { Flat } from "../models/flat.js";
-import { Agent } from "../models/agent.js";
 
-export function getuserbyemail1(request){
-    return Flat.findOne({
-        email:request.body.email
-    })
+
+
+export async function addflat(req) {
+  try {
+      const flat = new Flat({
+          img: req.body.img, // Assuming req.body.img holds the image data
+      });
+
+      await flat.save(); // Wait for the save operation to complete
+      return flat; // Return the saved flat document
+  } catch (error) {
+      console.error('Error saving flat:', error);
+      throw new Error('Failed to add flat'); // Or handle the error as needed
+  }
 }
 
 
-export function getusername(req) {
-    return Agent.findOne({ _id: req.agent._id }, 'name email age dob contact'); 
-}
-
-export function updateagent(req){
-    return Agent.findOneAndUpdate(
-        {_id:req.params.id},
-        {$set:req.body},
-        {new:true}
-    )
+export async function getAllImages() {
+  return await Flat.find(); // Fetch all flat entries from the database
 }
