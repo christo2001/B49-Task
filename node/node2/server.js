@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 7000;
 
 // In-memory data storage
 const rooms = [];
@@ -69,7 +69,9 @@ app.post('/bookings', (req, res) => {
   res.json(newBooking);
 });
 
-
+app.get("/gg", async(req,res)=>{
+  res.send("hello")
+})
 
 // 3. List all rooms with booked data
 app.get('/rooms/booked-data', (req, res) => {
