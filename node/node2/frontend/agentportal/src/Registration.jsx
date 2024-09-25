@@ -69,9 +69,11 @@ const ImageGallery = () => {
             onChange={(e) => setCategory(e.target.value)}
           >
             <option value="">All</option>
-            <option value="img">Images</option>
-            <option value="coin">Coins</option>
+            <option value="washing machine">Washing Machine</option>
+            <option value="TV">TV</option>
             <option value="mobile">Mobile</option>
+            <option value="WATCHES">Watches</option>
+            <option value="AC">AC</option>
           </Form.Control>
         </Col>
       </Row>
@@ -123,9 +125,9 @@ const ImageGallery = () => {
             />
             <p>Category: {selectedImage.cat}</p>
             <p>Name: {selectedImage.name || 'No Name Available'}</p>
-            <p>Description:{selectedImage.description}</p>
-            <p>Stock:{selectedImage.stock}</p>
-            <p>Price:{selectedImage.price}</p>
+            <p>Description: {selectedImage.description}</p>
+            <p>Stock: {selectedImage.stock}</p>
+            <p>Price: {selectedImage.price}</p>
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={handleCloseModal}>
