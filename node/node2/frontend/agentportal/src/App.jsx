@@ -10,8 +10,7 @@ function App() {
       <AuthProvider>  {/* Now AuthProvider is inside Router */}
         <Routes>
           <Route path="/" element={<Registration />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/home" element={<AddFlat />} />
+        
         </Routes>
       </AuthProvider>
     </Router>
