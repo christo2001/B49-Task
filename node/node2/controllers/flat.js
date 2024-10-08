@@ -1,4 +1,5 @@
 import { Flat } from "../models/flat.js";
+import { Userlist } from "../models/userlist.js";
 
 
 
@@ -15,6 +16,13 @@ export async function addflat(req) {
       console.error('Error saving flat:', error);
       throw new Error('Failed to add flat'); // Or handle the error as needed
   }
+}
+
+export async function adduser(req){
+  return Userlist.findOne({
+    email:req.body.email,
+    phone:req.body.phone,
+  })
 }
 
 

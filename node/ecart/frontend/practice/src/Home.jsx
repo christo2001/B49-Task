@@ -1,59 +1,120 @@
 import React, { useState } from 'react';
 
 function Home() {
-  const [data, setData] = useState([]); // State to store the list of entries
-  const [name, setName] = useState(''); // State to track name input
-  const [age, setAge] = useState(''); // State to track age input
+  const [data, setData] = useState([]);
+  const [fname, setFname] = useState('');
+  const [lname, setLname] = useState('');
+  const [phone, setPhone] = useState('');
+  const [email, setEmail] = useState('');
+  const [address, setAddress] = useState('');
+  const [error, setError] = useState('');
 
-  const setsubmit = () => {
-    const entry = { name, age }; // Create an object with the name and age
-    setData((prevData) => [...prevData, entry]); // Add the entry to the data array
-    setName(''); // Clear the input fields
-    setAge('');  // Clear the input fields
-  };
+  const setSubmit = () => {
+    const entry = { fname, lname, phone, email, address };
 
-  const setedit = (index) => {
-    const selectedEntry = data[index]; // Get the selected entry by index
-    setName(selectedEntry.name); // Populate the name input
-    setAge(selectedEntry.age);   // Populate the age input
-    // Remove the selected entry from the array
-    const updatedData = data.filter((_, i) => i !== index);
-    setData(updatedData); // Update the state with the entry removed
-  };
-
-  const setdelete=(index)=>{
+    // Validate phone for non-numeric input and check length
+    if (!/^\d+$/.test(entry.phone)) {
+      setError('Phone Number must be a numeric value');
+      return;
+    }
     
-    const remove = data.filter((_,i)=> i!==index)
-    setData(remove)
-  }
+    if (entry.phone.length !== 10) {
+      setError('Phone Number must be exactly 10 digits');
+      return;
+    }
+
+    // Validate email format
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(entry.email)) {
+      setError('Please enter a valid email address');
+      return;
+    }
+
+    setData((prevData) => [...prevData, entry]); // Add the entry to the data array
+    setFname('');
+    setLname('');
+    setPhone('');
+    setEmail('');
+    setAddress('');
+    setError(''); // Clear any error messages
+  };
+
+  const setEdit = (index) => {
+    const selectedEntry = data[index];
+    setFname(selectedEntry.fname);
+    setLname(selectedEntry.lname);
+    setPhone(selectedEntry.phone);
+    setEmail(selectedEntry.email);
+    setAddress(selectedEntry.address);
+    const updatedData = data.filter((_, i) => i !== index);
+    setData(updatedData);
+  };
+
+  const setDelete = (index) => {
+    const remove = data.filter((_, i) => i !== index);
+    setData(remove);
+  };
 
   return (
     <div>
       <input
         type="text"
-        name="name"
-        value={name} // Controlled input with value
-        onChange={(e) => setName(e.target.value)} // Update the name state
-        placeholder="Name"
+        name="fname"
+        value={fname}
+        onChange={(e) => setFname(e.target.value)}
+        placeholder="First Name"
+        required
       />
 
       <input
         type="text"
-        name="age"
-        value={age} // Controlled input with value
-        onChange={(e) => setAge(e.target.value)} // Update the age state
-        placeholder="Age"
+        name="lname"
+        value={lname}
+        onChange={(e) => setLname(e.target.value)}
+        placeholder="Last Name"
+        required
       />
 
-      <button onClick={setsubmit}>Submit</button>
+      <input
+        type="text"
+        name="phone"
+        value={phone}
+        onChange={(e) => setPhone(e.target.value)}
+        placeholder="Phone"
+        required
+      />
+
+      <input
+        type="email"
+        name="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder="Email"
+        required
+      />
+
+      <input
+        type="text"
+        name="address"
+        value={address}
+        onChange={(e) => setAddress(e.target.value)}
+        placeholder="Address"
+        required
+      />
+
+      <button onClick={setSubmit}>Submit</button>
+
+      {error && <p style={{ color: 'red' }}>{error}</p>}
 
       <div>
         {data.map((val, index) => (
           <div key={index}>
-            <p>{val.name}</p>
-            <p>{val.age}</p>
-            <button onClick={() => setedit(index)}>Edit</button> {/* Pass the index */}
-            <button onClick={()=>setdelete(index)}>delete</button>
+            <p>{val.fname}</p>
+            <p>{val.lname}</p>
+            <p>{val.phone}</p>
+            <p>{val.email}</p>
+            <p>{val.address}</p>
+            <button onClick={() => setEdit(index)}>Edit</button>
+            <button onClick={() => setDelete(index)}>Delete</button>
           </div>
         ))}
       </div>
