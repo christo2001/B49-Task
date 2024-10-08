@@ -19,7 +19,7 @@ router.post('/add', async (req, res) => {
 router.post('/adduser', async(req,res)=>{
   try {
     await adduser(req)
-    res.send('user added successfully')
+    res.send("user added successfully")
   } catch (error) {
     console.error(error);
     res.status(400).send('Error uploading user: ' + error.message);
