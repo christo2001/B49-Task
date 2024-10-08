@@ -1,0 +1,22 @@
+.container {
+    background-color: #f8f9fa;
+    min-height: 100vh;
+  }
+  
+  .card {
+    background-color: #ffffff;
+    transition: transform 0.2s;
+  }
+  
+  .card:hover {
+    transform: scale(1.02);
+  }
+  
+  .btn-primary {
+    transition: background-color 0.3s;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0056b3;
+  }
+  
