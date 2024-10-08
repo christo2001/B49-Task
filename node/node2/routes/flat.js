@@ -1,6 +1,5 @@
 import express from 'express';
 import { addflat, getAllImages,adduser } from '../controllers/flat.js';
-import { Userlist } from '../models/userlist.js';
 
 // Create the Express router
 const router = express.Router();
@@ -19,16 +18,11 @@ router.post('/add', async (req, res) => {
 
 router.post('/adduser', async(req,res)=>{
   try {
-    let userlist = await adduser(req)
-    if(userlist){
-      return res.status(400).json({error:"email and phone number already exist"})
-    }
-
-    userlist = new Userlist({
-      ...req.body
-    }).save()
+    await adduser(req)
+    res.send('user added successfully')
   } catch (error) {
-    res.status(500).json({error:"internal server"})
+    console.error(error);
+    res.status(400).send('Error uploading user: ' + error.message);
   }
 })
 

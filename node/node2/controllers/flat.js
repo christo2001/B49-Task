@@ -19,10 +19,16 @@ export async function addflat(req) {
 }
 
 export async function adduser(req){
-  return Userlist.findOne({
-    email:req.body.email,
-    phone:req.body.phone,
-  })
+  try {
+    const userlist = new Userlist({
+      ...req.body
+    })
+    await userlist.save()
+    return userlist;
+  } catch (error) {
+    console.log(error)
+    throw new Error('failed to add')
+  }
 }
 
 
